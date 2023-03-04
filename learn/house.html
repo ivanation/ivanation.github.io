@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>House</title>
+    <style>
+        body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+        a {text-decoration: none;}
+        #imagen{max-height: 300px;}
+        .cu{cursor: pointer;}
+    </style>
+</head>
+<body>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <div class="w3-content">
+                <a href="../study.html" class="w3-bar-item w3-button">Study</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-top: 54px;" class="w3-container w3-content w3-center">
+        <br><br>
+        <h3><span id="contador">0</span> / <span id="total">0</span></h3>
+        <br><br>
+        <div id="imagend">
+            <img src="../img/policeman.jpg" alt="policeman" class="w3-image" id="imagen">
+        </div>
+        <br><br><br>
+        <div class="w3-row">
+            <div class="w3-col s3 m3 l3">
+                <h3 onclick="avanza(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></h3>
+            </div>
+            <div class="w3-col s6 m6 l6">
+                <h4><a id="sonido" href="#" onclick="speak(casa[cont])"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name">Blue</span></a></h4>
+            </div>
+            <div class="w3-col s3 m3 l3">
+                <h3 onclick="avanza(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></h3>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <script>
+
+        //////////////////////////////////////////////////////
+
+        let voicesLoaded = false
+        let voices = []
+
+        const loadVoices = () => {
+            return new Promise((resolve, reject) => {
+                if (voicesLoaded) {
+                    resolve(voices)
+                    return
+                }
+                
+                let timeout = 0
+                const maxTimeout = 2000
+                const interval = 250
+                
+                const checkVoices = () => {
+                    voices = speechSynthesis.getVoices()
+                    
+                    if (voices.length > 0) {
+                        voicesLoaded = true
+                        resolve(voices)
+                    }
+                    
+                    if (timeout >= maxTimeout) {
+                        reject(new Error('loadVoices max timeout exceeded'))
+                    }
+                    
+                    timeout += interval
+                    setTimeout(checkVoices, interval)
+                }
+
+                checkVoices()
+            })
+        }
+
+        const speak = (text) => {
+            event.preventDefault()
+            if ('speechSynthesis' in window) {
+                loadVoices().then((voices) => {
+                    const voice = voices.find(v => v.lang.includes('US') && v.name.includes('Zira')) || voices.find(v => v.lang.includes('US'))
+                    const utterance = new SpeechSynthesisUtterance(text)
+                    utterance.voice = voice
+                    utterance.lang = voice.lang
+                    utterance.voiceURI = voice.voiceURI
+                    utterance.pitch = 1
+                    utterance.volume = 1
+                    utterance.rate = 1
+                    window.speechSynthesis.speak(utterance)
+                }).catch((err) => {
+                    console.error(err)
+                })
+            } else {
+                console.error('El navegador no admite la API de voz en la web')
+            }
+            return false
+        }
+
+        loadVoices();
+
+
+        ///////////////////////////////////////////////////7//
+        
+        const house = ['balcony', 'bathroom', 'bed', 'bedroom', 'bookcase', 'candles', 'carpet', 'chair', 'clocks', 'curtains', 'dining room', 'door', 'floor', 'key', 'kitchen', 'lamp', 'living room', 'lock', 'office', 'photo frame', 'pillow', 'plant', 'roof', 'sofa', 'stairs', 'stove', 'table', 'window']
+
+        const casa = house.sort((a, b) => 0.5 - Math.random())
+
+        const idcont = document.getElementById("contador")
+        const idtotal = document.getElementById("total")
+        const idnombre = document.getElementById("name")
+        const idimagen = document.getElementById("imagen")
+
+        let cont = 0
+        let len = casa.length
+
+        function actiualiza(){
+            idcont.innerHTML = cont+1
+            idtotal.innerHTML = len
+            idnombre.innerHTML = casa[cont]
+            idimagen.src="../img/" + casa[cont] + ".png"
+            idimagen.alt= casa[cont]
+        }
+
+        actiualiza()
+
+        function avanza(num){
+            if (num == 1) {
+                cont++
+                if (cont >= len) cont = 0
+                actiualiza()
+            }else{
+                cont--
+                if (cont < 0) cont = len - 1
+                actiualiza()
+            }
+        }
+
+    </script>
+</body>
+</html>

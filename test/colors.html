@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/colors.css">
+    <title>Colors</title>
+    <style>
+        body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+        a {text-decoration: none;}
+        .cu{cursor: pointer;}
+    </style>
+</head>
+<body>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <div class="w3-content">
+                <a href="../test.html" class="w3-bar-item w3-button">Test</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-top: 54px;" class="w3-container w3-content w3-center">
+        <br>
+        <h3 class="w3-text-grey"><i class="fa fa-check" aria-hidden="true"></i><span id="buenas">0</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-times" aria-hidden="true"></i><span id="malas">0</span></h3>
+        <br>
+        <span id="circulo"></span>
+        <br>
+        <div id="opciones">
+        </div>
+    </div>
+
+    <br><br><br>
+
+<script src="../script/main.js"></script>
+<script>
+    const colores = colors.sort((a, b) => 0.5 - Math.random())
+
+    const idcircle = document.getElementById("circulo")
+    const idpos = document.getElementById("buenas")
+    const idneg = document.getElementById("malas")
+    const idres = document.getElementById("opciones")
+
+    let cont = 0
+    let len = colores.length
+    let pos = 0
+    let neg = 0
+    let respuestas
+    let act = 0
+
+    function addRespuesta(){
+        let n = ran(0,clothes.length,1)
+        let s = ran(0,colores.length,1)
+        if ((!respuestas.includes(clothes[n]))&&(typeof clothes[n] !== 'undefined')) respuestas.push(clothes[n])
+        if ((!respuestas.includes(colores[s]))&&(typeof colores[s] !== 'undefined')) respuestas.push(colores[s])
+        //console.log(respuestas)
+    }
+
+    function actiualiza(){
+        idcircle.removeAttribute("class")
+        idcircle.classList.add(colores[cont])
+        idpos.innerHTML = pos
+        neg = (cont) - pos 
+        idneg.innerHTML = neg
+        idres.innerHTML = ""
+        respuestas = [colores[cont]]
+        addRespuesta()
+        addRespuesta()
+        let res = respuestas.sort((a, b) => 0.5 - Math.random())
+        for (let i = 0; i < res.length; i++) {
+            idres.innerHTML += '<p onclick="toca()" class="w3-large cu" id="'+res[i]+'">'+res[i]+'</p>'
+        }
+        act = 0
+        if ((cont == 0)&&(pos > 0)){
+            neg = len - pos
+            idneg.innerHTML = neg
+            idres.innerHTML = ""
+            idcircle.removeAttribute("class")
+            idcircle.innerHTML = '<h1 class="w3-text-gray">RESULTS</h1>'
+            idcircle.innerHTML += '<h2 class="w3-text-gray">COLORS</h2>'
+            idcircle.innerHTML += '<p class="xxlarge">'
+            idcircle.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
+            idcircle.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
+            idcircle.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
+            idcircle.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
+            idcircle.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
+            idcircle.innerHTML += '</p>'
+            idcircle.innerHTML += '<p class="xxxlarge w3-text-gray">'+((pos/len)*100).toFixed(0)+' %</p>'
+        }
+    }
+
+    actiualiza()
+
+    function toca(){
+        let a = event.srcElement.innerHTML
+        console.log(a)
+        if (a == colores[cont]) {
+            if (act == 0) pos++
+            idres.innerHTML = '<h3><a href="#" id="sonido" onclick="habla(colores[cont])" class="cu"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span>'+colores[cont]+'</span></a></h3><p class="w3-text-green w3-xxxlarge cu" onclick="avanza(1)"><i class="fa fa-check" aria-hidden="true"></i></p>'
+        }else{
+            let element = document.getElementById(a)
+            element.classList.add("w3-text-red")
+            act = 1
+        }
+    }
+
+    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Clothes</title>
+    <style>
+        body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+        a {text-decoration: none;}
+        #imagen{max-height: 300px;}
+        .cu{cursor: pointer;}
+    </style>
+</head>
+<body>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <div class="w3-content">
+                <a href="../study.html" class="w3-bar-item w3-button">Study</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding-top: 54px;" class="w3-container w3-content w3-center">
+        <br><br>
+        <h3><span id="contador">0</span> / <span id="total">0</span></h3>
+        <br><br>
+        <div id="imagend">
+            <img src="../img/handbag.jpg" alt="handbag" class="w3-image" id="imagen">
+        </div>
+        <br><br><br>
+        <div class="w3-row">
+            <div class="w3-col s3 m3 l3">
+                <h3 onclick="avanza(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></h3>
+            </div>
+            <div class="w3-col s6 m6 l6">
+                <h3><a id="sonido" href="#" onclick="habla(ropa[cont])"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name">Blue</span></a></h3>
+            </div>
+            <div class="w3-col s3 m3 l3">
+                <h3 onclick="avanza(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></h3>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    <script src="../script/main.js"></script>
+    <script>
+        const ropa = clothes.sort((a, b) => 0.5 - Math.random())
+
+        const idcont = document.getElementById("contador")
+        const idtotal = document.getElementById("total")
+        const idnombre = document.getElementById("name")
+        const idimagen = document.getElementById("imagen")
+
+        let cont = 0
+        let len = ropa.length
+
+        function actiualiza(){
+            idcont.innerHTML = cont+1
+            idtotal.innerHTML = len
+            idnombre.innerHTML = ropa[cont]
+            idimagen.src="../img/" + ropa[cont] + ".jpg"
+            idimagen.alt= ropa[cont]
+        }
+
+        actiualiza()
+
+    </script>
+</body>
+</html>

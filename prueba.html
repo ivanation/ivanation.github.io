@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+</head>
+<body>
+
+    <p><a href="#" onclick="habla('study, Orange, umbrella, jacket, skirt, shorts, sneakers')">Toca para hablar</a></p>
+    <p><a href="#" onclick="habla2('study, Orange, umbrella, jacket, skirt, shorts, sneakers')">Toca para hablar default</a></p>
+    <p>1.0</p>
+    <p id="result"></p>
+
+
+<script>
+
+const idres = document.getElementById("result");
+
+
+function habla2(txt){
+    speechSynthesis.speak(new SpeechSynthesisUtterance(txt));
+}
+
+
+function habla(txt) {
+
+    // Verificar si el navegador admite la API de voz en la web
+    if ('speechSynthesis' in window) {
+
+        // Extrae las voces
+        //const voices = window.speechSynthesis.getVoices();
+
+        // Crear una instancia del objeto SpeechSynthesisUtterance
+        const synthesisUtterance = new SpeechSynthesisUtterance(txt);
+
+        let n = -1;
+
+        // Imprimir las diferentes voces disponibles en la consola
+        //console.log('Las diferentes voces disponibles son: ');
+        idres.innerHTML += 'Las diferentes voces disponibles son: ' + '<br>';
+        for (let i = 0; i < voices.length; i++) {
+            idres.innerHTML += i + ' ' +  voices[i].name + ' ' + voices[i].lang + '<br>'
+            //console.log(`${i}. ${voices[i].name}. ${voices[i].lang}`)
+            if(voices[i].lang.includes('US')){
+                if(n == -1){
+                    n=i
+                }
+                if(voices[i].name.includes('Zira')){
+                    n=i
+                }
+            }
+        }
+
+        //n = 116;
+
+        //console.log('voz mia',voices[n])
+        idres.innerHTML += 'voz mia: '+ n + ' ' + voices[n].name + ' '+ voices[n].lang + '<br>';
+        synthesisUtterance.voice = voices[n];
+        synthesisUtterance.lang = voices[n].lang // // Android Chrome required
+        synthesisUtterance.voiceURI = voices[n].voiceURI // Who knows if required?
+
+        synthesisUtterance.pitch = 1
+        synthesisUtterance.volume = 1
+        synthesisUtterance.rate = 1
+
+        // Obtener el contenido del texto que se va a convertir en habla
+        if (synthesisUtterance.text !== txt) {
+            synthesisUtterance.text = txt
+        }
+
+        // Iniciar la conversión de texto a habla
+        window.speechSynthesis.speak(synthesisUtterance);
+
+    } else {
+        // Si el navegador no admite la API de voz en la web, mostrar un mensaje de error
+        console.error('El navegador no admite la API de voz en la web');
+    }
+}
+
+//habla(' ')
+
+let timeout = 0
+const maxTimeout = 2000
+const interval = 250
+let voices = []
+
+const loadVoices = (cb) => {
+    voices = speechSynthesis.getVoices()
+
+    if (voices.length > 0) {
+        return cb(undefined, voices)
+    }
+
+    if (timeout >= maxTimeout) {
+        return cb(new Error('loadVoices max timeout exceeded'))
+    }
+
+    timeout += interval
+    setTimeout(() => loadVoices(cb), interval)
+}
+
+loadVoices((err, voices) => {
+    if (err) return console.error(err)
+    console.log(voices[0]) // voices loaded and available
+    idres.innerHTML += voices[0].name + '<br>'
+})
+
+
+
+
+</script>  
+</body>
+</html>

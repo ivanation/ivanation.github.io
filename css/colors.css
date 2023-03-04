@@ -1,0 +1,132 @@
+.blue {
+    height: 250px;
+    width: 250px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.black {
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.beige {
+    height: 250px;
+    width: 250px;
+    background-color: beige;
+    border-radius: 50%;
+    display: inline-block;
+    border: solid 1px #CCC;
+}
+
+.brown {
+    height: 250px;
+    width: 250px;
+    background-color: brown;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.grey {
+    height: 250px;
+    width: 250px;
+    background-color: grey;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.green {
+    height: 250px;
+    width: 250px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.magenta {
+    height: 250px;
+    width: 250px;
+    background-color: magenta;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.olive {
+    height: 250px;
+    width: 250px;
+    background-color: olive;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.orange {
+    height: 250px;
+    width: 250px;
+    background-color: orange;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pink {
+    height: 250px;
+    width: 250px;
+    background-color: #FF69B4;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.purple {
+    height: 250px;
+    width: 250px;
+    background-color: purple;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red {
+    height: 250px;
+    width: 250px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ultramarine {
+    height: 250px;
+    width: 250px;
+    background-color: #120A8F;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.violet {
+    height: 250px;
+    width: 250px;
+    background-color: violet;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.white {
+    height: 250px;
+    width: 250px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    border: solid 1px #CCC;
+}
+
+.yellow {
+    height: 250px;
+    width: 250px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+
