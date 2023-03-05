@@ -66,11 +66,11 @@ const back = document.getElementById('back')
 
 let cont = 0
 let len = 0
-let tipo = -1
+let tipo = 0
 let pos = 0
 let neg = 0
 let act = 0
-let idcont, idtotal, idnombre, idimagen, obj, idcircle, idnumber, idpos, idneg, idres, idimagd, respuestas
+let idcont, idtotal, idnombre, idimagen, obj, idcircle, idnumber, idpos, idneg, idres, idimagd, respuestas, cat
 
 
 function toca(){
@@ -116,6 +116,7 @@ function addRespuesta(){
 
 
 function actualizaTest() {
+    console.log('actuliza test')
     idimagen.src="img/" + obj[cont] + ".jpg"
     idimagen.alt= obj[cont]
     idpos.innerHTML = pos
@@ -147,6 +148,7 @@ function actualizaTest() {
 
 
 function actiualiza(){
+    console.log('actualiza study')
     idcont.innerHTML = cont+1
     idtotal.innerHTML = len
     idnombre.innerHTML = obj[cont]
@@ -192,11 +194,11 @@ function tomaHtml() {
 
 function proceso(){
     tomaHtml()
+    back.onclick = function MyFuncion () {
+        generaMenu(categorias, catIcons, tipo)
+    }
     if (tipo == 0) actiualiza()
     if (tipo == 1) actualizaTest()
-    back.onclick = function MyFuncion () {
-        generaMenu(categorias, catIcons)
-    }
 }
 
 
@@ -212,6 +214,7 @@ const opTest = '<div id="opciones"></div>'
 
 
 function entraTest(num) {
+    console.log('test')
     let p = barraTest
     if (num == 0) {
 
@@ -226,11 +229,12 @@ function entraTest(num) {
 }
 
 
-function entraGeneral(num) {
+function entraGeneral() {
+    console.log('study')
     let p = barra
-    if (num == 0) {
+    if (cat == 0) {
         p += entNum
-    }else if (num == 1) {
+    }else if (cat == 1) {
         p += entColor
     }else{
         p += entGen
@@ -254,15 +258,16 @@ function avanza(num){
 }
 
 
-function entrar(cat) {
-    event.preventDefault()
+function entrar(val) {
+    cat = val
     obj = palabras[cat].sort((a, b) => 0.5 - Math.random())
     cont = 0
     len = obj.length
     pos = 0
     neg = 0
-    if (tipo == 0) entraGeneral(cat)
-    if (tipo == 1) entraTest(cat)
+    console.log(`entra a categoria ${categorias[cat]} tipo: ${tipo}`)
+    if (tipo == 0) entraGeneral()
+    if (tipo == 1) entraTest()
 }
 
 
