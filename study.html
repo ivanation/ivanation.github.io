@@ -76,10 +76,15 @@ let idcont, idtotal, idnombre, idimagen, obj, idcircle, idnumber, idpos, idneg, 
 function toca(){
     let a = event.srcElement.innerHTML
     //console.log(a)
-    if (a == obj[cont]) {
+    if(cat==0){
+        val = obj[cont][0]
+    }else{
+        val = obj[cont]
+    }
+    if (a == val) {
         if (act == 0) pos++
-        idres.innerHTML = `<h3><span id="sonido" class="cu"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span>${obj[cont]}</span></span></h3><p class="w3-text-green w3-xxxlarge cu" onclick="avanza(1)"><i class="fa fa-check" aria-hidden="true"></i></p>`
-        asignSound(obj[cont])
+        idres.innerHTML = `<h3><span id="sonido" class="cu"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span>${val}</span></span></h3><p class="w3-text-green w3-xxxlarge cu" onclick="avanza(1)"><i class="fa fa-check" aria-hidden="true"></i></p>`
+        asignSound(val)
     }else{
         let element = document.getElementById(a)
         element.classList.add("w3-text-red")
@@ -99,12 +104,17 @@ function ran(inferior, superior, paso = 1) {
 function addRespuesta(){
     let c = 0
     while (c < 3) {
-        let n = ran(0, obj.length, 1) // escoje uno del mismo obj
-        let x = ran(1, palabras.length, 1) // escoje categoria aleatoria
-        console.log(palabras[x].length)
-        let s = ran(0, palabras[x].length, 1) // escoje uno de la categoria aleatoria
-        if ((!respuestas.includes(obj[n]))&&(typeof obj[n] !== 'undefined')) {
-            respuestas.push(obj[n])
+        let n = ran(0, obj.length-1, 1) // escoje uno del mismo obj
+        let x = ran(1, palabras.length-1, 1) // escoje categoria aleatoria
+        let s = ran(0, palabras[x].length-1, 1) // escoje uno de la categoria aleatoria
+        let val
+        if(cat==0){
+            val = obj[n][0]
+        }else{
+            val =obj[n]
+        }
+        if ((!respuestas.includes(val))&&(typeof val !== 'undefined')) {
+            respuestas.push(val)
             c++
         }
         if ((!respuestas.includes(palabras[x][s]))&&(typeof palabras[x][s] !== 'undefined'))  {
@@ -116,14 +126,25 @@ function addRespuesta(){
 
 
 function actualizaTest() {
-    console.log('actuliza test')
-    idimagen.src="img/" + obj[cont] + ".jpg"
-    idimagen.alt= obj[cont]
+    if (idimagen){
+        idimagen.src="img/" + obj[cont] + ".jpg"
+        idimagen.alt= obj[cont]
+    }
+    if (idcircle){
+        idcircle.removeAttribute("class")
+        idcircle.classList.add(obj[cont])
+    }
     idpos.innerHTML = pos
     neg = (cont) - pos 
     idneg.innerHTML = neg
     idres.innerHTML = ""
     respuestas = [obj[cont]]
+
+    if(idnumber){
+        idnumber.innerHTML = obj[cont][1]
+        respuestas = [obj[cont][0]]
+    }
+
     addRespuesta()
     let res = respuestas.sort((a, b) => 0.5 - Math.random())
     for (let i = 0; i < res.length; i++) {
@@ -136,13 +157,13 @@ function actualizaTest() {
         idres.innerHTML = ""
         idimagd.innerHTML = ""
         idimagd.innerHTML = '<h1 class="w3-text-gray">RESULTS</h1>'
-        idimagd.innerHTML += `<h2 class="w3-text-gray">${categorias[0]}</h2>`
+        idimagd.innerHTML += `<h2 class="w3-text-gray">${categorias[cat]}</h2>`
         idimagd.innerHTML += '<p class="xxlarge">'
         for (let i = 0; i < 5; i++) {
             idimagd.innerHTML += '<i class="fa fa-star w3-text-yellow" aria-hidden="true"></i>'
         }
         idimagd.innerHTML += '</p>'
-        idimagd.innerHTML += '<h2 class="xxxlarge w3-text-gray">'+((pos/len)*100).toFixed(0)+' %</h2>'
+        idimagd.innerHTML += '<h1 class="xxxlarge w3-text-gray">'+((pos/len)*100).toFixed(0)+' %</h1>'
     }
 }
 
@@ -213,13 +234,13 @@ const genTest = '<div id="imagend"><img src="img/nurse.jpg" alt="nurse" class="w
 const opTest = '<div id="opciones"></div>'
 
 
-function entraTest(num) {
+function entraTest() {
     console.log('test')
     let p = barraTest
-    if (num == 0) {
-
-    }else if (num == 1) {
-
+    if (cat == 0) {
+        p += '<div id="imagend"><span id="numero" class="w3-text-gray">0</span></div>'
+    }else if (cat == 1) {
+        p += '<div id="imagend"><br><span id="circulo"></span><br></div>'
     }else{
         p += genTest
     }
@@ -249,12 +270,12 @@ function avanza(num){
     if (num == 1) {
         cont++
         if (cont >= len) cont = 0
-        actiualiza()
     }else{
         cont--
         if (cont < 0) cont = len - 1
-        actiualiza()
     }
+    if (tipo == 0) actiualiza()
+    if (tipo == 1) actualizaTest()
 }
 
 
@@ -265,6 +286,7 @@ function entrar(val) {
     len = obj.length
     pos = 0
     neg = 0
+    act = 0
     console.log(`entra a categoria ${categorias[cat]} tipo: ${tipo}`)
     if (tipo == 0) entraGeneral()
     if (tipo == 1) entraTest()
