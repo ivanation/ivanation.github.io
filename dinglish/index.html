@@ -42,7 +42,7 @@ a{text-decoration: none;}
 <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-white w3-card">
-        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars w3-xlarge" style="text-shadow: 1px 1px 0 #CCC;"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="menu()" title="Toggle Navigation Menu"><i class="fa fa-bars w3-xlarge" style="text-shadow: 1px 1px 0 #CCC;"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large" style="letter-spacing:4px;">DInglish</a>
         <div class="w3-right">
             <a href="#ventajas" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Ventajas</a>
@@ -355,12 +355,12 @@ form.addEventListener('submit', e => {
 })
 
 // Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
+function menu() {
     var x = document.getElementById("navDemo");
     if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
+        x.className += " w3-show";
     } else { 
-    x.className = x.className.replace(" w3-show", "");
+        x.className = x.className.replace(" w3-show", "");
     }
 }
 
@@ -393,8 +393,8 @@ function plusDivs(n) {
 }
 
 function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
+  let i;
+  let x = document.getElementsByClassName("mySlides");
   if (n > x.length) {slideIndex = 1}
   if (n < 1) {slideIndex = x.length}
   for (i = 0; i < x.length; i++) {
