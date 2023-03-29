@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone whatsapp</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<div class="w3-content">
+    <div class="w3-container w3-green w3-center">
+        <h2>Mensaje de whatsapp</h2>
+    </div>
+    <br>
+    <div class="w3-container">
+        <form class="w3-container w3-card-4 w3-light-grey w3-round-large w3-center">
+            <br>
+            <input class="w3-input w3-border w3-round" type="text" placeholder="+584120002288" id="numero">
+
+            <br>
+            <button class="w3-btn w3-green w3-round" onclick="gerarLink()">Mensaje</button>
+            <br><br>
+        </form>
+    </div>
+</div>
+<script>
+    function gerarLink() {
+        let numero = document.getElementById("numero").value;
+        if (numero != "") {
+            numero = numero.replace(/\D/g, '');
+            var url = "https://api.whatsapp.com/send?phone=" + numero;
+            window.open(url, '_blank');
+        }
+    }
+</script>
+</body>
+</html>
