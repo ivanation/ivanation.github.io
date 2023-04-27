@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href=".../css/fonts.css">
     <title>Iris Dataset</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"> </script> -->
     <style>
         body,
         h1,
@@ -34,9 +36,9 @@
     <div class="w3-container w3-content" style="padding-top: 100px;">
 
         <div class="w3-center">
-            <iframe title="iris" width="948" height="612"
+            <!-- <iframe title="iris" width="948" height="612"
                 src="https://app.powerbi.com/view?r=eyJrIjoiMTIxMzNmMjYtNjg3YS00Yzk2LTliN2EtNDk2NGZiOGRjMWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9"
-                frameborder="0" allowFullScreen="true"></iframe>
+                frameborder="0" allowFullScreen="true"></iframe> -->
         
 
             <br>
@@ -123,16 +125,24 @@
     <script>
 
         async function doIris(){
-            const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
+            // load iris model
+            console.log('doIris');
+            const modelUrl = 'https://ivanation.github.io/art/iris/iris_modelo/model.json';
+            //const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
+            const model = await tf.loadLayersModel(modelUrl);
 
-            // make a pediction
-            const input = tf.tensor2d([5.8, 2.7, 5.1, 1.9], [1, 4]);
+            // prepare input
+            //const input = tf.tensor2d([5.8, 2.7, 5.1, 1.9], [1, 4]);
+            // const input = [[4.4, 3.2, 1.3, 0.2]];
 
-            const prediction = model.predict(input);
-            console.log(prediction);
 
-            const predictionMax = model.predict(input).argMax(-1).dataSync();
-            console.log(predictionMax);
+            // make a prediction probabilities
+            //const prediction = model.predict(input);
+            //console.log(prediction);
+
+            // make a prediction answer
+            // const predictionMax = model.predict(input).argMax(-1).dataSync();
+            // console.log(predictionMax);
         }
 
         doIris();
