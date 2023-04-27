@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href=".../css/fonts.css">
+    <link rel="stylesheet" href="../../css/fonts.css">
     <title>Iris Dataset</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
     <style>
@@ -34,9 +34,9 @@
     <div class="w3-container w3-content" style="padding-top: 100px;">
 
         <div class="w3-center">
-            <iframe title="iris" width="948" height="612"
+            <!-- <iframe title="iris" width="948" height="612"
                 src="https://app.powerbi.com/view?r=eyJrIjoiMTIxMzNmMjYtNjg3YS00Yzk2LTliN2EtNDk2NGZiOGRjMWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9"
-                frameborder="0" allowFullScreen="true"></iframe>
+                frameborder="0" allowFullScreen="true"></iframe> -->
         
 
             <br>
@@ -123,7 +123,8 @@
     <script>
 
         async function doIris(){
-            const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
+            //const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
+            const model = await tf.loadLayersModel('iris_modelo/model.json');
 
             // make a pediction
             const input = tf.tensor2d([5.8, 2.7, 5.1, 1.9], [1, 4]);
