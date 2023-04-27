@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href=".../css/fonts.css">
+    <title>Iris Dataset</title>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Segoe UI Bold", Arial, Helvetica, sans-serif
+        }
+    </style>
+</head>
+
+<body class="w3-xlarge">
+    <div class="w3-top">
+        <div class="w3-bar w3-padding w3-card"
+            style="letter-spacing:4px; background-color: rgb(115, 183, 97) !important; color: white;">
+            <div class="w3-content">
+                <span class="w3-bar-item cu" id="back">Iris Dataset</span>
+            </div>
+        </div>
+    </div>
+    <div class="w3-container w3-content" style="padding-top: 100px;">
+
+        <div class="w3-center">
+            <iframe title="iris" width="948" height="612"
+                src="https://app.powerbi.com/view?r=eyJrIjoiMTIxMzNmMjYtNjg3YS00Yzk2LTliN2EtNDk2NGZiOGRjMWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9"
+                frameborder="0" allowFullScreen="true"></iframe>
+        
+
+            <br>
+
+            <div class="w3-card w3-container w3-medium w3-padding-32" style="margin-top: 25px;">
+                <div class="w3-row-padding w3-left-align">
+                    <div class="w3-col m6 s6 l6">
+                        <label>PetalLength</label>
+                        <input class="w3-input w3-border" type="text" placeholder="1.4" value="1.4">
+                        <br>
+                        <label>SepalLength</label>
+                        <input class="w3-input w3-border" type="text" placeholder="5.1" value="5.1">
+                    </div>
+                    <div class="w3-col m6 s6 l6">
+                        <label>PetalWith</label>
+                        <input class="w3-input w3-border" type="text" placeholder="0.2" value="0.2">
+                        <br>
+                        <label>SepalWith</label>
+                        <input class="w3-input w3-border" type="text" placeholder="3.5" value="3.5">
+                    </div>
+                </div>
+                <div style="padding-top: 25px;">
+                    <button class="w3-button w3-round w3-black" style="background-color: rgb(74, 88, 138) !important;">Predecir</button>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <h1>Visualizando Dataset Iris con Power BI y Modelo de Machine Learning</h1>
+        <div class="w3-text-grey">
+            <p>Como primer experimento quisiera hacer algo combinando el poder de visualización de datos de power bi y
+                algo de machine learning.</p>
+            <p>Para esto seleccioné la base de datos iris que es muy conocida en el mundo de la ciencia de datos y
+                generalmente es el primer ejercicio de machine learning que aprendemos, algo así como el “hola mundo” en
+                la ciencia de datos.</p>
+            <p>Antes de abordar el experimento, quisiera aclarar que para desplegar el modelo de machine learning me vi
+                forzado a utilizar un hosting web, ya que aún no conozco tanto power bi como para insertar código
+                mediante Python o R y desplegar modelos machine learning desde el mismo power bi, en realidad ni
+                siquiera sé si es posible.</p>
+            <p>Pido disculpas de antemano porque utilicé un hosting web gratis, este puede estar caído o presentar
+                lentitud al momento de acceder, pues no vi la necesidad de adquirir un hosting pago solo para una
+                prueba.</p>
+        </div>
+        <h1>Visualizaciones</h1>
+        <div class="w3-text-grey">
+            <p>No quería recargar con tantas graficas por eso realicé la visualización de datos basadas solo para la
+                propiedad “petal length”. Como se puede apreciar en la tabla de datos, esta es la mas significativa a la
+                hora de diferenciar datos, ya que tiene una relación lineal, mientras van aumentando los valores, va
+                cambiando el tipo de iris.</p>
+            <p>En las visualizaciones se puede observar claramente los clúster o agrupaciones por clases, esto nos dice
+                que es un modelo de clasificación y no de regresión, también observamos en este dataset, los clúster
+                están claramente definidos, lo cual será muy fácil de agrupar para los algoritmos de machine learning.
+            </p>
+            <p>También le agregue histogramas para visualizar la distribución de los datos a lo largo del eje x “petal
+                length” para detectar si había alguna distribución que aportara más información para la clasificación de
+                datos, pero no se observó nada significativo.</p>
+            <p>Por último, incorpore un grafico de radar solo para reflejar las diferencias entre “petal length” de cada
+                clase de iris.</p>
+            <p>Dando todo esto como conclusión una vista panorámica de los datos iris, haciendo hincapié en la propiedad
+                “petal length” que representa muy bien la clasificación. Con Power BI fue muy fácil realizar este tipo
+                de visualizaciones sin necesidad de lineas de códigos y se puede compartir como reporte o en insertarlo
+                en un sitio web que es nuestro caso.</p>
+        </div>
+        <h1>Modelo Machine Learning</h1>
+        <div class="w3-text-grey">
+            <p>El siguiente paso de este ejercicio es realizar la aplicación de machine learning.</p>
+            <p>Primeramente, lo elaboré en Python, pero no pude hacer el despliegue del modelo para que funcionara en la web, intente usando heroku pero no me salió 😊 espero que para la próxima.</p>
+            <p>Por esto, para resolver el problema de tener un modelo funcional, opté por tensorflow.js ya que funciona en javascript y vi la oportunidad de desplegar el modelo más fácilmente, y así fue.</p>
+            <p>No voy a profundizar en el uso de tensorflow o explicar el ejercicio de iris porque no es el alcance de esta publicación, en a internet hay mucho material sobre el dataset iris y su implementación en diferentes lenguajes y plataformas.</p>
+            <p>Pero como resumen, se uso una pequeña red neuronal de 10 neuronas (sigmoide) y 3 neuronas de salida (softmax), con un learningRate de 0.01 y 40 Epoch, dando como resultado un 99% de precisión en el modelo.</p>
+            <p>El resultado: una mezcla de power bi para las visualizaciones y el uso de tensorflow para el modelo y predicción de datos totalmente funcional.</p>
+            <p>Para cualquier información no dudes en contactarme:</p>
+            <p>Correo: aivan.alvarez@gmail.com</p>
+            <p>Whatsapp: https://wa.me/573123910241</p>
+        </div>
+
+
+
+    </div>
+    <br><br>
+
+</body>
+
+</html>
