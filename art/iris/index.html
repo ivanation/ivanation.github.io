@@ -130,8 +130,10 @@
 
     <script>
 
+        let model
+
         async function loadModel() {
-            const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
+            model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
         }
         loadModel();
 
