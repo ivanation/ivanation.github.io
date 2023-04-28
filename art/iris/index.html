@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../../css/fonts.css">
     <title>Iris Dataset</title>
-    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script> -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"> </script> -->
     <style>
@@ -38,8 +37,8 @@
         <div class="w3-center">
             <!----> <iframe title="iris" width="948" height="612"
                 src="https://app.powerbi.com/view?r=eyJrIjoiMTIxMzNmMjYtNjg3YS00Yzk2LTliN2EtNDk2NGZiOGRjMWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9"
-                frameborder="0" allowFullScreen="true"></iframe> 
-        
+                frameborder="0" allowFullScreen="true"></iframe>
+
 
             <br>
 
@@ -61,7 +60,8 @@
                     </div>
                 </div>
                 <div style="padding-top: 25px;">
-                    <button id="boton" class="w3-button w3-round w3-black" style="background-color: rgb(74, 88, 138) !important;" onclick="doIris()">Predecir</button>
+                    <button id="boton" class="w3-button w3-round w3-black"
+                        style="background-color: rgb(74, 88, 138) !important;" onclick="doIris()">Predecir</button>
                 </div>
             </div>
 
@@ -73,28 +73,54 @@
 
         <h1>Visualizando Dataset Iris con Power BI y Modelo de Machine Learning</h1>
         <div class="w3-text-grey">
-            <p>Como primer experimento, me gustaría combinar el poder de visualización de datos de Power BI con el potencial del machine learning. Para lograrlo, he seleccionado la conocida base de datos iris, la cual es comúnmente utilizada como el primer ejercicio de machine learning en la ciencia de datos, algo así como el "Hola mundo" en este campo.</p>
-            <p>Mi objetivo es crear un dashboard dinámico y fácil de utilizar en Power BI, mientras aprendo acerca de machine learning y redes neuronales. Este será el primero de varios sets de datos que abordaré, cada uno con mayor complejidad que el anterior. ¡Así que comencemos!</p>
+            <p>Como primer experimento, me gustaría combinar el poder de visualización de datos de Power BI con el
+                potencial del machine learning. Para lograrlo, he seleccionado la conocida base de datos iris, la cual
+                es comúnmente utilizada como el primer ejercicio de machine learning en la ciencia de datos, algo así
+                como el "Hola mundo" en este campo.</p>
+            <p>Mi objetivo es crear un dashboard dinámico y fácil de utilizar en Power BI, mientras aprendo acerca de
+                machine learning y redes neuronales. Este será el primero de varios sets de datos que abordaré, cada uno
+                con mayor complejidad que el anterior. ¡Así que comencemos!</p>
         </div>
         <h1>Visualizaciones</h1>
         <div class="w3-text-grey">
-            <p>Para evitar sobrecargar la visualización con demasiadas gráficas, me concentré en la propiedad "petal length" al realizar la visualización de datos. Como se puede apreciar en la tabla de datos, esta propiedad es la más significativa a la hora de diferenciar los datos, ya que tiene una relación lineal con el tipo de iris.</p>
-            <p>En las visualizaciones se puede observar claramente los clúster o agrupaciones por clases, lo que indica que se trata de un modelo de clasificación en lugar de uno de regresión. Además, en este dataset, los clúster están claramente definidos, lo que facilitará el agrupamiento para los algoritmos de machine learning.</p>
-            <p>También agregué histogramas para visualizar la distribución de los datos a lo largo del eje x "petal length" y detectar si había alguna distribución que pudiera aportar más información para la clasificación de los datos, pero no se observó nada significativo.</p>
-            <p>Por último, incorporé un gráfico de radar para reflejar las diferencias en la propiedad "petal length" de cada clase de iris.</p>
-            <p>En conclusión, esta visualización ofrece una vista panorámica de los datos iris, haciendo hincapié en la propiedad "petal length", que representa muy bien la clasificación. Gracias a Power BI, fue muy fácil realizar este tipo de visualizaciones sin necesidad de escribir líneas de código, y se puede compartir como un reporte o insertarlo en un sitio web, como en nuestro caso.</p>
+            <p>Para evitar sobrecargar la visualización con demasiadas gráficas, me concentré en la propiedad "petal
+                length" al realizar la visualización de datos. Como se puede apreciar en la tabla de datos, esta
+                propiedad es la más significativa a la hora de diferenciar los datos, ya que tiene una relación lineal
+                con el tipo de iris.</p>
+            <p>En las visualizaciones se puede observar claramente los clúster o agrupaciones por clases, lo que indica
+                que se trata de un modelo de clasificación en lugar de uno de regresión. Además, en este dataset, los
+                clúster están claramente definidos, lo que facilitará el agrupamiento para los algoritmos de machine
+                learning.</p>
+            <p>También agregué histogramas para visualizar la distribución de los datos a lo largo del eje x "petal
+                length" y detectar si había alguna distribución que pudiera aportar más información para la
+                clasificación de los datos, pero no se observó nada significativo.</p>
+            <p>Por último, incorporé un gráfico de radar para reflejar las diferencias en la propiedad "petal length" de
+                cada clase de iris.</p>
+            <p>En conclusión, esta visualización ofrece una vista panorámica de los datos iris, haciendo hincapié en la
+                propiedad "petal length", que representa muy bien la clasificación. Gracias a Power BI, fue muy fácil
+                realizar este tipo de visualizaciones sin necesidad de escribir líneas de código, y se puede compartir
+                como un reporte o insertarlo en un sitio web, como en nuestro caso.</p>
         </div>
         <h1>Modelo Machine Learning</h1>
         <div class="w3-text-grey">
             <p>El siguiente paso en este ejercicio fue aplicar el machine learning. </p>
-            <p>Inicialmente, intenté elaborarlo en Python, pero no pude desplegar el modelo para que funcionara en la web. Aunque intenté utilizar Heroku, no pude lograrlo 😊. Espero poder hacerlo en la próxima oportunidad.</p>
-            <p>Para solucionar el problema de tener un modelo funcional, opté por utilizar TensorFlow.js, ya que funciona en JavaScript y vi una oportunidad para desplegar el modelo de manera más fácil. Y así fue.</p>
-            <p>No profundizaré en el uso de TensorFlow ni en la implementación del ejercicio con iris, ya que no es el alcance de esta publicación. En internet hay mucho material sobre el dataset iris y su implementación en diferentes lenguajes y plataformas.</p>
-            <p>En resumen, se utilizó una pequeña red neuronal de 10 neuronas (sigmoide) y 3 neuronas de salida (softmax), con un learning rate de 0.01 y 40 epochs, lo que resultó en una precisión del modelo del 99%.</p>
-            <p>El resultado fue una combinación de Power BI para las visualizaciones y el uso de TensorFlow para el modelo y la predicción de datos, totalmente funcional.</p>
+            <p>Inicialmente, intenté elaborarlo en Python, pero no pude desplegar el modelo para que funcionara en la
+                web. Aunque intenté utilizar Heroku, no pude lograrlo 😊. Espero poder hacerlo en la próxima
+                oportunidad.</p>
+            <p>Para solucionar el problema de tener un modelo funcional, opté por utilizar TensorFlow.js, ya que
+                funciona en JavaScript y vi una oportunidad para desplegar el modelo de manera más fácil. Y así fue.</p>
+            <p>No profundizaré en el uso de TensorFlow ni en la implementación del ejercicio con iris, ya que no es el
+                alcance de esta publicación. En internet hay mucho material sobre el dataset iris y su implementación en
+                diferentes lenguajes y plataformas.</p>
+            <p>En resumen, se utilizó una pequeña red neuronal de 10 neuronas (sigmoide) y 3 neuronas de salida
+                (softmax), con un learning rate de 0.01 y 40 epochs, lo que resultó en una precisión del modelo del 99%.
+            </p>
+            <p>El resultado fue una combinación de Power BI para las visualizaciones y el uso de TensorFlow para el
+                modelo y la predicción de datos, totalmente funcional.</p>
             <p>Si necesitas más información, no dudes en contactarme:</p>
             <p>Correo: aivan.alvarez@gmail.com</p>
-            <p><a href="https://wa.me/+584262488793" target="_blank" style="text-decoration: none;">Whatsapp: +58 4262488793</a></p>
+            <p><a href="https://wa.me/+584262488793" target="_blank" style="text-decoration: none;">Whatsapp: +58
+                    4262488793</a></p>
         </div>
 
 
@@ -108,9 +134,9 @@
             const model = await tf.loadLayersModel('https://ivanation.github.io/art/iris/iris_modelo/model.json');
         }
         loadModel();
-        
-        async function doIris(){
-            
+
+        async function doIris() {
+
             // take values
             let a = Number(document.getElementById('a').value);
             let b = Number(document.getElementById('b').value);
@@ -141,9 +167,9 @@
                 tipo = "Iris Virginica"
             }
 
-            res.innerHTML = '<div class="w3-panel w3-card w3-green w3-display-container"><span onclick="this.parentElement.style.display=' + "'none'"+
-                            '" class="w3-button w3-large w3-display-topright">&times;</span><h3>Predicción</h3>'+
-                            '<p>'+tipo+' , Probabilidad: '+valorMaximo.toFixed(2)+'</p></div>'
+            res.innerHTML = '<div class="w3-panel w3-card w3-green w3-display-container"><span onclick="this.parentElement.style.display=' + "'none'" +
+                '" class="w3-button w3-large w3-display-topright">&times;</span><h3>Predicción</h3>' +
+                '<p>' + tipo + ' , Probabilidad: ' + valorMaximo.toFixed(2) + '</p></div>'
             elemento.classList.remove('w3-disabled');
 
         }
