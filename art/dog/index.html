@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Dog Vision</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+</head>
+<body>
+
+    <div class="w3-container w3-content" style="margin-top: 50px; max-width: 600px;">
+
+        <section class="w3-card w3-indigo w3-round-large w3-container">
+            <div class="w3-row-padding">
+                <div class="w3-col s7 m7 l7">
+                    <h1 class="title-01">Dog Vision</h1>
+                    <h3>Find your dog bree!</h3>
+                    <p>This use an AI to detect the bree of your dog</p>
+                </div>
+                <div class="w3-col s5 m5 l5 w3-center">
+                    <img src="https://www.freeiconspng.com/thumbs/dog-png/dog-png-30.png" width="120" alt="Dog Clip Art" />
+                </div>
+            </div>
+        </section>
+
+        <br>
+
+        <section>
+            <p>Submit a photo of your dog and the AI will try to detect the bree</p>
+            <input type="file" id="input-file">
+            <br><br>
+            <diV class="w3-center">
+                <img id="img-preview" src="#" alt="Preview" style="max-width: 300px;" class="w3-hide">
+            </diV>
+            <br><br>
+            <button class="w3-button w3-black w3-round-large" onclick="preparaFoto()">Predict!</button>
+        </section>
+
+        <br><br>
+
+    </div>
+
+    <script>
+
+        let model
+
+        async function loadModel() {
+            model = await tf.loadLayersModel('https://ivanation.github.io/art/dog/dog_modelo/model.json');
+        }
+        loadModel();
+
+        ///////////////////////////// imagen cargar
+
+        const inputFile = document.getElementById('input-file');
+        const imgPreview = document.getElementById('img-preview');
+
+        inputFile.addEventListener('change', () => {
+            imgPreview.classList.remove('w3-hide');
+            const file = inputFile.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                imgPreview.setAttribute('src', reader.result);
+            });
+            reader.readAsDataURL(file);
+        });
+
+        async function preparaFoto() {
+            const imgElement = document.getElementById('img-preview');
+
+            // Definimos el tamaño deseado para la imagen redimensionada
+            const size = [224, 224];
+
+            // Cargamos la imagen utilizando tensorflow.js y la redimensionamos
+            const tensor = await tf.browser.fromPixels(imgElement).toFloat();
+            console.log(tensor);
+            const tensor2 = await tensor.resizeBilinear(size);
+            console.log(tensor2);
+
+            // pedict
+            const prediction = model.predict(tensor2);
+            const arrp = await prediction.array();
+            const flatArrp = arrp.flat();
+            const valorMaximo = Math.max(...flatArrp);
+            const posicionMaximo = flatArrp.indexOf(valorMaximo);
+            console.log(valorMaximo, posicionMaximo);
+            console.log(arrp);
+        }
+
+    </script>
+    
+</body>
+</html>

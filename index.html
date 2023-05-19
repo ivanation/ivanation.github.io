@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Ivan</title>
     <style>
-        body, h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", Arial, Helvetica, sans-serif}
-        body{
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif
+        }
+
+        body {
             background: rgb(255, 255, 255);
             color: rgb(58, 58, 56);
         }
+
         .title-01 {
             font-weight: bold;
         }
-        .title-02{
+
+        .title-02 {
             font-weight: bold;
             font-size: 3.5em;
             color: rgb(188, 98, 240);
@@ -24,7 +37,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .caja{
+
+        .caja {
             height: 500px;
             width: 800px;
             padding: 7.5rem 0px;
@@ -33,81 +47,203 @@
             background-color: rgb(250, 250, 250);
             box-shadow: rgb(0 0 0 / 13%) 0px 6.4px 14.4px 0px, rgb(0 0 0 / 11%) 0px 1.2px 3.6px 0px;
         }
+
+        .titular {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .claro {
+            color: rgb(58, 58, 56);
+        }
+
+        .skill {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            width: 120px;
+            font-size: 16px;
+        }
+
+        .skill-level {
+            width: 160px;
+            height: 10px;
+            background-color: #d2d2d2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-left: 20px;
+        }
+
+        .skill-percent {
+            background-color: #333;
+            height: 100%;
+        }
+
+        .skill-percent-number {
+            margin-left: 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
+
 <body class="w3-light-gray">
     <div class="w3-container w3-content">
-        <section class="w3-center">
+
+        <br><br>
+
+        <section class="w3-center w3-card w3-indigo w3-round-large w3-container">
+            <br>
+            <img src="img/avatar.png" style="width: 150px;" class="w3-circle" alt="Data Analyst">
             <h1 class="title-01">Ivan Alvarez</h1>
-            <p>Caracas - Venezuela</p>
-            <p><a href="https://wa.me/+584262488793" target="_blank" style="text-decoration: none;">Whatsapp: +584262488793</a></p>
-            <p>Correo: aivan.alvarez@gmail.com</p>
+            <h2>Data Analyst</h2>
+            <div class="w3-container w3-padding w3-center w3-xxlarge">
+                <i class="fa fa-linkedin w3-hover-opacity"></i> &nbsp; &nbsp;
+                <i class="fa fa-github w3-hover-opacity"></i> &nbsp; &nbsp;
+                <i class="fa fa-whatsapp w3-hover-opacity"></i>&nbsp; &nbsp;
+                <i class="fa fa-envelope-o w3-hover-opacity"></i>
+            </div>
         </section>
 
-        <br>
+        <br><br>
 
-        <section class="w3-card w3-white w3-round-large w3-container">
-            <h2 class="w3-text-dark-grey">Summary</h2>
-            <p>Data science student with a strong passion for using data to solve real-world problems. Proven ability to learn quickly and apply new skills, use data to solve business problems, build and deploy machine learning models and communicate results to stakeholders. Seeking an entry-level data science role in a fast-paced environment where I can make a real impact.</p>
+        <section class="w3-card w3-white w3-round-large">
+            <div class="w3-indigo w3-container titular">
+                <h2>Summary</h2>
+            </div>
+            <div class="w3-container claro w3-large">
+                <p>Data science student with a strong passion for using data to solve real-world problems. Ability to
+                    learn quickly and apply new skills, use data to solve business problems, build and deploy machine
+                    learning models and communicate results to stakeholders. Seeking an entry-level data science role or
+                    data analytics and the opportunity to apply my expertise in a dynamic and collaborative environment.
+                </p>
+            </div>
         </section>
 
-        <br>
+        <br><br>
 
-        <section class="w3-card w3-white w3-round-large w3-container">
-            <h2 class="w3-text-dark-grey">Skills</h2>
-            <ul>
-                <li>Programming Languages: Python, SQL</li>
-                <li>Machine Learning: Linear regression, logistic regression, decision trees, random forests, neural networks</li>
-                <li>Data Visualization: Matplotlib, Seaborn, Power BI</li>
-                <li>Software Engineering: Agile development, version control</li>
-                <li>Communication: Clear and concise writing, effective presentations</li>
-            </ul>
-        </section>
-
-        <br>
-
-        <section class="w3-card w3-white w3-round-large w3-container">
-            <h2 class="w3-text-dark-grey">Education</h2>
-            <ul>
-                <li>Mining Engineer</li>
-                <li>Universidad Central de Venezuela</li>
-                <li>2006</li>
-            </ul>
-        </section>
-
-        <br>
-
-        <section class="w3-card w3-white w3-round-large w3-container">
-            <h2 class="w3-text-dark-grey">Projects</h2>
-
-            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                <div class="w3-col" style="width:110px">
-                    <img src="img/iris.jpg" style="width:95px" class="w3-hide-small w3-round">
-                </div>
-                <div class="w3-rest">
-                    <span class="w3-large">Titanic: Machine Learning from Disaster</span><br>
-                    <span>Difficulty: Beginner</span><br>
-                    <span>Focus: Binary classification, feature engineering, and model evaluation</span><br>
-                    <span class="w3-text-deep-purple"><a href="https://www.kaggle.com/c/titanic" target="_blank" style="text-decoration: none;">View</a></span>
+        <section class="w3-card w3-white w3-round-large">
+            <div class="w3-indigo w3-container titular">
+                <h2>Skills</h2>
+            </div>
+            <div class="w3-container claro w3-large w3-center">
+                <div class="w3-row">
+                    <div class="w3-col l6 m6 s12">
+                        <div class="skill" style="margin-top: 20px;">
+                            <div class="skill-name">HTML</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 90%"></div>
+                            </div>
+                            <div class="skill-percent-number">90%</div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">CSS</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 50%"></div>
+                            </div>
+                            <div class="skill-percent-number">50%</div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Javascript</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 70%"></div>
+                            </div>
+                            <div class="skill-percent-number">70%</div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">PHP</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 60%"></div>
+                            </div>
+                            <div class="skill-percent-number">60%</div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Python</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 70%"></div>
+                            </div>
+                            <div class="skill-percent-number">70%</div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">SQL</div>
+                            <div class="skill-level">
+                                <div class="skill-percent" style="width: 80%"></div>
+                            </div>
+                            <div class="skill-percent-number">80%</div>
+                        </div>
+                    </diV>
+                    <div class="w3-col l6 m6 s12">
+                        <br class="w3-hide-medium w3-hide-large">
+                        <p><b class="w3-hide-medium">Data and Analysis:</b> Pandas, NumPy, Excel</p>
+                        <p><b class="w3-hide-medium">Machine Learning:</b> Scikit-learn, TensorFlow, Keras</p>
+                        <p><b class="w3-hide-medium">Data Visualization:</b> Matplotlib, Seaborn, Power BI</p>
+                        <p><b class="w3-hide-medium">Database Management:</b> SQL Server, MySQL</p>
+                        <p><b class="w3-hide-medium">Software Engineering:</b> Agile and version control</p>
+                        <p><b class="w3-hide-medium">Communication:</b> Clear and concise presentations</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="w3-row w3-padding-16">
-                <div class="w3-col" style="width:110px">
-                    <img src="img/titanic.jpg" style="width:95px" class="w3-hide-small w3-round">
+        <br><br>
+
+        <section class="w3-card w3-white w3-round-large">
+            <div class="w3-indigo w3-container titular">
+                <h2>Projects</h2>
+            </div>
+            <div class="w3-container claro w3-large">
+                
+                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                    <div class="w3-col" style="width:110px">
+                        <img src="img/iris.jpg" style="width:95px" class="w3-hide-small w3-round">
+                    </div>
+                    <div class="w3-rest">
+                        <span class="w3-large"><b>Dog Vision</b></span><br>
+                        <span>Difficulty: Intermediate/Advanced</span><br>
+                        <span>Focus:  Image classification, feature engineering, large-scale datasets and deep learning </span><br>
+                        <span class="w3-text-deep-purple"><a href="art/dog/index.html" target="_blank"
+                                style="text-decoration: none;">View</a></span>
+                    </div>
                 </div>
-                <div class="w3-rest">
-                    <span class="w3-large">Titanic: Machine Learning from Disaster</span><br>
-                    <span>Difficulty: Beginner</span><br>
-                    <span>Focus: Binary classification, feature engineering, and model evaluation</span><br>
-                    <span class="w3-text-deep-purple"><a href="https://www.kaggle.com/c/titanic" target="_blank" style="text-decoration: none;">View</a></span>
+
+
+                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                    <div class="w3-col" style="width:110px">
+                        <img src="img/iris.jpg" style="width:95px" class="w3-hide-small w3-round">
+                    </div>
+                    <div class="w3-rest">
+                        <span class="w3-large"><b>Iris Dataset</b></span><br>
+                        <span>Difficulty: Beginner</span><br>
+                        <span>Focus: Classification, feature engineering, and model evaluation</span><br>
+                        <span class="w3-text-deep-purple"><a href="art/iris/index.html" target="_blank"
+                                style="text-decoration: none;">View</a></span>
+                    </div>
                 </div>
+
             </div>
 
         </section>
 
         <br><br>
 
+        <section class="w3-card w3-white w3-round-large">
+            <div class="w3-indigo w3-container titular">
+                <h2>Education</h2>
+            </div>
+            <div class="w3-container claro w3-large">
+                <ul>
+                    <li>Mining Engineer</li>
+                    <li>Universidad Central de Venezuela</li>
+                    <li>2006</li>
+                </ul>
+            </div>
+        </section>
+
+        <br><br>
+
     </div>
 </body>
+
 </html>
