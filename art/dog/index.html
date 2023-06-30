@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Dog Vision</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 </head>
 <body>
 
@@ -46,8 +46,10 @@
 
         let model
 
+        //load model
         async function loadModel() {
-            model = await tf.loadLayersModel('https://ivanation.github.io/art/dog/dog_modelo/model.json');
+            model = await tf.loadLayersModel('dog_modelo/model.json');
+            //model = await tf.loadGraphModel('dog_modelo/model.json');
         }
         loadModel();
 
