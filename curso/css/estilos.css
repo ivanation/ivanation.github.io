@@ -32,6 +32,10 @@ a {text-decoration: none;}
 .sombra-inv{
     box-shadow: -2px 0 10px 0 rgba(0,0,0,0.12), -2px 0 5px 0 rgba(0,0,0,0.16);
 }
+.traduc{
+    font-size: small;
+    color: gray;
+}
 
 
 .button-menu {
