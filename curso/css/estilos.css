@@ -26,6 +26,10 @@ a {text-decoration: none;}
 .text-azul{
     color: #213b6a;
 }
+.sombra-inv{
+    box-shadow: -2px 0 5px 0 rgba(0,0,0,0.16), -2px 0 10px 0 rgba(0,0,0,0.12);
+}
+
 
 .button-menu {
     width: 100%;
