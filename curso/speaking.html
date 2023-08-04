@@ -14,13 +14,13 @@
     <div class="w3-content w3-container w3-card w3-white w3-padding">
         <div class="w3-row">
             <div class="w3-col l3 s3 m3 w3-text-grey">
-                <a href="#" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                <a href="#" class="w3-xlarge w3-block" onclick="comienza2()"><i class="fa fa-arrow-left"></i></a>
             </div>
             <div class="w3-col l6 s6 m6 w3-center">
                 <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
             </div>
             <div class="w3-col l3 s3 m3 w3-text-grey">
-                <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                <span class="w3-xlarge w3-block w3-right-align" onclick="comienza()"><i class="fa fa-bars"></i></span>
             </div>
         </div>
     </div>
@@ -28,17 +28,137 @@
     <br><br>
 
     <div class="w3-main w3-content">
-        <div style="min-height: 400px;">
-            <div class="w3-block w3-padding"><span class="nube-izqda">Helloooooooooooooooooo0000000</span></div>
-            <div class="w3-block w3-padding w3-right-align"><span class="nube-drcha">Helloooooooooooooooooo</span></div>
+        <div id="dialogo">
+            <!-- <div class="w3-block w3-padding"><span class="nube-izqda">Hello</span></div>
+            <div class="w3-block w3-padding w3-right-align"><span class="nube-drcha">Hello</span></div>
             <div class="w3-block w3-padding"><span class="nube-izqda">How old are you?</span></div>
-            <div class="w3-block w3-padding w3-right-align"><span class="nube-drcha">I am 25 years old</span></div>
+            <div class="w3-block w3-padding w3-right-align"><span class="nube-drcha">I am 25 years old</span></div> -->
         </div>
     </div>
 
-    <div class="w3-center w3-card w3-bottom" style="padding-bottom: 15px;">
-        <div id="pista" class="w3-padding">How are you?</div>
-        <button class="w3-button w3-circle azul w3-xlarge" style="padding: 10px 20px;"><i class="fa fa-microphone"></i></button>
+    <div id="micro-control" class="w3-center w3-card w3-bottom" style="padding-bottom: 15px;">
+        <div id="pista" class="w3-padding w3-hide">How are you?</div>
+        <button id="btnstart" class="w3-button azul w3-round-xxlarge" onclick="empezando()">Comenzar</button>
+        <button id="btnmicro" class="w3-circle azul w3-xlarge w3-hide" style="padding: 10px 21px; border: 0;" onclick="microfono()"><i class="fa fa-microphone"></i></button>
     </div>
+
+    <audio id="audio1"><source src="audios/1.mp3" type="audio/mpeg"></audio>
+    <audio id="audio2"><source src="audios/2.mp3" type="audio/mpeg"></audio>
+    <audio id="audio3"><source src="audios/3.mp3" type="audio/mpeg"></audio>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/easy-speech/dist/EasySpeech.iife.js"></script>
+    <script>
+
+        const preguntas = ["Hi","What's your name?","How old are you?"];
+        const respuestas = [["Hello","Hi","How old are you?"],["My name is Carlos","Carlos","I'm","is my name","my name"],["I am 14 years old", "years old","I am","I'm"]];
+        const sonidos = ["audio1","audio2","audio3"];
+
+        let pista = 0;
+
+        // reproduce audios
+        function playAudio(elemento){
+            let audio = document.getElementById(elemento);
+            audio.play();
+        }
+
+        function comienza(){
+            if (pista < sonidos.length) {
+                playAudio(sonidos[pista]);
+                nube(preguntas[pista],1);
+                pista++;
+            }
+        }
+
+        function comienza2(){
+            if (pista < sonidos.length) {
+                playAudio(sonidos[pista]);
+                nube(preguntas[pista],0);
+                pista++;
+            }
+        }
+
+        function empezando() {
+            document.getElementById("btnstart").style.display = "none";
+            document.getElementById("btnmicro").classList.remove("w3-hide");
+            comienza();
+        }
+
+        // imprime pregunta
+        function nube(elemento, lado){
+            const dialogo = document.getElementById("dialogo");
+            const newDiv = document.createElement("div");
+            if (lado == 1){
+                newDiv.innerHTML = "<div class=\"w3-block w3-padding w3-animate-opacity\"><span class=\"nube-izqda\">"+elemento+"</span></div>";
+            } else {
+                newDiv.innerHTML = "<div class=\"w3-block w3-padding w3-animate-left w3-right-align\"><span class=\"nube-drcha\">"+elemento+"</span></div>";
+            }
+            dialogo.appendChild(newDiv);
+        }
+
+        function compararstring(a){
+            a = a.replace(/[^\w\s]/gi, '').trim().toLowerCase();
+            for (let i = 0; i < respuestas[pista-1].length; i++) {
+                let b = respuestas[pista-1][i].replace(/[^\w\s]/gi, '').trim().toLowerCase();
+                console.log("comparación: "+a+" = "+b);
+                if (a.includes(b)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        ////////////////////// voces
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+        var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
+        var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+        var speechRecognition = new SpeechRecognition();
+
+        speechRecognition.lang = "en-US";
+
+        speechRecognition.onstart = function() {
+            console.log('Listening...');
+            let a =document.getElementById("btnmicro");
+            a.classList.remove("azul");
+            a.classList.add("w3-grey");
+        };
+
+        speechRecognition.onend = function() {
+            console.log('No longer listening...');
+            let a = document.getElementById("btnmicro");
+            a.classList.remove("w3-grey");
+            a.classList.add("azul");
+        };
+
+        speechRecognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            const confidence = event.results[0][0].confidence;
+            console.log(`Transcript: ${transcript}`);
+            console.log(`Confidence: ${confidence}`);
+            if(compararstring(transcript)){
+                nube(transcript,0);
+                setTimeout(comienza, 1000);
+                if(pista >= sonidos.length){
+                    document.getElementById("micro-control").classList.add("w3-hide");
+                }
+            }else{
+                let ele = document.getElementById("pista");
+                ele.classList.remove("w3-hide");
+                ele.innerHTML = respuestas[pista-1][0];
+            }
+        };
+
+        // Empezar a reconocer el habla
+        function microfono(){
+            event.preventDefault();
+            document.getElementById("pista").classList.add("w3-hide");
+            speechRecognition.start();
+            console.log('Ready to receive a color command.');
+        }
+
+    </script>
 </body>
 </html>
