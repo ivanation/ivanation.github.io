@@ -2,42 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Topics</title>
+    <title>Speaking</title>
 </head>
-<body class="w3-large" style="background-color: e8e8e8;">
+<body class="w3-large">
 
-<div class="w3-top">
-    <div class="w3-bar azul w3-padding w3-card" style="letter-spacing:4px;">
-        <div class="w3-content">
-            <span class="w3-bar-item w3-medium" id="back">DInglish</span>
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block" onclick="comienza2()"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align" onclick="comienza()"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div style="padding-top: 60px;">
-    <div class="w3-content w3-container" style="max-width: 600px;">
-        <br><br>
-        <p class="w3-center">Al completar todos los pasos de este tema, podras desbloquear tu clase en vivo.</p>
-        <button class="button-menu">Grammar</button>
-        <br><br>
-        <button class="button-menu">Practice</button>
-        <br><br>
-        <button class="button-menu">Listening</button>
-        <br><br>
-        <button class="button-menu">Writing</button>
-        <br><br>
-        <button class="button-menu">Speaking</button>
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 52px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <!-- <p><i class="fa fa-pencil-square-o w3-jumbo text-azul"></i></p>
+            <p>Completa todas las prácticas para que puedas acceder a tu clase en vivo.</p>
+            <br>
+            <a href="#" class="w3-border w3-round-large w3-padding-large w3-block w3-button">
+                <span class="w3-left">Propias Mercantil</span> 
+                <i class="fa fa-chevron-right w3-right w3-xlarge text-azul" style="margin-top: 2px;"></i>
+            </a>
+            <br>
+            <a href="#" class="w3-border w3-round-large w3-padding-large w3-block w3-button">
+                <span class="w3-left">De Terceros Mercantil</span> 
+                <i class="fa fa-chevron-right w3-right w3-xlarge text-azul" style="margin-top: 2px;"></i>
+            </a>
+            <br>
+            <a href="speaking.html" class="w3-border w3-round-large w3-padding-large w3-block w3-button">
+                <span class="w3-left">De Otros Bancos Nacionales</span> 
+                <i class="fa fa-chevron-right w3-right w3-xlarge text-azul" style="margin-top: 2px;"></i>
+            </a> -->
+        </div>
     </div>
-</div>
 
-<br>
-<br>
+    <br><br>
+
+    <script>
+        const menu = {
+            "icon":"fa-pencil-square-o",
+            "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
+            "titulos":["grammar","practice","listening","writing","speaking"],
+            "links":["grammar.html","practice.html","listening.html","writing.html","speaking.html"]
+        }
+
+        function printMenu(){
+            const a = document.getElementById("menu");
+            let print ="";
+            print += "<p><i class=\"fa " + menu.icon + " w3-jumbo text-azul\"></i></p>";
+            print += "<p>" + menu.parrafo + "</p>";
+            for (let i = 0; i < menu.titulos.length; i++) {
+                print += '<br><a href="'+menu.links[i]+'" class="w3-border w3-round-large w3-padding-large w3-block w3-button">';
+                print += '<span class="w3-left">' + menu.titulos[i] + '</span>';
+                print += '<i class="fa fa-chevron-right w3-right w3-xlarge text-azul" style="margin-top: 2px;"></i></a>';
+            }
+            a.innerHTML = print;
+        }
+
+        printMenu();
+    </script>
 
 </body>
 </html>
