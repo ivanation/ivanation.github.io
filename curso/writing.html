@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Writing</title>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 52px;">
+        <div id="menu" class="w3-container w3-content" style="max-width: 600px;">
+            <p id="parrafo" class="w3-medium w3-center">Escribe en el orden correcto las siguientes expresiones</p>
+            <br>
+            <form id="formulario">  
+                <!-- <p>You are how? &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="uno">
+                <p>Afternoon good &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="dos">
+                <p>later you see &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="tres">
+                <p>You nice meet to &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="cuatro">
+                <p>From are where you? &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="cinco">
+                <p>old are how you? &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="seis"> -->
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- boton continue -->
+    <div class="w3-center w3-padding-large">
+        <button id="btn_continue" class="w3-button azul w3-round-xxlarge">Acept</button>
+        <br><br>
+    </div>
+
+    <br><br>
+
+    <script>
+
+        const words = [["You are how?", "how are you?"], ["Afternoon good ", "good afternoon"], ["later you see", "see you later"], ["You nice meet to", "nice to meet you"], ["From are where you?", "where are you from?"], ["old are how you?", "how old are you?"]];
+
+        // cargar opciones
+        function cargaWritting(params) {
+            let print = "";
+            for (let i = 0; i < params.length; i++) {
+                print += '<p>' + params[i][0] + ' &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="name' + i + '">';
+            }
+            document.getElementById("formulario").innerHTML = print;
+        }
+
+        cargaWritting(words);
+
+    </script>
+
+</body>
+</html>

@@ -30,9 +30,9 @@
     <div class="w3-main" style="margin-top: 52px;">
         <div id="contenido" class="w3-container w3-content" style="max-width: 600px;">
             
-            <div id="welcome" class="">
-                <h2 class="text-azul">Presentarte y Saludar</h2>
-                <p class="w3-justify">¡Bienvenidos a la clase de inglés de saludos!</p>
+            <div id="welcome" class="w3-medium">
+                <h2 class="text-azul w3-center">Presentarte y Saludar</h2>
+                <p class="w3-center">¡Bienvenidos a la clase de inglés de saludos!</p>
                 <p class="w3-justify">En esta sesión, vamos a aprender cómo saludar a alguien en inglés de manera adecuada y efectiva. Saber cómo saludar a alguien es una habilidad esencial en cualquier idioma y es especialmente útil si estás viajando o trabajando en un entorno internacional.</p>
                 <p class="w3-justify">Durante esta clase, exploraremos diferentes formas de saludos en inglés y reguntas básicas para iniciar una conversación.</p>
                 <p class="w3-justify">Así que prepárate para aprender cómo dar una buena impresión en inglés cuando te encuentres con alguien por primera vez. ¡Empecemos!</p>
@@ -87,6 +87,10 @@
         const etapas = [["saludos1",saludos,tsaludos],["saludos2",despedidas,tdespedidas],["saludos3",preguntas,tpreguntas]];
 
         function laminas() {
+            // si index llega al final llevar al menu principal
+            if (index > etapas.length-1) {
+                window.location.href = "topics.html";
+            }
             // si el audio  está en progreso, detener
             if (document.getElementById("audios").innerHTML != '') {
                 if (isAudioPlaying(etapas[index-1][0])){
@@ -106,6 +110,10 @@
             document.getElementById("content1").classList.remove("w3-hide");
             // siguiente lamina
             index++;
+            // si index llega al final cambiar boton a terminar
+            if (index > etapas.length-1) {
+                document.getElementById("btn_continue").innerHTML = "Finish";
+            }
         }
 
         function btnFreases(elemento) {
