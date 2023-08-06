@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/road.css">
     <title>Roadmap</title>
 </head>
@@ -70,6 +69,7 @@
     function printClases(temas, activas){
         const a = document.getElementById("temas");
         let print ="";
+        print += '<span style= "position: relative; top: -50px;">¡Comienza ya! elige un tema</span><br>';
         for (let i = 0; i < temas.length; i++) {
             if (isOdd(i)) print += '<div class="w3-padding-row">';
             print += '<div class="w3-col s4 w3-center '+ colors[activas[i]] +' '+ estilos2[i] +'">';

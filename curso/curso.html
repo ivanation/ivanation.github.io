@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Topics</title>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div id="back" class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="javascript:void(0)" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="javascript:void(0)" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div id="menu" class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="javascript:void(0)" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div id="topics" class="laminas"></div>
+    <div id="practice" class="laminas"></div>
+    <div id="writing" class="laminas"></div>
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script src="js/main.js"></script>
+    <script>
+
+        createLamina('topics', datos_topics);
+
+    </script>
+
+</body>
+</html>

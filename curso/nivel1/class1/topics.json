@@ -1,0 +1,7 @@
+{
+    "icon":"fa-pencil-square-o",
+    "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
+    "titulos":["grammar","practice","writing","listening","speaking"],
+    "links":["grammar.html","practice.html","writing.html","listening.html","speaking.html"],
+    "termindas":[0,0,0,0,0]
+}
