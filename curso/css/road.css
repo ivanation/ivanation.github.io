@@ -1,0 +1,108 @@
+#fondo{
+    background-image: url(img/letras.jpg);
+    background-color: #213b6a;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.r-ico{
+    position: relative; 
+    top: -25px;
+}
+.r-sp{
+    padding-bottom: 30px;
+}
+.r-nulo{
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #fff;
+}
+.r-1{
+    border-top: 2px solid #ccc;
+}
+.r-2{
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+.r-3{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+.r-4{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -2px;
+}
+.r-7{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -4px;
+}
+.r-8{
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -4px;
+}
+.r-9{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -4px;
+}
+.r-10{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -6px;
+}
+.r-14{
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -8px;
+}
+.r-15{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+    top: -8px;
+}
+.r-16{
+    border-top: 2px solid #ccc;
+    position: relative;
+    top: -10px;
+}
+@media (min-width:768px){
+    #poster{
+        height: 300px;
+        max-width: 600px;
+        display: block;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+    #logoimg{
+        top: 200px !important;
+        width: 150px !important;
+    }
+}
