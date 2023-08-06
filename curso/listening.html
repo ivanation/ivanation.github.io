@@ -79,7 +79,7 @@
         function cargaOpciones(params) {
             let print = "";
             for (let i = 0; i < params.length; i++) {
-                print += "<br><div class=\"w3-row\"><div class=\"w3-col text-azul\" style=\"width:50px\"><a href=\"#\" class=\"w3-xlarge btn-audio\" onclick=\"playAudio('"+pistas[i]+"')\"><i class=\"fa fa-play-circle w3-xxlarge vertical\"></i></a></div>";
+                print += "<br><div class=\"w3-row\"><div class=\"w3-col text-azul\" style=\"width:50px\"><a href=\"#\" class=\"w3-xlarge btn-audio\" onclick=\"playAudio('"+pistas[i]+"')\"><i class=\"fa fa-volume-up  w3-xxlarge vertical\"></i></a></div>";
                 print += '<div class="w3-rest"><select name="name'+i+'" class="w3-input w3-border w3-round-large">';
                     for (let z = 0; z < params[i].length; z++) {
                         print += '<option value="'+z+'">'+params[i][z]+'</option>';
