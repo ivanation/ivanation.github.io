@@ -1,0 +1,43 @@
+{
+    "0":{
+        "name":"topics",
+        "titulos":["grammar","practice","writing","listening","speaking"],
+        "links":[5,1,2,3,4],
+        "terminadas":[0,0,0,0,0],
+        "icon":"fa-pencil-square-o",
+        "iconos":["fa-chevron-right","fa-check-square-o"],
+        "colors": ["text-azul","w3-text-green"],
+        "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
+        "func":0
+        },
+    "1":{
+        "name":"practice",
+        "words":["______ morning!","How ______ you?","See ______ tomorrow","_______ your name?","_______ afternoon","_______ are you from?"],
+        "opciones":[["","bad","good","are"],["","are","afternoon","am"],["","name","you","later"],["","what's","you","helo"],["","am","evening","good"],["","where","morning","am"]],
+        "respuestas":[2,1,2,1,3,1],
+        "terminadas":[0,0,0,0,0,0],
+        "func":1
+        },
+    "2":{
+        "name":"writing",
+        "words":["You are how?", "Afternoon good ", "later you see", "You nice meet to", "From are where you?", "old are how you?"],
+        "respuestas":["how are you?", "good afternoon", "see you later", "nice to meet you", "where are you from?", "how old are you?"],
+        "terminadas":[0,0,0,0,0,0],
+        "func":2
+        },
+    "3":{
+        "name":"listening",
+        "audios":["saludos5","saludos6","saludos7","saludos8","saludos9","saludos10"],
+        "opciones":[["","Good morning","Good afternoon","Good evening"],["","bye bye","Hello","See you later"],["","Hello","Good evening","See you tomorrow"],["","My name is Maria","I am 24 years old","I am from Colombia"],["","I am from Colombia","I am 24 years old","My name is Maria"],["","I am from Colombia","I am 24 years old","My name is Maria"]],
+        "respuestas":[3,2,3,1,2,1],
+        "terminadas":[0,0,0,0,0,0],
+        "func":3
+        },
+    "4":{
+        "name":"speaking",
+        "audios":["1","2","3"],
+        "preguntas":["Hi","What's your name?","How old are you?"],
+        "respuestas":[["Hello","hi","good morning","good afternoon","good evening"],["My name is Carlos","carlos","i'm","is my name","my name","I am", "I'm"],["I am 14 years old", "years old","I am","I'm"]],
+        "func":4
+        }
+}

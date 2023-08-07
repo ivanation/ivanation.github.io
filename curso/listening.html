@@ -57,9 +57,14 @@
 
         function cargaAudio(params) {
             const dialogo = document.getElementById("audios");
-            const newDiv = document.createElement("div");
-            newDiv.innerHTML = '<audio id="'+params+'"><source src="audios/'+params+'.mp3" type="audio/mpeg"></audio>';
-            dialogo.appendChild(newDiv);
+            const audio = document.getElementById(params);
+            if (div.contains(audio)) {
+                return;
+            }else{
+                const newDiv = document.createElement("div");
+                newDiv.innerHTML = '<audio id="'+params+'"><source src="audios/'+params+'.mp3" type="audio/mpeg"></audio>';
+                dialogo.appendChild(newDiv);
+            }
         }
 
         for (let i = 5; i < 11; i++) {
