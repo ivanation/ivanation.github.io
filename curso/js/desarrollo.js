@@ -1,7 +1,6 @@
 
-let datos;
-let page;
-let topics;
+let datos, page;
+let pista = 0;
 const back = document.getElementById("back");
 
 ///////////////////////////// puntajes //////////////////////////////
@@ -184,9 +183,9 @@ function printPracticeMenu() {
     `;
     backAction();
     document.getElementById("practice_menu").innerHTML = print;
-  }
+}
   
-  function printWriting() {
+function printWriting() {
     console.log("imprimiendo writing");
     const print = `
       <p class="w3-medium w3-center">Escribe en el orden correcto las siguientes expresiones</p><br>
@@ -203,7 +202,31 @@ function printPracticeMenu() {
     `;
     backAction();
     document.getElementById("writing_menu").innerHTML = print;
-  }
+}
+
+function printFrases() {
+    console.log("imprimiendo frases");
+}
+
+function printGrammar() {
+    console.log("imprimiendo grammar");
+    const bloque = document.getElementById("grammar_menu");
+    if (!bloque.hasChildNodes()) {
+        fetch("nivel1/html/"+datos[page].contenido).then(response => response.text()).then(data => {
+            bloque.innerHTML = data;
+            backAction();
+            const div = document.createElement('div');
+            div.innerHTML = `
+            <br><br>
+            <!-- boton continue -->
+            <div class="w3-bottom w3-center w3-padding-large">
+                <button id="btn_continue" onclick="createLamina(${datos[page].link})" class="w3-button azul w3-round-xxlarge">Continue</button>
+                <br><br>
+            </div>`;
+            document.getElementById("grammar").appendChild(div);
+        });
+    }
+}
 
 function createLamina(id) {
     page = id;
@@ -225,12 +248,14 @@ function muestra(params) {
 }
 
 function choicePrint(id) {
+    console.log("printer"+id);
     const functions = {
         0: printTopics,
         1: printPracticeMenu,
         2: printWriting,
         3: printListening,
         4: printSpeaking,
+        5: printGrammar,
     };
 
     const functionToCall = functions[id];

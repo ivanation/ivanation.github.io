@@ -1,5 +1,5 @@
 
-let pista = 0;
+pista = 0;
 
 function comienza(){
     if (pista < datos[page].audios.length) {

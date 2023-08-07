@@ -39,5 +39,11 @@
         "preguntas":["Hi","What's your name?","How old are you?"],
         "respuestas":[["Hello","hi","good morning","good afternoon","good evening"],["My name is Carlos","carlos","i'm","is my name","my name","I am", "I'm"],["I am 14 years old", "years old","I am","I'm"]],
         "func":4
+        },
+    "5":{
+        "name":"grammar",
+        "contenido":"c1_grammar_1.html",
+        "link":0,
+        "func":5
         }
 }
