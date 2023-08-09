@@ -1,0 +1,97 @@
+{"vistas":[
+    {
+        "name":"topics",
+        "titulos":["To be","practice","writing","listening","speaking"],
+        "links":[1,2,3,4,5],
+        "terminadas":[0,0,0,0,0],
+        "icon":"fa-pencil-square-o",
+        "iconos":["fa-chevron-right","fa-check-square-o"],
+        "colors": ["text-azul","w3-text-green"],
+        "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
+        "titular":"Class 7",
+        "func":0
+        },
+    {
+        "name":"frases",
+        "titulo":"Verbo To Be",
+        "parrafo":"Escucha y repite los mejor que puedas",
+        "frases":["I am", "You are","He is","She is","It is","We are","You are","They are"],
+        "traducciones":["yo soy","tu eres","él es","ella es","eso es","nosotr@s somos","ustedes son","éll@s son"],
+        "audios":["class7_1"],
+        "refTopic":0,
+        "boton":"Continue",
+        "link":2,
+        "func":6
+        },
+    {
+        "name":"frases2",
+        "titulo":"Primeras Frases",
+        "parrafo":"Con esto ya podemos formar oraciones sencillas. Escucha y repite los mejor que puedas",
+        "frases":["I am a teacher", "You are a student","He is a musician","She is a nurse","It is an apple","We are a family","You are doctors","They are teachers"],
+        "traducciones":["yo soy un profesor","tú eres un estudiante","él es un músico","ella es una enfermera","eso es una manzana","nosotr@s somos una familia","ustedes son doctores","éll@s son profesores"],
+        "audios":["class7_2"],
+        "refTopic":0,
+        "boton":"Continue",
+        "link":3,
+        "func":6
+        },
+    {
+        "name":"frases3",
+        "titulo":"Contracciones",
+        "parrafo":"Usamos contracciones para sonar más natural en conversaciones en inglés. Escucha y repite los mejor que puedas",
+        "frases":["I'm a engineer", "You're a waiter","He's a policeman","She's a cleaner","It's a dog","We're students","You're photographers","They're teachers"],
+        "traducciones":["yo soy un ingeniero","tú eres un mesero","él es un policia","ella es una limpiadora","eso es un perro","nosotr@s somos estudiantes","ustedes son fotógraf@s","éll@s son profesor@s"],
+        "audios":["class7_3"],
+        "refTopic":0,
+        "boton":"Continue",
+        "link":4,
+        "func":6
+        },
+    {
+        "name":"frases4",
+        "titulo":"Negativas",
+        "parrafo":"Para formar oraciones negativas, simplemente colocamos un (not) después del verbo to be. Escucha y repite los mejor que puedas",
+        "frases":["I am not a boy", "You are not a girl","He is not a doctor","She is not an artist","It is not blue","We are not students","You are not photographers","They are not teachers"],
+        "traducciones":["yo no soy un niño","tú no eres una niña","él no es un dóctor","ella no es una artista","eso no es azul","nosotr@s no somos estudiantes","ustedes no son fotógraf@s","éll@s no son profesor@s"],
+        "audios":["class7_4"],
+        "refTopic":0,
+        "boton":"Continue",
+        "link":5,
+        "func":6
+        },
+    {
+        "name":"frases4",
+        "titulo":"Negativas",
+        "parrafo":"Para formar oraciones negativas, simplemente colocamos un (not) después del verbo to be. Escucha y repite los mejor que puedas",
+        "frases":["I am not a boy", "You are not a girl","He is not a doctor","She is not an artist","It is not blue","We are not students","You are not photographers","They are not teachers"],
+        "traducciones":["yo no soy un niño","tú no eres una niña","él no es un dóctor","ella no es una artista","eso no es azul","nosotr@s no somos estudiantes","ustedes no son fotógraf@s","éll@s no son profesor@s"],
+        "audios":["class7_4"],
+        "refTopic":0,
+        "boton":"Continue",
+        "link":5,
+        "func":6
+        },
+    {
+        "name":"listening",
+        "audios":["saludos5","saludos6","saludos7","saludos8","saludos9","saludos10"],
+        "opciones":[["","Good morning","Good afternoon","Good evening"],["","bye bye","Hello","See you later"],["","Hello","Good evening","See you tomorrow"],["","My name is Maria","I am 24 years old","I am from Colombia"],["","I am from Colombia","I am 24 years old","My name is Maria"],["","I am from Colombia","I am 24 years old","My name is Maria"]],
+        "respuestas":[3,2,3,1,2,1],
+        "terminadas":[0,0,0,0,0,0],
+        "func":3
+        },
+    {
+        "name":"speaking",
+        "audios":["1","2","3"],
+        "preguntas":["Hi","What's your name?","How old are you?"],
+        "respuestas":[["Hello","hi","good morning","good afternoon","good evening"],["My name is Carlos","carlos","i'm","is my name","my name","I am", "I'm"],["I am 14 years old", "years old","I am","I'm"]],
+        "func":4
+        },
+    {
+        "name":"grammar",
+        "contenido":"c1_grammar_1.html",
+        "boton":"Continue",
+        "link":6,
+        "func":5
+        }
+    ]
+}

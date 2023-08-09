@@ -29,24 +29,35 @@
 
     <br><br>
 
-    <div id="topics" class="laminas"></div>
-    <div id="practice" class="laminas"></div>
-    <div id="writing" class="laminas"></div>
-    <div id="listening" class="laminas"></div>
-    <div id="speaking" class="laminas"></div>
-    <div id="grammar" class="laminas"></div>
-    <div id="frases" class="laminas"></div>
+    <div id="vistas"></div>
     <div id="audios"></div>
 
     <br><br>
 
-    <script src="js/desarrollo.js"></script>
+    <script src="js/main.js"></script>
     <script>
 
-        fetch("nivel1/class1.json").then(response => response.json()).then(data => {
-            datos = data;
-            createLamina(0);
-        });
+        // fetch("nivel1/class7.json").then(response => response.json()).then(data => {
+        //     datos = data.vistas;
+        //     for (let i = 0; i < datos.length; i++) createDiv(i);
+        //     createLamina(0);
+        // });
+
+        ndatos = getCookie("datos");
+        if (ndatos != "") {
+            ndatos = JSON.parse(ndatos);
+            fetch("nivel1/class"+ndatos+".json").then(response => response.json()).then(data => {
+                datos = data.vistas;
+                for (let i = 0; i < datos.length; i++) createDiv(i);
+                createLamina(0);
+            });
+        }else {
+            fetch("nivel1/class1.json").then(response => response.json()).then(data => {
+                datos = data.vistas;
+                for (let i = 0; i < datos.length; i++) createDiv(i);
+                createLamina(0);
+            });
+        }
 
     </script>
 

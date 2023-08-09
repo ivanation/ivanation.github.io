@@ -1,5 +1,5 @@
 
-let datos, page;
+let datos, page, nivel;
 let pista = 0;
 const back = document.getElementById("back");
 
@@ -61,32 +61,66 @@ function cargaAudio(params) {
 
 function playAudio(elemento){
     let audio = document.getElementById(elemento);
+    audio.currentTime = 0;
     audio.play();
+}
+
+function pauseAudio(elemento){
+    let audio = document.getElementById(elemento);
+    audio.pause();
+}
+
+function isAudioPlaying(elemento){
+    let audio = document.getElementById(elemento);
+    return !audio.paused;
 }
 
 ///////////////////////////// impresoras //////////////////////////////
 
+function createDiv(params) {
+    const div = document.createElement('div');
+    div.id = "vista_"+params;
+    div.className = "laminas";
+    document.getElementById("vistas").appendChild(div);
+}
+
 function plantillas(params) {
-    const b = document.getElementById(params);
+    const b = document.getElementById("vista_"+page);
     // comprobar si esta vacia
     if (b.hasChildNodes()) {
+        console.log("vacio");
         return;
     } else {
-        const a = '<div class="w3-main" style="margin-top: 52px;"><div id="'+params+'_menu" class="w3-container w3-content" style="max-width: 600px;"></div></div>';
+        const a = '<div class="w3-main" style="margin-top: 52px;"><div id="vista_'+ page + '_menu" class="w3-container w3-content" style="max-width: 600px;"></div></div>';
         b.innerHTML = a;
     }  
 }
 
 function backAction() {
-    back.addEventListener('click', function() {
+    back.onclick = function() {
         createLamina(0);
-    });
+    };
+    
+    // back.addEventListener('click', function() {
+    //     createLamina(0);
+    // });
+}
+
+function backRoad() {
+    back.onclick = function() {
+        window.location.href = "road.html";
+    }
+    // back.addEventListener('click', function() {
+    //     window.location.href = "road.html";
+    // });
 }
 
 function printTopics() {
     console.log("imprimiendo topics");
-    const bloque = document.getElementById("topics_menu");
+    const bloque = document.getElementById("vista_"+ page + "_menu");
+    backRoad();
     bloque.innerHTML = `
+    <h2 class="text-azul w3-center">${datos[page].titular}</h2>
     <div class="w3-center">
         <p><i class="fa ${datos[page].icon} w3-jumbo text-azul"></i></p>
         <p>${datos[page].parrafo}</p>
@@ -126,7 +160,7 @@ function printSpeaking() {
     `;
     backAction();
     pista = 0;
-    document.getElementById("speaking").innerHTML = print;
+    document.getElementById("vista_"+page).innerHTML = print;
 }
 
 function printListening(){
@@ -135,8 +169,8 @@ function printListening(){
         cargaAudio(datos[page].audios[i]);
     }
     const print = `
-        <p class="w3-medium">Escucha y responde con la opción correcta</p>
-        <form id="form_listening">
+        <p class="w3-medium w3-center">Escucha y responde con la opción correcta</p>
+        <form id="form_${datos[page].name}">
             ${datos[page].audios.map((word, i) =>`
             <br>
             <div class="w3-row">
@@ -150,7 +184,7 @@ function printListening(){
                 </div>
             </div>
             `).join("")}
-        <p id="form_msj_listening" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
+        <p id="form_msj_${datos[page].name}" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
             <div class="w3-center w3-padding-large">
                 <button class="w3-button azul w3-round-xxlarge" onclick="comprobar_puntaje()">Accept</button>
                 <br><br>
@@ -158,7 +192,7 @@ function printListening(){
         </form>
     `;
     backAction();
-    document.getElementById("listening_menu").innerHTML = print;
+    document.getElementById("vista_"+ page + "_menu").innerHTML = print;
 }
 
 
@@ -166,7 +200,7 @@ function printPracticeMenu() {
     console.log("imprimiendo practice");
     const print = `
         <p class="w3-medium w3-center">Selecciona la palabra correcta</p><br>
-        <form id="form_practice">
+        <form id="form_${datos[page].name}">
             ${datos[page].words.map((word, i) => `
                 <p>${word} &nbsp;
                 <select name="name${i}" class="w3-input w3-border w3-round-large">
@@ -174,7 +208,7 @@ function printPracticeMenu() {
                 </select>
                 </p>
             `).join("")}
-            <p id="form_msj_practice" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
+            <p id="form_msj_${datos[page].name}" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
             <div class="w3-center w3-padding-large">
                 <button class="w3-button azul w3-round-xxlarge" onclick="comprobar_puntaje()">Accept</button>
                 <br><br>
@@ -182,18 +216,18 @@ function printPracticeMenu() {
         </form>
     `;
     backAction();
-    document.getElementById("practice_menu").innerHTML = print;
+    document.getElementById("vista_"+ page + "_menu").innerHTML = print;
 }
   
 function printWriting() {
     console.log("imprimiendo writing");
     const print = `
-      <p class="w3-medium w3-center">Escribe en el orden correcto las siguientes expresiones</p><br>
-      <form id="form_writing">
+      <p class="w3-medium w3-center">${datos[page].parrafo}</p><br>
+      <form id="form_${datos[page].name}">
         ${datos[page].words.map((word, i) => `
           <p>${word} &nbsp; <input class="w3-input w3-round-large w3-border" type="text" name="name${i}">
         `).join("")}
-        <p id="form_msj_writing" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
+        <p id="form_msj_${datos[page].name}" class="w3-medium w3-center w3-hide w3-red">La respuesta es incorrecta</p>
         <div class="w3-center w3-padding-large">
           <button class="w3-button azul w3-round-xxlarge" onclick="comprobar_puntaje_texto()">Accept</button>
           <br><br>
@@ -201,16 +235,64 @@ function printWriting() {
       </form>
     `;
     backAction();
-    document.getElementById("writing_menu").innerHTML = print;
+    document.getElementById("vista_"+ page + "_menu").innerHTML = print;
 }
 
 function printFrases() {
     console.log("imprimiendo frases");
+    for (let i = 0; i < datos[page].audios.length; i++) {
+        cargaAudio(datos[page].audios[i]);
+    }
+    const bloque = document.getElementById("vista_"+ page + "_menu");
+    if (!bloque.hasChildNodes()) {
+        const print = `
+            <div class="w3-center">
+                <h2 class="text-azul">${datos[page].titulo}</h2>
+                <p class="w3-medium">${datos[page].parrafo}</p>
+                <button id="btn_play" onclick="btnFrases('${datos[page].audios[0]}')" class="w3-circle azul w3-xlarge w3-hover-gray" style="padding: 5px 12px; border: 0; position:relative; top: 10px;"><i class="fa fa-volume-up"></i></button>
+                <br>
+                <div>
+                ${datos[page].frases.map((word, i) => `
+                    <div class="w3-left-align w3-padding-large" style="border-top: 1px solid #ccc;">
+                        <span>${word}</span><br>
+                        <span class="traduc">${datos[page].traducciones[i]}</span>
+                    </div>
+                `).join("")}
+                    <div style="border-top: #ccc solid 1px;"></div>
+                </div>
+            </div>
+        `;
+        backAction();
+        document.getElementById("vista_"+ page + "_menu").innerHTML = print;
+        const div = document.createElement('div');
+        div.innerHTML = `
+        <br><br>
+        <!-- boton continue -->
+        <div class="w3-bottom w3-center w3-padding-large">
+            <button id="btn_continue_${page}" onclick="btnContinueFrases()" class="w3-button azul w3-round-xxlarge w3-hide">${datos[page].boton}</button>
+            <br><br>
+        </div>`;
+        document.getElementById("vista_"+page).appendChild(div);
+    }
+}
+
+function btnFrases(elemento) { ///////////////// revisar y guardar que termino
+    playAudio(elemento);
+    document.getElementById("btn_continue_"+page).classList.remove("w3-hide");
+}
+
+function btnContinueFrases(){
+    if (isAudioPlaying(datos[page].audios[0])){
+        pauseAudio(datos[page].audios[0]);
+    }
+    document.getElementById("btn_continue_" + page).classList.add("w3-hide");
+    if (datos[page].link === 0) datos[0].terminadas[datos[page].refTopic] = 1;
+    createLamina(datos[page].link)
 }
 
 function printGrammar() {
     console.log("imprimiendo grammar");
-    const bloque = document.getElementById("grammar_menu");
+    const bloque = document.getElementById("vista_"+ page + "_menu");
     if (!bloque.hasChildNodes()) {
         fetch("nivel1/html/"+datos[page].contenido).then(response => response.text()).then(data => {
             bloque.innerHTML = data;
@@ -220,21 +302,23 @@ function printGrammar() {
             <br><br>
             <!-- boton continue -->
             <div class="w3-bottom w3-center w3-padding-large">
-                <button id="btn_continue" onclick="createLamina(${datos[page].link})" class="w3-button azul w3-round-xxlarge">Continue</button>
+                <button id="btn_continue_${page}" onclick="btnContinueGrammar()" class="w3-button azul w3-round-xxlarge">${datos[page].boton}</button>
                 <br><br>
             </div>`;
-            document.getElementById("grammar").appendChild(div);
+            document.getElementById("vista_"+page).appendChild(div);
         });
     }
 }
 
+function btnContinueGrammar(){
+    if (datos[page].link === 0) datos[0].terminadas[datos[0].links.indexOf(page)] = 1;
+    createLamina(datos[page].link)
+}
+
 function createLamina(id) {
     page = id;
-    const name = datos[page].name;
-    console.log(name);
-    plantillas(name);
-    muestra(name);
-    console.log(datos[page].func);
+    plantillas("vista_"+page);
+    muestra("vista_"+page);
     choicePrint(datos[page].func);
 }
 
@@ -248,7 +332,6 @@ function muestra(params) {
 }
 
 function choicePrint(id) {
-    console.log("printer"+id);
     const functions = {
         0: printTopics,
         1: printPracticeMenu,
@@ -256,6 +339,7 @@ function choicePrint(id) {
         3: printListening,
         4: printSpeaking,
         5: printGrammar,
+        6: printFrases
     };
 
     const functionToCall = functions[id];

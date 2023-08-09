@@ -1,0 +1,53 @@
+{"vistas":[
+    {
+        "name":"topics",
+        "titulos":["Singular","Practice","Plurals","Practice","Listening"],
+        "links":[3,1,4,2,5],
+        "terminadas":[0,0,0,0,0],
+        "icon":"fa-pencil-square-o",
+        "iconos":["fa-chevron-right","fa-check-square-o"],
+        "colors": ["text-azul","w3-text-green"],
+        "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
+        "titular":"Class 6",
+        "func":0
+        },
+    {
+        "name":"Practice 1",
+        "words":["___ cat","___ house","___ umbrella","___ book","___ truck","___ apple","___ orange","___ pencil","___ egg"],
+        "opciones":[["","a","an"],["","a","an"],["","a","an"],["","a","an"],["","a","an"],["","a","an"],["","a","an"],["","a","an"],["","a","an"]],
+        "respuestas":[1,1,2,1,1,2,2,1,2],
+        "terminadas":[0,0,0,0,0,0],
+        "func":1
+        },
+    {
+        "name":"Writing",
+        "words":["a phone","a pencil","an address","a baby","a table","a key","a calf","an egg","a wife","a fox","a day"],
+        "respuestas":["phones","pencils","addresses","babies","tables","keys","calves","eggs","wives","foxes","days"],
+        "terminadas":[0,0,0,0,0,0,0,0,0,0,0],
+        "parrafo":"Convierte en plural las siguientes expresiones",
+        "func":2
+        },
+    {
+        "name":"Grammar",
+        "contenido":"c2_grammar_1.html",
+        "boton":"Finish",
+        "link":0,
+        "func":5
+        },
+    {
+        "name":"Plurals",
+        "contenido":"c2_grammar_2.html",
+        "boton":"Finish",
+        "link":0,
+        "func":5
+        },
+    {
+        "name":"Listening",
+        "audios":["saludos11","saludos12","saludos13","saludos14","saludos15","saludos16"],
+        "opciones":[["","a house","a dog","an orange"],["","an hour","an apple","an egg"],["","an orange", "a cat", "a table"],["","a house","a car","a tomate"],["","an elephant","an airplane","a book"],["","a dog","a cat","a house"]],
+        "respuestas":[1,2,1,3,2,1],
+        "terminadas":[0,0,0,0,0,0],
+        "func":3
+        }
+    ]
+}

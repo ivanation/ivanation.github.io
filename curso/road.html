@@ -20,41 +20,19 @@
 <br><br>
 <div class="w3-main">
     <div id="temas" class="w3-container w3-content w3-center" style="max-width: 600px;">
-
-        <!-- <div class="w3-padding-row">
-            <div class="w3-col s4 w3-center text-azul r-sp r-1">
-                <span class="r-ico"><li class="fa fa-check-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>Grettings</span></span>
-            </div>
-            <div class="w3-col s4 w3-center w3-text-grey r-sp r-2">
-                <span class="r-ico"><li class="fa fa-pencil-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>Numbers</span></span>
-            </div>
-            <div class="w3-col s4 w3-center w3-text-grey r-sp r-3">
-                <span class="r-ico"><li class="fa fa-pencil-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>Vowels</span></span>
-            </div>
-        </div>
-        <div class="w3-padding-row">
-            <div class="w3-col s4 w3-center w3-text-grey r-sp r-4">
-                <span style="position: relative; top: -27px;"><li class="fa fa-pencil-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>Vocabulary</span></span>
-            </div>
-            <div class="w3-col s4 w3-center w3-text-grey r-sp">
-                <span class="r-ico"><li class="fa fa-pencil-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>Plurals</span></span>
-            </div>
-            <div class="w3-col s4 w3-center w3-text-grey r-sp r-nulo">
-                <span class="r-ico"><li class="fa fa-pencil-square-o  w3-xxxlarge"></li><span class="w3-medium"><br>A-An</span></span>
-            </div>
-        </div> -->
         
     </div>
 </div>
 
 
+<script src="js/main.js"></script>
 <script>
-    const nombre = "Nivel 1";
-    const temas = ["Grettings", "Numbers", "Vowels", "Vocabulary", "Plurals", "A-An", "Tobe", "Tobe", "Tobe", "Present", "Present", "Present", "Continuo", "Continuo", "Contunio", "Pasado", "Pasado", "Pasado"];
-    const enlaces = ["topics.html","javascript:void(0)"];
-    const activas = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    const iconos = ["fa-pencil-square-o","fa-check-square-o"];
-    const colors = ["w3-text-grey","text-azul"];
+    //const nombre = "Nivel 1";
+    //const temas = ["Grettings", "Numbers", "Colors", "Plurals", "Vocabuary", "This-That", "Tobe", "Tobe", "Tobe", "Present", "Present", "Present", "Continuo", "Continuo", "Contunio", "Pasado", "Pasado", "Pasado"];
+    //const enlaces = ["topics.html","javascript:void(0)"];
+    //const activas = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    const iconos = ["fa-lock","fa-check-square-o","fa-pencil-square-o"];
+    const colors = ["w3-text-grey","w3-text-green","text-azul"];
     const estilos = ['class="r-ico"','class="r-ico"','class="r-ico"','style="position: relative; top: -27px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -29px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -20px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -33px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -15px;"','class="r-ico"','class="r-ico"'];
     const estilos2 = ['r-sp r-1','r-sp r-2','r-sp r-3','r-sp r-4','r-sp','r-sp r-nulo','r-sp r-nulo','r-sp r-8','r-sp r-9','r-sp r-10','r-sp r-nulo','r-sp r-nulo','r-sp r-nulo','r-sp r-14','r-sp r-15','r-sp r-16','r-sp r-nulo','r-sp r-nulo'];
     
@@ -66,27 +44,50 @@
         return number === 2 || number === 5 || number === 8 || number === 11 || number === 14 || number === 17;
     }
 
-    function printClases(temas, activas){
+    function printClases(){
         const a = document.getElementById("temas");
         let print ="";
         print += '<span style= "position: relative; top: -50px;">¡Comienza ya! elige un tema</span><br>';
-        for (let i = 0; i < temas.length; i++) {
+        for (let i = 0; i < nivel.temas.length; i++) {
             if (isOdd(i)) print += '<div class="w3-padding-row">';
-            print += '<div class="w3-col s4 w3-center '+ colors[activas[i]] +' '+ estilos2[i] +'">';
+            print += '<div class="w3-col s4 w3-center '+ colors[nivel.activas[i]] +' '+ estilos2[i] +'">';
             // imprime el link segun activa
-            print += '<a href=';
-            if (activas[i] != 0){
-                print += enlaces[i]
-            }else{
-                print += 'javascript:void(0)'
+            print += '<a href="javascript:void(0)"';
+            if (nivel.activas[i] != 0){
+                print += ' onclick="linkPage(' + nivel.links[i] + ')"; ';
             }
-            print +=' '+ estilos[i] +'><li class="fa '+ iconos[activas[i]] +' w3-xxxlarge"></li><span class="w3-medium"><br>'+ temas[i] +'</span></a>';
+            print +=' '+ estilos[i] +'><li class="fa '+ iconos[nivel.activas[i]] +' w3-xxxlarge"></li><span class="w3-medium"><br>'+ nivel.temas[i] +'</span></a>';
             print += '</div>';
             if (isOdd2(i)) print += '</div>';
         }
         a.innerHTML = print;
     }
-    printClases(temas, activas);
+
+    function linkPage(clase) {
+        setCookie("datos", JSON.stringify(clase), 1);
+        window.location.replace("curso.html");
+        // fetch("nivel1/class"+clase+".json").then(response => response.json()).then(data => {
+        //     console.log("descargando clase", clase);
+        //     datos = data.vistas;
+        //     console.log(datos[0].titular);
+        //     setCookie("datos", JSON.stringify(datos), 1);
+        //     //window.location.replace("curso.html");
+        // });
+    }
+
+    nivel = getCookie("nivel");
+    if (nivel != "") {
+        console.log("encontrado");
+        nivel = JSON.parse(nivel);
+        printClases();
+    }else{
+        fetch("nivel1/nivel1.json").then(response => response.json()).then(data => {
+            console.log("descargando nivel");
+            nivel = data;
+            setCookie("nivel", JSON.stringify(nivel), 1);
+            printClases();
+        });
+    }
 </script>
 
 
