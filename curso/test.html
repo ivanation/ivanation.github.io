@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Vocabulary</title>
+    <style>
+        #ropa{
+            margin-top: 40px;
+        }
+        @media (min-width:993px){
+            #ropa{
+                margin-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block"><span id="clothe_cont">8</span> / <span id="clothe_total">34</span></a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 20px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <p class="w3-medium">Selecciona la opción correcta</p>
+            <div id="ropa">
+                <img id="ropa_1" src="img/class3/boots.jpg" alt="boots" class="w3-image ropa" style="max-height: 300px;">
+                <img id="ropa_2" src="img/class3/belt.jpg" alt="belt" class="w3-image ropa w3-hide" style="max-height: 300px;">
+                <img id="ropa_3" src="img/class3/cap.jpg" alt="cap" class="w3-image ropa w3-hide" style="max-height: 300px;">
+                <img id="ropa_4" src="img/class3/dress.jpg" alt="dress" class="w3-image ropa w3-hide" style="max-height: 300px;">
+                <img id="ropa_5" src="img/class3/gloves.jpg" alt="gloves" class="w3-image ropa w3-hide" style="max-height: 300px;">
+            </div>
+            <br>
+            <div class="w3-center">
+                <p class="w3-border w3-round-large">Boots</p>
+                <p class="w3-border w3-round-large">Shirt</p>
+                <p class="w3-border w3-round-large">Skirt</p>
+                <p class="w3-border w3-round-large">Pants</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+        const words = ["boots", "belt", "cap", "dress", "gloves"];
+        const opciones = [["boots","belt","cap"],["dress","cap","belt"],["dress","cap","gloves"],["dress","cap","belt"],["boots","cap","gloves"]];
+        const respuestas = [0,2,1,0,2];
+        let cont = 0;
+        let errores = 0;
+
+        function printTest() {
+            for (let i = 0; i < words.length; i++) {
+                cargaAudio(words[i]);
+            }
+            const print = `
+            <p class="w3-medium">Selecciona la opción correcta</p>
+            <div>
+                ${words.map((word, i) => `
+                    <img id="${word}"_ropa src="img/class3/${word}.jpg" alt="${word}" class="w3-image ropa w3-hide" style="max-height: 300px;">
+                `).join("")}
+            </div>
+            <br>
+            <div class="w3-center" id="opciones_test">
+                ${opciones[cont].map((value,i) => `
+                    <p resp="${i}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${value}</p>
+                `).join("")}
+            </div>`;
+            document.getElementById("menu").innerHTML = print;
+            const errores_maximos = Math.ceil(words.length*0.1);
+            document.getElementById("clothe_total").innerHTML = errores_maximos;
+            document.getElementById("clothe_cont").innerHTML = errores;
+            document.getElementById(words[cont]).classList.remove("w3-hide");
+        }
+
+        function clickTest() {
+            event.preventDefault();
+            let resp = event.target.getAttribute("resp");
+            console.log(resp);
+            //playAudio(opciones[cont][resp]);
+            if (resp == respuestas[cont]) {
+                document.getElementById(words[cont]).classList.add("w3-hide");             
+                cont++;
+                actualiza();
+            } else {
+                errores++;
+                actualiza();
+            }
+        }
+
+        function actualiza() {
+            const a = document.querySelectorAll('.ropa');
+            a.forEach(function(boton) {
+                boton.classList.add('w3-hide');
+            });
+            document.getElementById(words[cont]).classList.remove("w3-hide");
+            document.getElementById("opciones_test").innerHTML = opciones[cont].map((value,i) => `
+            <p resp="${i}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${value}</p>`).join("");
+            document.getElementById("clothe_cont").innerHTML = errores;
+        }
+
+        function cargaAudio(params) {
+            const div = document.getElementById("audios");
+            const audio = document.getElementById(params);
+            if (div.contains(audio)) {
+                return;
+            }else{
+                const newDiv = document.createElement("div");
+                newDiv.innerHTML = '<audio id="'+params+'_audio"><source src="audios/class3/'+params+'.mp3" type="audio/mpeg"></audio>';
+                div.appendChild(newDiv);
+            }
+        }
+
+        function playAudio(elemento){
+            const audio = document.getElementById(elemento+'_audio');
+            console.log(audio);
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        printTest();
+
+    </script>
+
+</body>
+</html>
