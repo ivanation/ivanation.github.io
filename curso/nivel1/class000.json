@@ -1,8 +1,8 @@
 {"vistas":[
     {
         "name":"topics",
-        "titulos":["To be","practice","writing","listening","speaking"],
-        "links":[5,1,2,3,4],
+        "titulos":["grammar","practice","writing","listening","speaking"],
+        "links":[1,2,3,4,5],
         "terminadas":[0,0,0,0,0],
         "icon":"fa-pencil-square-o",
         "iconos":["fa-chevron-right","fa-check-square-o"],
@@ -10,37 +10,6 @@
         "parrafo":"¡No te pierdas tu clase en vivo! Completa todas las prácticas para estar listo.",
         "titular":"Class 7",
         "func":0
-    },
-    {
-        "name":"practice",
-        "words":["I ___ a teacher","You ___ a student","It ___ an apple","They ___ nurses","He ___ a doctor","She ___ a maid", "We ____ a family", "You ___ doctors"],
-        "opciones":[["","am","are","is"],["","am","are","is"],["","am","are","is"],["","am","are","is"],["","am","are","is"],["","am","are","is"],["","am","are","is"],["","am","are","is"]],
-        "respuestas":[1,2,3,2,3,3,2,2],
-        "terminadas":[0,0,0,0,0,0],
-        "func":1
-    },
-    {
-        "name":"writing",
-        "words":["not I boy am a","girl a are you","doctor not is he","she not is artist an","yellow it is","are we students not","Maria are Juan and painters","My I brother and are students","dog brown is the"],
-        "respuestas":["i am not a boy", "you are a girl", "he is not a doctor", "she is not an artist","it is not yellow","we are not students","maria and juan are painters","my brother and I are students","the dog is brown"],
-        "terminadas":[0,0,0,0,0,0],
-        "parrafo":"Escribe en el orden correcto las siguientes expresiones",
-        "func":2
-    },
-    {
-        "name":"listening",
-        "audios":["saludos5","saludos6","saludos7","saludos8","saludos9","saludos10"],
-        "opciones":[["","Good morning","Good afternoon","Good evening"],["","bye bye","Hello","See you later"],["","Hello","Good evening","See you tomorrow"],["","My name is Maria","I am 24 years old","I am from Colombia"],["","I am from Colombia","I am 24 years old","My name is Maria"],["","I am from Colombia","I am 24 years old","My name is Maria"]],
-        "respuestas":[3,2,3,1,2,1],
-        "terminadas":[0,0,0,0,0,0],
-        "func":3
-        },
-    {
-        "name":"speaking",
-        "audios":["1","2","3"],
-        "preguntas":["good morning","How are you?","Fine, what's your name?","I'm Frank. Nice to meet you!","Where are you from?","How old are you?","What do you do?","What do you like t do?","Ok, she's Karen, she's my mother, she's a chef, she's 54 years old, she's from Mexico. Is my mother from Brazil?","My mother's name is Karen?","Is she a doctor?","Is she 24 years old?","Very good! nice to see you, bye bye"],
-        "respuestas":[["Hello","hi","good morning","good afternoon","good evening"],["I'm fine","am good","I am fine","fine","good"],["My name is Carlos","carlos","i'm","is my name","my name","I am", "I'm"],["Nice to meet you too","Nice to meet you","nice to meet","to meet"],["I'm from Mexico","I am from","I'm from","from"],["I am 21 years old", "years old","I am","I'm","years old","years"],["I'm a student","I am","I'm","student"],["I like play soccer","I like","like"],["No, she is not from Brazil","shesn't from brazil","she is not","she's not","no"]],
-        "func":4
     },
     {
         "name":"frases",
@@ -51,7 +20,7 @@
         "audios":["class7_1"],
         "refTopic":0,
         "boton":"Continue",
-        "link":6,
+        "link":2,
         "func":6
     },
     {
@@ -63,7 +32,7 @@
         "audios":["class7_2"],
         "refTopic":0,
         "boton":"Continue",
-        "link":7,
+        "link":3,
         "func":6
     },
     {
@@ -75,7 +44,7 @@
         "audios":["class7_3"],
         "refTopic":0,
         "boton":"Continue",
-        "link":8,
+        "link":4,
         "func":6
     },
     {
@@ -87,19 +56,7 @@
         "audios":["class7_4"],
         "refTopic":0,
         "boton":"Continue",
-        "link":9,
-        "func":6
-    },
-    {
-        "name":"frases4",
-        "titulo":"Negativas",
-        "parrafo":"Para formar oraciones negativas, simplemente colocamos un (not) después del verbo to be. Escucha y repite los mejor que puedas",
-        "frases":["I am not a boy", "You are not a girl","He is not a doctor","She is not an artist","It is not blue","We are not students","You are not photographers","They are not teachers"],
-        "traducciones":["yo no soy un niño","tú no eres una niña","él no es un dóctor","ella no es una artista","eso no es azul","nosotr@s no somos estudiantes","ustedes no son fotógraf@s","éll@s no son profesor@s"],
-        "audios":["class7_4"],
-        "refTopic":0,
-        "boton":"Continue",
-        "link":10,
+        "link":5,
         "func":6
     },
     {
@@ -111,7 +68,7 @@
         "audios":["class7_5"],
         "refTopic":0,
         "boton":"Continue",
-        "link":11,
+        "link":6,
         "func":6
     },
     {
@@ -123,7 +80,7 @@
         "audios":["class7_6"],
         "refTopic":0,
         "boton":"Continue",
-        "link":12,
+        "link":7,
         "func":6
     },
     {

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Vocabulary</title>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block"><span id="clothe_cont">8</span> / <span id="clothe_total">34</span></a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 20px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <br>
+            <div>
+                <img id="ropa_1" src="img/boots.jpg" alt="boots" class="w3-image ropa" style="max-height: 300px;">
+                <img id="ropa_2" src="img/belt.jpg" alt="belt" class="w3-image ropa w3-hide" style="max-height: 300px;">
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="micro-control" class="w3-center sombra-inv w3-bottom w3-padding-16" style="padding-bottom: 15px;">
+        <div class="w3-row" style="max-width: 600px; margin: 0 auto;">
+            <div class="w3-col s2 m2 l2">
+                <h3 onclick="avanza(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></h3>
+            </div>
+            <div class="w3-col s8 m8 l8">
+                <a href="javascript:void(0)" style="line-height: 50px;"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name">Blue</span></a>
+            </div>
+            <div class="w3-col s2 m2 l2">
+                <h3 onclick="avanza(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+        const ropa = ["ropa_1", "ropa_2"];
+        let cambiador = 0;
+        
+        function cambia(paso) {
+            const a = document.querySelectorAll('.ropa');
+            cambiador += paso
+            const b = document.getElementById(ropa[cambiador]);
+            a.forEach(function(boton) {
+                boton.classList.add('w3-hide');
+            });
+            b.classList.remove('w3-hide');
+            const len = ropa.length;
+            document.getElementById("clothe_cont").innerHTML = cambiador+1;
+            document.getElementById("clothe_total").innerHTML = len;
+        }
+
+        function avanza(paso){
+            if (paso == 1) {
+                if(ropa[cambiador+1]){
+                    cambia(1);
+                }
+            } else {
+                if(ropa[cambiador-1]){
+                    cambia(-1);
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>

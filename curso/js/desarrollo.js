@@ -100,19 +100,12 @@ function backAction() {
     back.onclick = function() {
         createLamina(0);
     };
-    
-    // back.addEventListener('click', function() {
-    //     createLamina(0);
-    // });
 }
 
 function backRoad() {
     back.onclick = function() {
         window.location.href = "road.html";
     }
-    // back.addEventListener('click', function() {
-    //     window.location.href = "road.html";
-    // });
 }
 
 function printTopics() {

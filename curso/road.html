@@ -27,10 +27,6 @@
 
 <script src="js/main.js"></script>
 <script>
-    //const nombre = "Nivel 1";
-    //const temas = ["Grettings", "Numbers", "Colors", "Plurals", "Vocabuary", "This-That", "Tobe", "Tobe", "Tobe", "Present", "Present", "Present", "Continuo", "Continuo", "Contunio", "Pasado", "Pasado", "Pasado"];
-    //const enlaces = ["topics.html","javascript:void(0)"];
-    //const activas = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     const iconos = ["fa-lock","fa-check-square-o","fa-pencil-square-o"];
     const colors = ["w3-text-grey","w3-text-green","text-azul"];
     const estilos = ['class="r-ico"','class="r-ico"','class="r-ico"','style="position: relative; top: -27px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -29px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -20px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -33px;"','class="r-ico"','class="r-ico"','style="position: relative; top: -15px;"','class="r-ico"','class="r-ico"'];
@@ -66,13 +62,6 @@
     function linkPage(clase) {
         setCookie("datos", JSON.stringify(clase), 1);
         window.location.replace("curso.html");
-        // fetch("nivel1/class"+clase+".json").then(response => response.json()).then(data => {
-        //     console.log("descargando clase", clase);
-        //     datos = data.vistas;
-        //     console.log(datos[0].titular);
-        //     setCookie("datos", JSON.stringify(datos), 1);
-        //     //window.location.replace("curso.html");
-        // });
     }
 
     nivel = getCookie("nivel");
