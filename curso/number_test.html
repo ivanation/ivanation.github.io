@@ -131,7 +131,7 @@
             const opciones = randomOptions(randomIndex);
             console.log(excludedArray);
             document.getElementById("opciones_test").innerHTML = opciones.map((value) => `
-            <p resp="${value}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${words[value][0]}</p>`).join("");
+            <p resp="${value}" class="w3-border w3-round-large w3-hover-grey w3-padding" onclick="clickTest()">${words[value][0]}</p>`).join("");
             document.getElementById("clothe_cont").innerHTML = errores;
             document.getElementById('numero').innerHTML = words[randomIndex][1];
         }

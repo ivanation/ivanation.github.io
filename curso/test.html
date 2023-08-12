@@ -116,7 +116,7 @@
             });
             document.getElementById(words[cont]).classList.remove("w3-hide");
             document.getElementById("opciones_test").innerHTML = opciones[cont].map((value,i) => `
-            <p resp="${i}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${value}</p>`).join("");
+            <p resp="${i}" class="w3-border w3-round-large w3-hover-grey w3-padding" onclick="clickTest()">${value}</p>`).join("");
             document.getElementById("clothe_cont").innerHTML = errores;
         }
 
