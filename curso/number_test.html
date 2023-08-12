@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Vocabulary</title>
+    <style>
+        #numero {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:150px;
+        }
+    </style>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block"><span id="clothe_cont">8</span> / <span id="clothe_total">34</span></a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 20px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <p class="w3-medium">Selecciona la opción correcta</p>
+            <span id="circulo"><span id="numero" class="w3-text-gray">100</span></span>
+            <br>
+            <div class="w3-center">
+                <p class="w3-border w3-round-large w3-hover-grey">one</p>
+                <p class="w3-border w3-round-large w3-hover-grey">two</p>
+                <p class="w3-border w3-round-large w3-hover-grey">three</p>
+                <p class="w3-border w3-round-large w3-hover-grey">four</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+        const words = [["one",1],["two",2],["three",3],["four",4],["five",5],["six",6],["seven",7],["eight",8],["nine",9],["ten",10],["eleven",11],["twelve",12],["thirteen",13],["fourteen",14],["fifteen",15],["sixteen",16],["seventeen",17],["eighteen",18],["nineteen",19],["twenty",20],["thirty",30],["forty",40],["fifty",50],["sixty",60],["seventy",70],["eighty",80],["ninety",90],["one hundred",100]];
+        let errores = 0;
+        let excludedArray = [];
+
+        function randomOptions(pos) {
+            const len = words.length;
+            // selecciono dos posiciones random que no sean pos
+            let randomIndex1 = Math.floor(Math.random() * len);
+;            while (randomIndex1 == pos) {
+                randomIndex1 = Math.floor(Math.random() * len);
+            }
+            let randomIndex2 = Math.floor(Math.random() * len);
+            while (randomIndex2 == pos || randomIndex2 == randomIndex1) {
+                randomIndex2 = Math.floor(Math.random() * len);
+            }
+            // hago un array con los resultados
+            let array = [randomIndex1, randomIndex2, pos];
+            // desordeno el array
+            const len2 = array.length;
+            for (let i = 0; i < len2; i++) {
+                let randomIndex = Math.floor(Math.random() * len2);
+                let temp = array[i];
+                array[i] = array[randomIndex];
+                array[randomIndex] = temp;
+            }
+            return array;
+        }
+
+        function seleccionaGanador(excludedArray) {
+            const len = words.length;
+            let randomIndex = Math.floor(Math.random() * len);
+            while (excludedArray.includes(randomIndex)) {
+                randomIndex = Math.floor(Math.random() * len);
+            }
+            return randomIndex;
+        }
+        
+        function printTest() {
+            const len = words.length;
+            const randomIndex = Math.floor(Math.random() * len);
+            console.log(randomIndex);
+            excludedArray.push(randomIndex);
+            const opciones = randomOptions(randomIndex);
+            console.log(opciones);
+            const print = `
+            <p class="w3-medium">Selecciona la opción correcta</p>
+            <span id="circulo"><span id="numero" class="w3-text-gray">${words[randomIndex][1]}</span></span>
+            <br>
+            <div class="w3-center" id="opciones_test">
+                ${opciones.map((value) => `
+                    <p resp="${value}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${words[value][0]}</p>
+                `).join("")}
+            </div>`;
+            document.getElementById("menu").innerHTML = print;
+            const errores_maximos = Math.ceil(len*0.1);
+            document.getElementById("clothe_total").innerHTML = errores_maximos;
+            document.getElementById("clothe_cont").innerHTML = errores;
+        }
+
+        function clickTest() {
+            event.preventDefault();
+            let resp = event.target.getAttribute("resp");
+            if (resp == excludedArray[excludedArray.length-1]) {
+                actualiza();
+            } else {
+                errores++;
+                actualiza();
+            }
+        }
+
+        function actualiza() {
+            const len = words.length;
+            const randomIndex = seleccionaGanador(excludedArray);
+            excludedArray.push(randomIndex);
+            const opciones = randomOptions(randomIndex);
+            console.log(excludedArray);
+            document.getElementById("opciones_test").innerHTML = opciones.map((value) => `
+            <p resp="${value}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${words[value][0]}</p>`).join("");
+            document.getElementById("clothe_cont").innerHTML = errores;
+            document.getElementById('numero').innerHTML = words[randomIndex][1];
+        }
+
+        printTest();
+
+    </script>
+
+</body>
+</html>
