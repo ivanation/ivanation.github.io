@@ -104,7 +104,7 @@
             <br>
             <div class="w3-center" id="opciones_test">
                 ${opciones.map((value) => `
-                    <p resp="${value}" class="w3-border w3-round-large w3-hover-grey" onclick="clickTest()">${words[value][0]}</p>
+                    <p resp="${value}" class="w3-border w3-round-large w3-hover-grey w3-padding" onclick="clickTest()">${words[value][0]}</p>
                 `).join("")}
             </div>`;
             document.getElementById("menu").innerHTML = print;
