@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <title>Vocabulary</title>
+    <style>
+        #numero {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:150px;
+        }
+    </style>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block"><span id="clothe_cont">8</span> / <span id="clothe_total">34</span></a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 20px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <p class="w3-medium">Escucha y repite los mejor que puedas</p>
+            <span id="color" class="c-black"></span>
+            <br><br>
+            <div class="w3-row">
+                <div class="w3-col s3 m3 l3">
+                    <span onclick="avanza(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                </div>
+                <div class="w3-col s6 m6 l6">
+                    <span><a id="sonido" href="#" onclick="habla(ropa[cont])"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name">Blue</span></a></h3>
+                </div>
+                <div class="w3-col s3 m3 l3">
+                    <span onclick="avanza(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+        const words = ["blue","black","brown","grey","green","orange","pink","purple","red","white","yellow"];
+        let cont = 0;
+
+        function cargaAudio(params) {
+            const div = document.getElementById("audios");
+            const audio = document.getElementById(params);
+            if (div.contains(audio)) {
+                return;
+            }else{
+                const newDiv = document.createElement("div");
+                newDiv.innerHTML = '<audio id="'+params+'_audio"><source src="audios/class3/'+params+'.mp3" type="audio/mpeg"></audio>';
+                div.appendChild(newDiv);
+            }
+        }
+
+        function playAudio(elemento){
+            const audio = document.getElementById(elemento+'_audio');
+            console.log(audio);
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function printNumberTest() {
+            const len = words.length;
+
+            for (let i = 0; i < len; i++) {
+                cargaAudio(words[i]);
+            }
+
+            const print = `
+            <p class="w3-medium">Escucha y repite los mejor que puedas</p>
+            <span id="colors" class="c-${words[cont]}"></span>
+            <br><br>
+            <div class="w3-row">
+                <div class="w3-col s3 m3 l3">
+                    <span onclick="avanza(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                </div>
+                <div class="w3-col s6 m6 l6">
+                    <span><a id="sonido" href="javascript:void(0)" onclick="playAudio(words[cont]);"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name">${words[cont]}</span></a></h3>
+                </div>
+                <div class="w3-col s3 m3 l3">
+                    <span onclick="avanza(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                </div>
+            </div>`;
+            document.getElementById("menu").innerHTML = print;
+            document.getElementById("clothe_total").innerHTML = len;
+            document.getElementById("clothe_cont").innerHTML = cont+1;
+        }
+
+        function actualiza(paso) {
+            cont += paso
+            const len = words.length;
+            document.getElementById("clothe_cont").innerHTML = cont+1;
+            document.getElementById("clothe_total").innerHTML = len;
+            document.getElementById("name").innerHTML = words[cont];
+            let color = document.getElementById("colors");
+            color.removeAttribute("class");
+            color.classList.add("c-"+words[cont]);
+            playAudio(words[cont]);
+        }
+
+        function avanza(paso){
+            if (paso == 1) {
+                if(words[cont+1]){
+                    actualiza(1);
+                }else{
+                    cont = -1;
+                    actualiza(1);
+                }
+            } else {
+                if(words[cont-1]){
+                    actualiza(-1);
+                }else{
+                    cont = words.length;
+                    actualiza(-1);
+                }
+            }
+        }
+
+        printNumberTest();
+
+    </script>
+
+</body>
+</html>
