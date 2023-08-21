@@ -2,8 +2,28 @@
 let datos, page, nivel;
 let pista = 0;
 const back = document.getElementById("back");
+const logo = document.getElementById("logo");
+let cont = 0;
+let errores = 0;
+let errores_maximos = 0;
+let excludedArray = [];
 
 ///////////////////////////// puntajes //////////////////////////////
+
+function salvar_puntaje() {
+    users[usuario]["finish"][datos[0].links.indexOf(page)] = 1;
+    let data = new FormData();
+    data.append("data",JSON.stringify(users));
+    data.append("nro",clase);
+    fetch("nivel1/leer.php", {method: "POST",body: data});
+}
+
+function salvar_puntaje_frases() {
+    users[usuario]["finish"][datos[page].refTopic] = 1;
+    let data = new FormData();
+    data.append("data",JSON.stringify(users));
+    fetch("nivel1/leer.php", {method: "POST",body: data});
+}
 
 // aqui enviar a post los datos y a cookies
 function comprobar_puntaje() {
@@ -99,7 +119,7 @@ function plantillas(params) {
 function backAction() {
     back.onclick = function() {
         createLamina(0);
-    };
+    }
 }
 
 function backRoad() {
@@ -107,6 +127,8 @@ function backRoad() {
         window.location.href = "road.html";
     }
 }
+
+///////////////////////////////////////////////////////////////////////////
 
 function printTopics() {
     console.log("imprimiendo topics");
@@ -132,6 +154,160 @@ function loadEasySpeech() {
     const script = document.createElement("script");
     script.src = "js/microfono.js";
     document.head.appendChild(script);
+}
+
+function printNumberTest() {
+    console.log("imprimiendo number test");
+    cont = 0;
+    errores = 0;
+    errores_maximos = 0;
+    excludedArray = [];
+    const len = datos[page].words.length;
+    const randomIndex = Math.floor(Math.random() * len);
+    excludedArray.push(randomIndex);
+    const opciones = randomOptions(randomIndex);
+    const print = `
+    <div class="w3-center">
+        <p class="w3-medium">Selecciona la opción correcta</p>
+        <span id="circulo_${page}"><span id="numero" class="w3-text-gray">${datos[page].words[randomIndex][1]}</span></span>
+        <br>
+        <div class="w3-center" id="opciones_test">
+            ${opciones.map((value) => `
+                <p resp="${value}" class="w3-border w3-round-large w3-hover-grey w3-padding" onclick="clickTest()">${datos[page].words[value][0]}</p>
+            `).join("")}
+        </div>
+    </div>`;
+    errores_maximos = Math.ceil(len*0.1);
+    document.getElementById('vista_'+ page + '_menu').innerHTML = print;
+    logo.innerHTML = `<span id="cont_${page}">${errores}</span> / <span id="total_${page}">${errores_maximos}</span>`;
+    backAction();
+}
+
+function randomOptions(pos) {
+    const len = datos[page].words.length;
+    // selecciono dos posiciones random que no sean pos
+    let randomIndex1 = Math.floor(Math.random() * len);
+    while (randomIndex1 == pos) {
+        randomIndex1 = Math.floor(Math.random() * len);
+    }
+    let randomIndex2 = Math.floor(Math.random() * len);
+    while (randomIndex2 == pos || randomIndex2 == randomIndex1) {
+        randomIndex2 = Math.floor(Math.random() * len);
+    }
+    // hago un array con los resultados
+    let array = [randomIndex1, randomIndex2, pos];
+    // desordeno el array
+    const len2 = array.length;
+    for (let i = 0; i < len2; i++) {
+        let randomIndex = Math.floor(Math.random() * len2);
+        let temp = array[i];
+        array[i] = array[randomIndex];
+        array[randomIndex] = temp;
+    }
+    return array;
+}
+
+function seleccionaGanador(excludedArray) {
+    const len = datos[page].words.length;
+    let randomIndex = Math.floor(Math.random() * len);
+    while (excludedArray.includes(randomIndex)) {
+        randomIndex = Math.floor(Math.random() * len);
+    }
+    return randomIndex;
+}
+
+function clickTest() {
+    event.preventDefault();
+    let resp = event.target.getAttribute("resp");
+    if (resp == excludedArray[excludedArray.length-1]) {
+        actualizaTest();
+    } else {
+        errores++;
+        if (errores > errores_maximos) {
+            createLamina(0);
+        }else{
+            actualizaTest();
+        }
+    }
+}
+
+function actualizaTest() {
+    const len = datos[page].words.length;
+    const randomIndex = seleccionaGanador(excludedArray);
+    excludedArray.push(randomIndex);
+    // si ya no quedan mas numeros pasa la prueba
+    if (excludedArray.length == len) {
+        datos[0].terminadas[datos[0].links.indexOf(page)] = 1;
+        salvar_puntaje();
+        createLamina(0);
+    } else {
+        const opciones = randomOptions(randomIndex);
+        //console.log(excludedArray);
+        document.getElementById("opciones_test").innerHTML = opciones.map((value) => `
+        <p resp="${value}" class="w3-border w3-round-large w3-hover-grey w3-padding" onclick="clickTest()">${datos[page].words[value][0]}</p>`).join("");
+        document.getElementById("cont_"+page).innerHTML = errores;
+        document.getElementById('numero').innerHTML = datos[page].words[randomIndex][1];
+    }
+    
+}
+
+function printNumber() {
+    console.log("imprimiendo number");
+    let len = datos[page].words.length;
+    for (let i = 0; i < len; i++) {
+        cargaAudio(datos[page].words[i][1]);
+    }
+    cont = 0;
+    const print = `
+    <div class="w3-center">
+        <p class="w3-medium">Escucha y repite los mejor que puedas</p>
+        <span id="circulo_${page}"><span id="numero" class="w3-text-gray">${datos[page].words[cont][1]}</span></span>
+        <br><br>
+        <div class="w3-row">
+            <div class="w3-col s3 m3 l3">
+                <span onclick="avanzaNumber(0)" class="cu"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+            </div>
+            <div class="w3-col s6 m6 l6">
+                <span><a id="sonido" href="javascript:void(0)" onclick="playAudio(datos[page].words[cont][1]);"><i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;<span id="name_${page}">${datos[page].words[cont][0]}</span></a></h3>
+            </div>
+            <div class="w3-col s3 m3 l3">
+                <span onclick="avanzaNumber(1)" class="cu"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>`;
+    document.getElementById('vista_'+ page + '_menu').innerHTML = print;
+    logo.innerHTML = `<span id="cont_${page}">${cont+1}</span> / <span id="total_${page}">${len}</span>`;
+    backAction();
+}
+
+function actualizaNumber(paso) {
+    cont += paso
+    const len = datos[page].words.length;
+    document.getElementById("cont_"+page).innerHTML = cont+1;
+    document.getElementById("total_"+page).innerHTML = len;
+    document.getElementById("name_"+page).innerHTML = datos[page].words[cont][0];
+    document.getElementById("numero").innerHTML = datos[page].words[cont][1];
+    playAudio(datos[page].words[cont][1]);
+}
+
+function avanzaNumber(paso){
+    if (paso == 1) {
+        if(datos[page].words[cont+1]){
+            actualizaNumber(1);
+        }else{
+            datos[0].terminadas[datos[0].links.indexOf(page)] = 1;
+            salvar_puntaje();
+            cont = -1;
+            actualizaNumber(1);
+        }
+    } else {
+        if(datos[page].words[cont-1]){
+            actualizaNumber(-1);
+        }else{
+            cont = datos[page].words.length;
+            actualizaNumber(-1);
+        }
+    }
 }
 
 function printSpeaking() {
@@ -279,7 +455,10 @@ function btnContinueFrases(){
         pauseAudio(datos[page].audios[0]);
     }
     document.getElementById("btn_continue_" + page).classList.add("w3-hide");
-    if (datos[page].link === 0) datos[0].terminadas[datos[page].refTopic] = 1;
+    if (datos[page].link === 0){
+        datos[0].terminadas[datos[page].refTopic] = 1;
+        salvar_puntaje_frases();
+    }
     createLamina(datos[page].link)
 }
 
@@ -308,6 +487,8 @@ function btnContinueGrammar(){
     createLamina(datos[page].link)
 }
 
+///////////////////////////////
+
 function createLamina(id) {
     page = id;
     plantillas("vista_"+page);
@@ -332,7 +513,9 @@ function choicePrint(id) {
         3: printListening,
         4: printSpeaking,
         5: printGrammar,
-        6: printFrases
+        6: printFrases,
+        7: printNumber,
+        8: printNumberTest
     };
 
     const functionToCall = functions[id];

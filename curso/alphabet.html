@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>alphabet</title> 
+    <style>
+        .p{
+            padding: 11px 20px 11px 20px;
+            margin-bottom: 20px;
+        }
+    </style>   
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-main" style="margin-top: 52px;">
+        <div class="w3-container w3-content" style="max-width: 600px;">
+            
+            <div class="w3-center">
+                <br>
+                <p class="w3-medium w3-center">Toca cada letra para escuchar y repetir lo mejor que puedas</p>
+                <br>
+                <div class="w3-row w3-xlarge">
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                    <div class="w3-col s3 m3 l3"><span class="w3-button w3-border w3-circle p">A</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <!-- boton continue -->
+    <div class="w3-bottom w3-center w3-padding-large">
+        <button id="btn_continue" class="w3-button azul w3-round-xxlarge">Finish</button>
+        <br><br>
+    </div>
+
+    <!-- carga de audios -->
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+
+        const saludos = ["Hello", "Hi", "Good morning", "Good afternoon", "Good evening"];
+        const tsaludos = ["hola", "hola", "buenos dias", "buenas tardes", "buenas noches (saludo)"];
+        const variables = [["Saludos","Escucha y repite lo mejor que puedas"], ["Despedidas","Escucha y repite lo mejor que puedas"],["Preguntas Simples","Escucha y repite los mejor que puedas"]];
+        const despedidas = ["Bye","See you later","Take care","Good night","See you tomorrow"];
+        const tdespedidas = ["Chau","Nos vemos más tarde","Cuidate","Buenas noches (despedida)", "Nos vemos mañana"];
+        const preguntas = ["How are you?","I am fine, thank you","What's your name?","My name is Maria","Nice to meet you","Nice to meet you, too","Where are you from?","I am from Spain","How old are you?","I am 25 years old","What do you do?","I am a doctor","What do you like to do?","I like to play football"];
+        const tpreguntas = ["¿cómo estás?","Estoy bien, gracias","¿Qué es tu nombre?","Mi nombre es María","gusto en conocerte","gusto en conocerte, también","¿De dónde eres?","Yo soy de España","¿Cuántos años tienes?","tengo 25 años","¿a qué te dedicas?","Soy médico","¿qué te gusta hacer?","me gusta jugar fútbol"];
+
+
+        let index = 0;
+        const etapas = [["saludos1",saludos,tsaludos],["saludos2",despedidas,tdespedidas],["saludos3",preguntas,tpreguntas]];
+
+        function laminas() {
+            // si index llega al final llevar al menu principal
+            if (index > etapas.length-1) {
+                window.location.href = "topics.html";
+            }
+            // si el audio  está en progreso, detener
+            if (document.getElementById("audios").innerHTML != '') {
+                if (isAudioPlaying(etapas[index-1][0])){
+                    pauseAudio(etapas[index-1][0]);
+                }
+            }
+            // carga el audio nuevo
+            cargaAudio(etapas[index][0]);
+            // imprime las frases
+            imprimeFrases(etapas[index][1], etapas[index][2], variables[index]);
+            // asigna el audio nuevo al btn play
+            const a = document.getElementById("btn_play");
+            a.setAttribute("onclick", "btnFreases('"+etapas[index][0]+"')");
+            // cambio de botones
+            document.getElementById("btn_continue").classList.add("w3-hide");
+            document.getElementById("welcome").classList.add("w3-hide");
+            document.getElementById("content1").classList.remove("w3-hide");
+            // siguiente lamina
+            index++;
+            // si index llega al final cambiar boton a terminar
+            if (index > etapas.length-1) {
+                document.getElementById("btn_continue").innerHTML = "Finish";
+            }
+        }
+
+        function btnFreases(elemento) {
+            playAudio(elemento);
+            //setTimeout(showContinue, 15000);
+            showContinue();
+        }
+
+        function showContinue() {
+            document.getElementById("btn_continue").classList.remove("w3-hide");
+        }
+
+        function cargaAudio(params) {
+            const dialogo = document.getElementById("audios");
+            const newDiv = document.createElement("div");
+            newDiv.innerHTML = '<audio id="'+params+'"><source src="audios/'+params+'.mp3" type="audio/mpeg"></audio>';
+            dialogo.appendChild(newDiv);
+        }
+
+        function playAudio(elemento){
+            let audio = document.getElementById(elemento);
+            audio.play();
+        }
+
+        function pauseAudio(elemento){
+            let audio = document.getElementById(elemento);
+            audio.pause();
+        }
+
+        function isAudioPlaying(elemento){
+            let audio = document.getElementById(elemento);
+            return !audio.paused;
+        }
+
+        function imprimeFrases(frases, traduccion, titulos) {
+            document.getElementById("titulo").innerHTML = titulos[0];
+            document.getElementById("parrafo").innerHTML = titulos[1];
+            let print = "";
+            for (let i = 0; i < frases.length; i++) {
+                print += '<div class="w3-justify w3-padding-large" style="border-top: 1px solid #ccc;">';
+                print += '<span>' + frases[i] + '</span><br>';
+                print += '<span class="traduc">' + traduccion[i] + '</span>';
+                print += '</div>';
+            }
+            print += '<div style="border-top: #ccc solid 1px;"></div>';
+            document.getElementById("frases").innerHTML = print;
+        }
+
+    </script>
+
+</body>
+</html>

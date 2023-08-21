@@ -1,2 +1,8 @@
 * Agregar nombre, email, link de datos al mensaje de whatsapp cada vez que alguien escriba
 * Definitivamente boton de ayuda en todas las paginas
+
+*id
+*user
+*clase
+*actividad
+*nivel
