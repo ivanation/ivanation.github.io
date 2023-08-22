@@ -13,85 +13,109 @@
     .lp-t-blue{color:#003366}
     #target{border:none; width:200px; border:1px solid #ccc;}
     #target:focus{border:0 !important;}
+    @media (min-width:600px){
+        #view_lista{
+            padding:0.01em 16px;
+            margin-bottom: 16px;
+            margin-top: 68px;
+        }
+    }
+    @media (min-width:993px){
+        #myfooter{
+            margin-left:250px;
+        }
+    }
+    .lp-lista{
+        padding:8px 16px;
+        border-bottom: 1px solid #ccc;
+    }
+
 </style>
 </head>
 
 <body style="background-color:#eff3f6">
 
-<!-- Top container -->
-<div id="mytopheader" class="w3-container w3-top lp-blue w3-card-4 w3-large w3-padding" style="z-index:4">
-    <button class="w3-btn w3-hide-large w3-padding-0 lp-blue w3-hover-text-grey" onclick="w3_open();">
-    <i class="fa fa-bars"></i></button>
-    <span class="w3-right">Lista</span>
-    <a class="w3-hide-large w3-hide-medium w3-padding-0 lp-blue w3-hover-text-grey w3-right w3-padding-right" href="#" id="abrir-buscador">
-    <i class="fa fa-search"></i></a>
-    <a class="w3-hide-large w3-hide-medium w3-padding-0 lp-blue w3-hover-text-grey w3-right w3-padding-right" href="#">
-    <i class="fa fa-plus-circle"></i></a>
+<!-- Top barra -->
+<div id="myTopBar" class="w3-bar w3-top lp-blue w3-card-4 w3-xlarge" style="z-index:4">
+    <input class="w3-bar-item w3-imput w3-medium w3-round w3-animate-left" type="search" id="target" placeholder="Buscar" style="margin-top: 8px; margin-left: 10px; min-width:250px; line-height: 18px;">
+    <button class="w3-btn w3-bar-item w3-right" onclick="topBarLista()"><i class="fa fa-times"></i></button>
 </div>
 
-<!-- Sidenav/menu -->
-<nav id="mySidenav" class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:250px;">
-    <br>
-    <div class="w3-container w3-row">
-        <div class="w3-col">
-            <span>Bienvenido, <strong>Daniel</strong></span><br>
-            <a href="#" class="w3-hover-none w3-hover-text-red w3-show-inline-block"><i class="fa fa-envelope"></i></a>
-            <a href="#" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
-            <a href="#" class="w3-hover-none w3-hover-text-blue w3-show-inline-block"><i class="fa fa-cog"></i></a>
-        </div>
+<!-- Sidebar/menu -->
+<nav id="mySidebar" class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top w3-card w3-animate-left" style="z-index: 3; width: 250px; display: none; margin-top: 52px;">
+    <div class="w3-container" style="border-bottom: 1px solid #d4d4d4;">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <h3 class="w3-wide"><b>LOGO</b></h3>
     </div>
-    <hr>
-    <a href="#" class="w3-padding-16 w3-hide-large w3-hover-black" onclick="w3_close()" title="close menu">
-    <i class="fa fa-remove fa-fw"></i>&nbsp; CERRAR</a>
-    <a href="lista.html" class="w3-padding-16 lp-blue-light"><i class="fa fa-user-o fa-fw"></i> LISTA</a>
-    <a href="index.html" class="w3-padding-16"><i class="fa fa-bar-chart fa-fw"></i> CONVERTIDOS</a>
-    <a href="add.html" class="w3-padding-16"><i class="fa fa-plus-circle  fa-fw"></i> AGREGAR</a>
+    <div class="w3-padding w3-text-grey">
+        <a href="#" class="w3-bar-item w3-button w3-light-grey btn-menu">Bienvenida</a>
+        <a href="#" class="w3-bar-item w3-button btn-menu">Saludos</a>
+        <a href="#" class="w3-bar-item w3-button btn-menu">Plurales</a>
+        <a href="#" class="w3-bar-item w3-button btn-menu">Primeras Frases 1</a>
+        <a href="#" class="w3-bar-item w3-button btn-menu">Presente Simple 1</a>
+    </div>
 </nav>
 
-<!-- Overlay effect when opening sidenav on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor: pointer; display: none;" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div id="mycontent" class="w3-main" style="margin-left:250px; margin-top:45px;">
+<div id="mycontent" class="w3-main" style="margin-left:250px; margin-top:52px;">
 
-    <!-- espacio -->
-    <div class=" w3-padding-12 w3-hide-small"></div>
+    <div id="view_lista">
+    
+        <div id="list-cont">
+            
+            <div class=" w3-hide w3-margin-bottom" style="max-width: 800px; margin: 0 auto">
+                <ul class="w3-navbar w3-white w3-card-2">
+                    <li><span style="display:block; padding:8px;">Ordenar por:</span></li>
+                    <li><a href="#" class="sort" data-sort="name">nombre</a></li>
+                    <li><a href="#" class="sort" data-sort="sector">sector</a></li>
+                    <li><a href="#" class="sort" data-sort="born">número</a></li>
+                    <li><input class="search w3-input" type="search" placeholder="Buscar"></li>
+                </ul>
+            </div>
+            
+            <div id="user_list" class="w3-white w3-card-4" style="max-width: 800px; margin: 0 auto">
+                <div class="lp-lista w3-row">
+                    <div class="w3-col s6">
+                        <span>Liset Rojas</span><br>
+                        <span>0412-3345678</span><br>
+                        <span>Centro</span>
+                    </div>
+                    <div class="w3-col s6">
+                        <span class="w3-right w3-xlarge" style="position: relative; bottom: -15px;"><i class="fa fa-arrow-circle-right w3-xxlarge lp-t-blue" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="lp-lista w3-row">
+                    <div class="w3-col s6">
+                        <span>Liset Rojas</span><br>
+                        <span>0412-3345678</span><br>
+                        <span>Centro</span>
+                    </div>
+                    <div class="w3-col s6">
+                        <span class="w3-right w3-xlarge" style="position: relative; bottom: -15px;"><i class="fa fa-arrow-circle-right w3-xxlarge lp-t-blue" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="lp-lista w3-row">
+                    <div class="w3-col s6">
+                        <span>Liset Rojas</span><br>
+                        <span>0412-3345678</span><br>
+                        <span>Centro</span>
+                    </div>
+                    <div class="w3-col s6">
+                        <span class="w3-right w3-xlarge" style="position: relative; bottom: -15px;"><i class="fa fa-arrow-circle-right w3-xxlarge lp-t-blue" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Ejemplo de lista -->
-    <div id="users">
-        <div class="w3-container w3-top w3-white w3-card-4 w3-large w3-padding w3-hide" style="z-index:4" id="top-buscador">
-            <a class=" w3-hide-large w3-padding-0 w3-hover-text-grey" href="#" id="cerrar-buscador">
-            <i class="fa fa-times "></i></a>
-        <span class="w3-right"><input class="search" type="search" placeholder="Search" id="target" /></span>
-    </div>
-  
-    <div id="list-cont">
-        <div class=" w3-hide-small w3-margin-bottom">
-            <ul class="w3-navbar w3-white w3-card-2">
-                <li><span style="display:block; padding:8px;">Ordenar por:</span></li>
-                <li><a href="#" class="sort" data-sort="name">nombre</a></li>
-                <li><a href="#" class="sort" data-sort="sector">sector</a></li>
-                <li><a href="#" class="sort" data-sort="born">número</a></li>
-                <li><input class="search w3-input" type="search" placeholder="Buscar"></li>
-            </ul>
         </div>
-        <ul id="user_list" class="w3-ul w3-white w3-card-4">
-            <li class="w3-padding-16">
-                <span class="w3-closebtn w3-padding w3-margin-right lp-t-blue" style="margin-top: 7px;">
-                    <i class="fa fa-arrow-circle-right"></i>
-                </span>
-                <span>Liset Rojas</span>
-                <br>
-                <span>0412-3345678</span>
-                <br>
-                <span>Centro</span>
-            </li>
-        </ul>
+
     </div>
 
 </div>
 
-<footer class="w3-container w3-padding-24 lp-blue w3-center">
+<footer id="myfooter" class="w3-container w3-padding-24 lp-blue w3-center">
     <h4>Ir arriba</h4>
     <p>Luz y Paz - Cocorote</p>
 
@@ -103,10 +127,47 @@
 
  	
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script>
 
-//////////////////// zona /////////////////////
+//////////////////// top bar /////////////////////
+
+function topBarLista() {
+    document.getElementById("myTopBar").innerHTML=`<button class="w3-btn w3-hide-large w3-bar-item" onclick="w3_open();"><i class="fa fa-bars"></i></button>
+    <button onclick="topBarSearch()" class="w3-btn w3-bar-item w3-right"><i class="fa fa-search"></i></button>`;
+}
+
+function topBarSearch() {
+    document.getElementById("myTopBar").innerHTML=`<input type="search" id="target" onkeyup="searcher()" class="w3-bar-item w3-imput w3-medium w3-round w3-animate-left" placeholder="Buscar" style="margin-top: 8px; margin-left: 10px; min-width:250px; line-height: 18px;">
+    <button class="w3-btn w3-bar-item w3-right" onclick="searchFinish()"><i class="fa fa-times"></i></button>`;
+}
+
+topBarLista()
+
+/////////////////////// buscador /////////////////////
+
+function searchFinish() {
+    const searchResults = document.querySelectorAll(".lp-lista");
+    searchResults.forEach(function(boton){
+        boton.classList.remove('w3-hide');
+    });
+    topBarLista();
+}
+
+function searcher() {
+    const searchInput = document.getElementById("target");
+    const searchResults = document.querySelectorAll(".lp-lista");
+    const searchTerm = searchInput.value.toLowerCase();
+    searchResults.forEach(function(boton) {
+        boton.classList.add('w3-hide');
+        const text = boton.textContent.toLowerCase();
+        if (text.indexOf(searchTerm) >= 0) {
+            boton.classList.remove('w3-hide');
+        }
+    });
+}
+
+/////////////////////// zona ///////////////////////////
 
 let zonas;
 
@@ -114,94 +175,37 @@ fetch("zonas.json").then(response => response.json()).then(data => {
     zonas = data
 });
 
-//////////////////// lista buscador /////////////////////
+//////////////////// lista de usuarios /////////////////////
 
 fetch("users.json").then(response => response.json()).then(data => {
     const div = document.getElementById("user_list");
     div.innerHTML = `
         ${data.map((word, i) => `
-            <li class="w3-padding-16">
-                <span class="w3-closebtn w3-padding w3-margin-right lp-t-blue" style="margin-top: 7px;">
-                    <i class="fa fa-arrow-circle-right"></i>
-                </span>
-                <span>${word[0]}</span><br>
-                <span>${word[1]}</span><br>
-                <span>${zonas[word[2]]}</span><br>
-            </li>
+            <div class="lp-lista w3-row">
+                <div class="w3-col s6">
+                    <span>${word[0]}</span><br>
+                    <span>${word[1]}</span><br>
+                    <span>${zonas[word[2]]}</span>
+                </div>
+                <div class="w3-col s6">
+                    <span class="w3-right w3-xlarge" style="position: relative; bottom: -18px;"><i class="fa fa-chevron-right w3-xlarge lp-t-blue" aria-hidden="true"></i></span>
+                </div>
+            </div>
        `).join("")}`;
 });
 
-
 //////////////////// menu navegacion /////////////////////
 
-// Get the Sidenav
-var mySidenav = document.getElementById("mySidenav");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidenav, and add overlay effect
 function w3_open() {
-    if (mySidenav.style.display === 'block') {
-        mySidenav.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidenav.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
 }
 
-// Close the sidenav with the close button
 function w3_close() {
-    mySidenav.style.display = "none";
-    overlayBg.style.display = "none";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
 }
 
-
-
-
-
-$( document ).ready(function() {  
-
-//////////////////// si es mobile /////////////////////
-
-celular();
-	
-$( window ).resize(function() {
-	  celular();
-});
-
-function celular(){
-    if( $(window).width() > 595 ) {
-        $('#list-cont').addClass('w3-container');
-        $('.may').addClass('w3-medium');
-    }else{
-        $('#list-cont').removeClass('w3-container');
-        $('.may').removeClass('w3-medium');
-    }
-}
-
-//////////////////// buscar /////////////////////
-
-$('#abrir-buscador').click(function(){
-    $('#top-header').hide();
-    $('#top-buscador').removeClass('w3-hide');
-    $('#target').focus();
-});
-
-$('#cerrar-buscador').click(function(){
-    $('#top-buscador').addClass('w3-hide');
-    $('#top-header').show();
-    userList.search();
-    $('#target').val('');
- });
-
-//////////////////// jquery /////////////////////
-	
-});
- 
- 
 </script>
-</div>
 </body>
 </html>
