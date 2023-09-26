@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Vocabulary</title>
+    <style>
+        #numero {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:150px;
+        }
+    </style>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding w3-top">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main" style="margin-top: 20px;">
+        <div id="menu" class="w3-container w3-content w3-center" style="max-width: 600px;">
+            <br>
+            <p id="btn_play"><button class="w3-circle azul w3-xlarge w3-hover-gray" style="padding: 5px 12px; border: 0;"><i class="fa fa-volume-up"></i></button></p>
+            <br class="w3-hide-small">
+            <p id="frase" class="w3-large">My father and my sister are watching TV in the living room</p>
+            <br>
+            <div class="w3-center" id ="opciones_test">
+                <p class="w3-border w3-round-large w3-hover-grey">one</p>
+                <p class="w3-border w3-round-large w3-hover-grey">two</p>
+                <p class="w3-border w3-round-large w3-hover-grey">three</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="audios"></div>
+
+    <br><br>
+
+    <script>
+        const tob = [`am`,`is`,`are`];
+        const words = ["I __ a teacher","They ___ in the kitchen","He ___ a doctor","She ___ a maid"];
+        const op = [tob,tob,tob,tob];
+        const r = [0,2,1,1];
+        let total = 0;
+        let num = 0;
+        const pre = 4;
+
+        function printActuaiza(num){
+            document.getElementById("frase").innerHTML = words[num];
+            const lista = document.getElementById("opciones_test");
+            let a = "";
+            for (let i = 0; i < op[num].length; i++) {
+                a+= `<p resp="${i}" onclick="clickExam()" class="w3-border w3-round-large w3-hover-grey">${op[num][i]}</p>`;
+            }
+            lista.innerHTML = a;
+        }
+
+        printActuaiza(num)
+
+        function clickExam() {
+            event.preventDefault();
+            let resp = event.target.getAttribute("resp");
+            console.log(resp);
+            if(resp == r[num]) total++;
+            console.log(total);
+            num++;
+            if (num < words.length){
+                printActuaiza(num);
+            }else{
+                printFinal(total);
+            }
+        }
+
+        function printFinal(params) {
+            document.getElementById("btn_play").style.display = "none";
+            document.getElementById("opciones_test").style.display = "none";
+            let a = "";
+            a+= '<p>Total Score</p>';
+            a+= '<p class="w3-xxxlarge">'+((total/4)*100).toFixed(0)+'%</p>';
+            document.getElementById("frase").innerHTML = a;
+        }
+
+    </script>
+
+</body>
+</html>
