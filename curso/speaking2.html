@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Speaking</title>
+</head>
+<body class="w3-large">
+
+    <div class="w3-card w3-white w3-padding">
+        <div class="w3-content" style="max-width: 600px;">
+            <div class="w3-row">
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="topics.html" class="w3-xlarge w3-block"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="w3-col l6 s6 m6 w3-center">
+                    <a href="#" style="line-height: 36px;" class="w3-block">DInglish</a>
+                </div>
+                <div class="w3-col l3 s3 m3 w3-text-grey">
+                    <a href="#" class="w3-xlarge w3-block w3-right-align"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="w3-main w3-content w3-center" style="max-width: 600px;">
+        <div id="dialogo">
+            <div class="w3-block w3-padding w3-animate-opacity w3-xlarge"><span>Hi, I'm Frank and you?</span></div>
+        </div>
+        <div id="translate">
+            <div class="w3-block w3-padding w3-animate-opacity w3-medium"><span>Hola, Yo soy Frank, ¿y tu?</span></div>
+        </div>
+        <br>
+        <div id="botones" class="w3-row">
+            <div class="w3-col s6 m6 l6">
+                <button class="w3-circle azul w3-large" style="padding: 5px 13px; border: 0;"><i class="fa fa-volume-down"></i></button>
+            </div>
+            <div class="w3-col s6 m6 l6">
+                <button class="w3-circle azul w3-large" style="padding: 5px 11px; border: 0;"><i class="fa fa-volume-up"></i></button>
+            </div>
+        </div>
+        <br>
+        <div id="answers">
+            <div class="w3-block w3-padding w3-animate-opacity w3-xlarge w3-text-orange"><span>Hi, I'm Frank and you?</span><br><strong>Almost Correct</strong></div>
+        </div>
+    </div>
+
+    <div id="micro-control" class="w3-center sombra-inv w3-bottom w3-padding-16" style="padding-bottom: 15px;">
+        <div class="w3-row" style="max-width: 600px; margin: auto;">
+            <div class="w3-col s3 m3 l3">
+                <button class="w3-circle azul w3-large" style="padding: 5px 11px; border: 0; margin-top: 10px;"><i class="fa fa-music"></i></button>
+            </div>
+            <div class="w3-col s6 m6 l6">
+                <button id="btnstart" class="w3-button azul w3-round-xxlarge" onclick="empezando()">Comenzar</button>
+                <button id="btnmicro" class="w3-circle azul w3-xlarge w3-hide" style="padding: 10px 21px; border: 0;" onclick="microfono()"><i class="fa fa-microphone"></i></button>
+            </div>
+            <div class="w3-col s3 m3 l3">
+                <button class="w3-circle azul w3-large" style="padding: 5px 10px; border: 0; margin-top: 10px;">&nbsp;<i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio1"><source src="audios/1.mp3" type="audio/mpeg"></audio>
+    <audio id="audio2"><source src="audios/2.mp3" type="audio/mpeg"></audio>
+    <audio id="audio3"><source src="audios/3.mp3" type="audio/mpeg"></audio>
+
+
+
+    <script>
+
+        const preguntas = ["Hi, I'm Frank and you?","What's your name?","How old are you?"];
+        const respuestas = [["Hello","Hi","How old are you?"],["My name is Carlos","Carlos","I'm","is my name","my name"],["I am 14 years old", "years old","I am","I'm"]];
+        const sonidos = ["audio1","audio2","audio3"];
+
+        let pista = 0;
+
+        // reproduce audios
+        function playAudio(elemento){
+            let audio = document.getElementById(elemento);
+            audio.play();
+        }
+
+        function comienza(){
+            if (pista < sonidos.length) {
+                playAudio(sonidos[pista]);
+                nube(preguntas[pista],1);
+                pista++;
+            }
+        }
+
+        function comienza2(){
+            if (pista < sonidos.length) {
+                playAudio(sonidos[pista]);
+                nube(preguntas[pista],0);
+                pista++;
+            }
+        }
+
+        function empezando() {
+            document.getElementById("btnstart").style.display = "none";
+            document.getElementById("btnmicro").classList.remove("w3-hide");
+            comienza();
+        }
+
+        // imprime pregunta
+        function nube(elemento){
+            const dialogo = document.getElementById("dialogo");
+            dialogo.innerHTML = "<div class=\"w3-block w3-padding w3-animate-opacity w3-center w3-xlarge\"><span>"+elemento+"</span></div>";
+        }
+
+        function compararstring(a){
+            a = a.replace(/[^\w\s]/gi, '').trim().toLowerCase();
+            for (let i = 0; i < respuestas[pista-1].length; i++) {
+                let b = respuestas[pista-1][i].replace(/[^\w\s]/gi, '').trim().toLowerCase();
+                console.log("comparación: "+a+" = "+b);
+                if (a.includes(b)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        ////////////////////// voces
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+        var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
+        var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+        var speechRecognition = new SpeechRecognition();
+
+        speechRecognition.lang = "en-US";
+
+        speechRecognition.onstart = function() {
+            console.log('Listening...');
+            let a =document.getElementById("btnmicro");
+            a.classList.remove("azul");
+            a.classList.add("w3-grey");
+        };
+
+        speechRecognition.onend = function() {
+            console.log('No longer listening...');
+            let a = document.getElementById("btnmicro");
+            a.classList.remove("w3-grey");
+            a.classList.add("azul");
+        };
+
+        speechRecognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            const confidence = event.results[0][0].confidence;
+            console.log(`Transcript: ${transcript}`);
+            console.log(`Confidence: ${confidence}`);
+            if(compararstring(transcript)){
+                nube(transcript,0);
+                setTimeout(comienza, 1000);
+                if(pista >= sonidos.length){
+                    document.getElementById("micro-control").classList.add("w3-hide");
+                }
+            }else{
+                let ele = document.getElementById("pista");
+                ele.classList.remove("w3-hide");
+                ele.innerHTML = respuestas[pista-1][0];
+            }
+        };
+
+        // Empezar a reconocer el habla
+        function microfono(){
+            event.preventDefault();
+            document.getElementById("pista").classList.add("w3-hide");
+            speechRecognition.start();
+            console.log('Ready to receive a color command.');
+        }
+
+    </script>
+</body>
+</html>
