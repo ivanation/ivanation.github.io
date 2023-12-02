@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Galeria</title>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif
+        }
+
+        body {
+            background: rgb(255, 255, 255);
+            color: rgb(58, 58, 56);
+        }
+
+        .title-01 {
+            font-weight: bold;
+        }
+
+        .title-02 {
+            font-weight: bold;
+            font-size: 3.5em;
+            color: rgb(188, 98, 240);
+            background: -webkit-linear-gradient(rgb(118, 125, 236) 3.65%, rgb(188, 98, 240) 109.45%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .caja {
+            height: 500px;
+            width: 800px;
+            padding: 7.5rem 0px;
+            border-radius: 1.5rem;
+            margin: auto 3rem;
+            background-color: rgb(250, 250, 250);
+            box-shadow: rgb(0 0 0 / 13%) 0px 6.4px 14.4px 0px, rgb(0 0 0 / 11%) 0px 1.2px 3.6px 0px;
+        }
+
+        .titular {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .claro {
+            color: rgb(58, 58, 56);
+        }
+
+        .skill {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            width: 120px;
+            font-size: 16px;
+        }
+
+        .skill-level {
+            width: 160px;
+            height: 10px;
+            background-color: #d2d2d2;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-left: 20px;
+        }
+
+        .skill-percent {
+            background-color: #333;
+            height: 100%;
+        }
+
+        .skill-percent-number {
+            margin-left: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body class="w3-light-gray">
+    <div class="w3-container w3-content">
+
+        <br><br>
+
+        <section class="w3-row">
+
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZjVkODUwNzItZDhkYy00MWQzLWI4MjEtZjExMTU0YzcwNzk5IiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb1.jpg" class="w3-image" alt="factory">
+                        <span style="display: block; padding-top: 8px;">Factory</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZmIyMGU1NDAtYmQ4OC00MjAzLWFhYjMtYTI4NjNjZDk5NGI2IiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb2.jpg" class="w3-image" alt="housing">
+                        <span style="display: block; padding-top: 8px;">Housing</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMTIxMzNmMjYtNjg3YS00Yzk2LTliN2EtNDk2NGZiOGRjMWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb3.jpg" class="w3-image" alt="iris">
+                        <span style="display: block; padding-top: 8px;">Iris</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiY2JlOTEyOTYtNjFjZS00MDFkLTg3ZDUtOGQ2OTZkMmE4ODBlIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb4.jpg" class="w3-image" alt="academy">
+                        <span style="display: block; padding-top: 8px;">Academy</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiOTgxNmE3MjctOWQ3Yi00Mzk2LTkyYWMtMGY4MmUzYzkyMzU1IiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" style="text-decoration:none;" target="_blank">
+                        <img src="img/pb5.jpg" class="w3-image" alt="rrhh">
+                        <span style="display: block; padding-top: 8px;">RRHH</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiOTc1ODI4YzEtOWVjMS00MGViLTliMWQtOTkwZmJlYmUyYWIxIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb6.jpg" class="w3-image" alt="salary">
+                        <span style="display: block; padding-top: 8px;">Salary</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w3-col l3 m4 s6 w3-padding">
+                <div class=" w3-container w3-white w3-card w3-round-large claro w3-large w3-padding">
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMGYzNTBkNDUtMzdlMy00MWQ0LWJiZWEtNDRkNmU4NTc0YTFmIiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank" style="text-decoration:none;">
+                        <img src="img/pb7.jpg" class="w3-image" alt="ventas">
+                        <span style="display: block; padding-top: 8px;">Call Center</span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <br><br>
+
+    </div>
+</body>
+
+</html>
