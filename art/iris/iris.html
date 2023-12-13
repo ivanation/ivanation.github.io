@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Porcentajes</title>
+
+<!-- Import TensorFlow.js -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+<!-- Import the main script file -->
+<script src="iris.js"></script>
+
+</head>
+
+<body>
+
+<div id="result"></div>
+
+<script>
+
+async function trainModel(xTrain, yTrain, xTest, yTest){
+    // Create a sequential model
+    const model = tf.sequential();
+    const learningRate = .01;
+    const numberOfEpochs = 40;
+    const optimizer = tf.train.adam(learningRate);
+
+    // Add a single input layer la primera se usa sigmoide para que devuelva valores 0 o 1
+    model.add(tf.layers.dense({units: 10, activation: 'sigmoid' , inputShape: [xTrain.shape[1]]}));
+
+    //model.add(tf.layers.dense({units: 10, activation: 'sigmoid' }));
+
+    // la ultima capa se usa softmax porque devuelve valores entre 0 y 1 decimal para el acurrency
+    // el numero de neuronas tiene que ser igualal numero de salidas o output
+    model.add(tf.layers.dense({units: 3, activation: 'softmax'}));
+
+    // Prepare the model for training.  
+    model.compile({
+        optimizer: optimizer,
+        loss: 'categoricalCrossentropy',
+        metrics: ['mse']
+    });
+
+    const history = await model.fit(xTrain, yTrain,
+    {
+        epochs: numberOfEpochs, 
+        validationData: [xTest, yTest],
+        callbacks:{
+            onEpochEnd: async (epoch, logs) => 
+            {
+                console.log("Epoch: "+epoch+" Logs: "+logs.loss);
+                await tf.nextFrame();
+            }
+        }
+    });
+
+    return model;
+}
+
+
+async function doIris(){
+    const [xTrain, yTrain, xTest, yTest] = getIrisData(0.2);
+    model = await trainModel(xTrain, yTrain, xTest, yTest);
+
+    // make a pediction
+    const input = tf.tensor2d([5.8, 2.7, 5.1, 1.9], [1, 4]);
+
+    const prediction = model.predict(input);
+    console.log("Prediccion: "+prediction);
+
+    const predictionMax = model.predict(input).argMax(-1).dataSync();
+    console.log("predictionMax: "+predictionMax);
+
+    /// calculate score with data test
+    const xData = xTest.dataSync();
+    const yTrue = yTest.argMax(-1).dataSync();
+    const predictions = await model.predict(xTest);
+    const yPred = predictions.argMax(-1).dataSync();
+
+    var correct = 0;
+    var wrong = 0;
+    var flen = yTrue.length;
+    console.log("flen: "+flen);
+
+    for (let i = 0; i < flen; i++) {
+        if (yTrue[i] == yPred[i]) {
+            correct++;
+        } else {
+            wrong++;
+        }
+    }
+
+    console.log("Prediction rate: "+ (correct/flen));
+
+    await model.save('downloads://my-model-petalos');
+}
+
+doIris();
+
+</script>
+</body>
+</html>
