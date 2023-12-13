@@ -97,7 +97,7 @@ function prepareData(data) {
 
 async function doIris(){
 
-    const model = await tf.loadLayersModel('my-model-housing.json');
+    const model = await tf.loadLayersModel('https://ivanation.github.io/art/housing/my-model-housing.json');
 
     const tensorData = prepareData(data);
 	const {inputMax, inputMin, outputMax, outputMin} = tensorData;
@@ -111,19 +111,19 @@ async function doIris(){
 
     console.log(a+" "+b+" "+c+" "+d+" "+e);
 
-    // // make a pediction
-    // const input = tf.tensor2d([a,b,c,d,e], [1, 5]);
+    // make a pediction
+    const input = tf.tensor2d([a,b,c,d,e], [1, 5]);
 
-    // const normalizedinput = input.sub(inputMin).div(inputMax.sub(inputMin));
+    const normalizedinput = input.sub(inputMin).div(inputMax.sub(inputMin));
 
-    // const prediction = model.predict(normalizedinput);
-    // console.log("Prediccion: "+prediction);
+    const prediction = model.predict(normalizedinput);
+    console.log("Prediccion: "+prediction);
 
-    // const unNormPreds = prediction.mul(outputMax.sub(outputMin)).add(outputMin);
+    const unNormPreds = prediction.mul(outputMax.sub(outputMin)).add(outputMin);
 
-    // const arr = await unNormPreds.array();
-    // console.log("Prediccion: "+arr[0]);
-    // $("#result").html(arr[0]);
+    const arr = await unNormPreds.array();
+    console.log("Prediccion: "+arr[0]);
+    $("#result").html(arr[0]);
 
 }
 
