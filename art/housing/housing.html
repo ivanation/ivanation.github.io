@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Housing</title>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous">
+</script>
+<!-- Import TensorFlow.js -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+<!-- Import tfjs-vis -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+<!-- Import the main script file -->
+<script src="housing_datos.js"></script>
+
+</head>
+
+<body>
+
+<div id="result"></div>
+
+<script>
+
+
+//const data = [[-3,2,-5],[-1,1,-2],[1,3,-2],[3,5,-2],[5,10,5],[7,13,5]];
+
+
+
+function prepareData(data) {
+    return tf.tidy(() => {
+
+        tf.util.shuffle(data);
+
+        //const inputs = data.map(d => [d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10], d[11], d[12], d[13], d[14]]);
+        const inputs = data.map(d => [d[1],d[2],d[3],d[9],d[10]]); 
+        //const inputs = data.map(d => [d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[10]]); 
+        const outputs = data.map(d => [d[0]]);
+
+        const inputTensor  = tf.tensor2d(inputs, [inputs.length, inputs[0].length]);
+        const outputTensor  = tf.tensor2d(outputs, [outputs.length, outputs[0].length]);
+
+        const inputMax = inputTensor.max();
+        const inputMin = inputTensor.min();  
+        const outputMax = outputTensor.max();
+        const outputMin = outputTensor.min();
+
+        //console.log("inputMax:"+inputMax+" inputMin:"+inputMin+" outputMax:"+outputMax+" outputMin:"+outputMin);
+
+        const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
+        const normalizedoutputs = outputTensor.sub(outputMin).div(outputMax.sub(outputMin));
+
+        return {
+            inputs: normalizedInputs,
+            outputs: normalizedoutputs,
+            inputMax,
+            inputMin,
+            outputMax,
+            outputMin,
+        }
+
+    });
+}
+
+
+
+async function trainModel(xTrain, yTrain, xTest, yTest){
+    
+    const model = tf.sequential();
+    const learningRate = .05;
+    const numberOfEpochs = 40;
+
+    //layer de entrada
+    model.add(tf.layers.dense({inputShape: [xTrain.shape[1]], units: 20}));
+
+    // layer intermedios
+    model.add(tf.layers.dense({units: 30, activation: 'sigmoid' }));
+
+    // layer intermedios
+    //model.add(tf.layers.dense({units: 10, activation: 'sigmoid' }));
+    
+    // layer de salida
+    model.add(tf.layers.dense({units: 1}));
+
+    // Prepare the model for training.  
+    model.compile({
+        optimizer: tf.train.sgd(learningRate),
+        loss: "meanSquaredError",
+        //loss: tf.losses.meanSquaredError,
+        metrics: [tf.metrics.meanAbsoluteError]
+    });
+
+    const history = await model.fit(xTrain, yTrain,
+    {
+        epochs: numberOfEpochs,
+        batchSize: 32,
+        //validationData: [xTest, yTest],
+        validationSplit: 0.1,
+        shuffle: true,
+        callbacks:{
+            onEpochEnd: async (epoch, logs) => 
+            {
+                console.log("Epoch: "+epoch+" Logs: "+logs.loss);
+                //console.log("mae: "+ logs.meanAbsoluteError);
+                //console.log("val_mae: "+logs.val_meanAbsoluteError);
+                await tf.nextFrame();
+            }
+        }
+    });
+
+    return model;
+}
+
+
+
+async function run() {
+
+    // creating Tensor
+    const tensorData = prepareData(data);
+	const {inputs, outputs, inputMax, inputMin, outputMax, outputMin} = tensorData;
+
+    //training the model
+    model = await trainModel(inputs, outputs, inputs, outputs);
+    console.log('Done Training');
+
+
+    // make a pediction
+    const prueba = [[4,2,3190,3190,0]];
+  
+  
+    const input = tf.tensor2d(prueba, [prueba.length, prueba[0].length]);
+    const normalizedinput = input.sub(inputMin).div(inputMax.sub(inputMin));
+    
+
+    const prediction = model.predict(normalizedinput);
+    console.log('prediction: '+prediction);
+
+    const unNormPreds = prediction.mul(outputMax.sub(outputMin)).add(outputMin);
+    console.log('prediction: '+unNormPreds);
+
+    // calculate score with data test
+    const xData = inputs.dataSync();
+    const yTrue = outputs.dataSync();
+    const predictions = await model.predict(inputs);
+    const yPred = predictions.dataSync();
+
+    let correct = 0;
+    let wrong = 0;
+    let flen = yTrue.length;
+    let arr=[];
+    let sum = 0;
+
+    for (let i = 0; i < flen; i++) {
+        if (yTrue[i] == yPred[i]) {
+            correct++;
+        } else {
+            wrong++;
+        }
+        //arr.push([i,yPred[i],yTrue[i]]);
+        sum +=  yTrue[i] / yPred[i];
+    }
+    console.log("Prediction rate: "+ (correct/flen));
+    let avg = sum / flen;
+    console.log(avg);
+
+    await model.save('downloads://my-model-housing');
+
+    //let myJSON = await JSON.stringify(arr);
+    //document.getElementById("result").innerHTML = myJSON;
+
+}
+
+run();
+
+</script>
+</body>
+</html>

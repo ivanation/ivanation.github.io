@@ -1,0 +1,11 @@
+1.0357435457840585
+96.43
+
+inputMax:Tensor
+    1074218 
+inputMin:Tensor
+    0 
+outputMax:Tensor
+    26590000 
+outputMin:Tensor
+    7800
