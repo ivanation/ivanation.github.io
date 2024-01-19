@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medias Móviles</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        /* HTML: <div class="loader"></div> */
+    .loader {
+        width: 50px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 8px solid #514b82;
+        animation:
+            l20-1 0.8s infinite linear alternate,
+            l20-2 1.6s infinite linear;
+    }
+    @keyframes l20-1{
+        0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+        12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+        25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+        50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+        62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+        75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+        100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+    }
+    @keyframes l20-2{ 
+        0%    {transform:scaleY(1)  rotate(0deg)}
+        49.99%{transform:scaleY(1)  rotate(135deg)}
+        50%   {transform:scaleY(-1) rotate(0deg)}
+        100%  {transform:scaleY(-1) rotate(-135deg)}
+    }
+    </style>
+</head>
+<body class="w3-light-gray">
+    <div class="w3-content w3-container" style="max-width: 600px; margin: 0 auto;">
+        <div class="w3-center"><h1>Bot Trading Medias Móviles 📈</h1></div>
+        
+        <div id="spiner" class="loader" style="display: block; margin: 0 auto; margin-top: 100px;"></div>
+
+        <div id="panel" class="w3-white w3-card w3-padding w3-round">
+            <p>Intervalo:<br><select id="temp" class="w3-input w3-border">
+                <option value="1m">1m</option>
+                <option value="5m">5m</option>
+                <option value="15m">15m</option>
+                <option value="30m" selected>30m</option>
+                <option value="1h">1h</option>
+            </select></p>
+            <p>Cantidad de velas (Máximo mil):<br><input id="velas" type="number" class="w3-input w3-border" value="1000"></p>
+            <p>Media Móvil 1:<br><input id="movil1" type="number" class="w3-input w3-border" value="96"></p>
+            <p>Media Móvil 2:<br><input id="movil2" type="number" class="w3-input w3-border" value="10"></p>
+            <p><input id="enviar" type="submit" class="w3-btn w3-block w3-indigo w3-round" value="Aceptar"></p>
+            <p class="w3-center">Si la media móvil 1 es mayor entra en long, si no, entra en short.</p>
+            <p class="w3-center">BNBUSDT (BINANCE)</p>
+        </div>
+
+        <div id="respuesta" class="w3-white w3-card w3-padding w3-round" style="display: none;">
+            <p>Ganancia: <span id="gain">25%</span></p>
+            <p>positivas: <span id="pos">2</span></p>
+            <p>negativas: <span id="neg">3</span></p>
+            <p><button id="regresa" class="w3-btn w3-block w3-indigo w3-round">Regresar</button></p>
+            <p id="movimientos"></p>
+        </div>
+
+        <br><br>
+
+        
+
+        
+
+        <br><br>
+    </div>
+
+<script>
+
+    ///////////////////////////////// SMA (SIMPLE MOVIL AVERAGE) /////////////////////////////
+
+    class ema {
+        constructor(weight){
+            this.result = false;
+            this.age = 0;
+            this.weight = weight;
+        }
+        actualiza(price) {
+            if(this.result === false) this.result = price;
+            this.age ++;
+            this.calcula(price);
+            return this.result;
+        }
+        calcula(price){
+            var k = 2 / (this.weight + 1);
+            var y = this.result;
+            this.result = price * k + y * (1 - k);
+        }
+    }
+
+    ///////////////////////////////// funciones auxiliares /////////////////////////////
+
+    function fecha(b = new Date()) {
+        const fecha = new Date(b);
+        const a = `(${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}) hora: ${fecha.getHours()}:${fecha.getMinutes()}`;
+        return a;
+    }
+
+    ////////////////////////////////////// algoritmo /////////////////////////////////
+
+    document.getElementById("spiner").style.display = "none";
+    const miBoton = document.getElementById("enviar");
+    const regresa = document.getElementById("regresa");
+
+    regresa.addEventListener("click", function() {
+        document.getElementById("respuesta").style.display = "none";
+        document.getElementById("panel").style.display = "block";
+    })
+    
+    miBoton.addEventListener("click", function() {
+        console.log("comenzando");
+        document.getElementById("panel").style.display = "none";
+        document.getElementById("spiner").style.display = "block";
+
+
+        // obtengo valores
+        const coin = "BNB";
+        const int = document.getElementById("temp").value;
+        const limit = document.getElementById("velas").value;
+        const media1 = document.getElementById("movil1").value;
+        const media2 = document.getElementById("movil2").value;
+
+        // llamo a velas de binance
+        const dir = "https://fapi.binance.com/fapi/v1/klines?symbol=" + coin + "USDT&interval=" + int + "&limit=" + limit;
+        fetch(dir).then(res => res.json()).then(function (res) {
+            backtesting(res, media1, media2);
+            document.getElementById("spiner").style.display = "none";
+            document.getElementById("respuesta").style.display = "block";
+        })
+    });
+
+
+    function backtesting(res, media1, media2){
+ 
+        // valores iniciales
+        let suma = 0, pos = 0, neg = 0;
+        let act = 0;
+        let entrada, salida, gain;
+        let imp = "";
+        const fee = 0.00045 * 2;
+        const sma1 = new ema(media1);
+        const sma2 = new ema(media2);
+        const maxi = Math.max(media1,media2);
+
+        // comienzo recorrido por las velas
+        for (let i = 0; i < res.length; i++) {
+            if(i > maxi){
+                if (act === 0) { // inactivo
+                    entrada = res[i][4];
+                    fee1 = entrada * 0.00045;
+                    if (sma1.actualiza(res[i][4]) > sma2.actualiza(res[i][4])) {
+                        act = 1;
+                        imp += fecha(res[i][0])+ " entrada long<br>";
+                    }else{
+                        act = 2;
+                        imp += fecha(res[i][0])+ " entrada short<br>";
+                    }
+                }else if(act===1){ // entrada long
+                    if (sma1.actualiza(res[i][4]) < sma2.actualiza(res[i][4])) {
+                        salida = res[i][4];
+                        gain = (salida / entrada ) - fee - 1;
+                        suma += gain;
+                        if(gain > 0){pos++}else{neg++};
+                        act = 0;
+                        imp += fecha(res[i][0])+" salida long gain: " + gain.toFixed(4) + " total: "+ suma.toFixed(4)  +"<br>";
+                    }
+                }else if(act===2){ // entraada short
+                    if (sma1.actualiza(res[i][4]) > sma2.actualiza(res[i][4])) {
+                        salida = res[i][4];
+                        gain = (entrada / salida ) - fee - 1;
+                        suma += gain;
+                        if(gain > 0){pos++}else{neg++};
+                        act = 0;
+                        imp += fecha(res[i][0])+" salida short gain: " + gain.toFixed(4) + " total: "+ suma.toFixed(4)+"<br>";
+                    }
+                }
+            }   
+        }
+        document.getElementById("gain").innerHTML=(suma*100).toFixed(2)+"%";
+        document.getElementById("pos").innerHTML=pos;
+        document.getElementById("neg").innerHTML=neg;
+        document.getElementById("movimientos").innerHTML=imp;
+            
+    }
+
+</script>
+</body>
+</html>
