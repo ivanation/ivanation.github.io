@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <title>Dinglish - App</title>
+    <link rel="shortcut icon" href="img/logico.ico" />
+</head>
+<style>
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    a{text-decoration: none;}
+    .titular {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+    .claro {
+        color: rgb(58, 58, 56);
+    }
+    .azul{
+        background: #213b6a;
+        color: white;
+    }
+    .amarillo{
+        background: #fa9b29;
+        color: black;
+    }
+    .txt-azul{
+        color: #213b6a !important;
+    }
+    .txt-amarillo{
+        color: #fa9b29 !important;
+    }
+</style>
+<body class="w-light-gray">
+
+<div class="w3-content w3-container">
+
+<br>
+<div class="w3-card azul w3-round-large w3-container">
+    <div class="w3-bar">
+            <a class="w3-bar-item w3-button w3-padding w3-hide-medium w3-hide-large w3-right" style="font-size: 34px;" href="javascript:void(0)" onclick="despliega()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="index.html" class="w3-bar-item w3-button w3-padding"><h4>D'inglish</h4></a>
+            <a href="app.html" class="w3-bar-item w3-button w3-padding w3-hide-small"><h4>APP</h4></a>
+            <a href="pagos.html" class="w3-bar-item w3-button w3-padding w3-hide-small"><h4>Pagos</h4></a>
+    </div>
+    <div id="navDemo" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium azul">
+        <a href="app.html" class="w3-bar-item w3-button w3-padding-large" onclick="despliega()"><h4>APP</h4></a>
+        <a href="pagos.html" class="w3-bar-item w3-button w3-padding-large" onclick="despliega()"><h4>Pagos</h4></a>
+    </div>
+</div>
+
+<br><br>
+
+<section class="w3-card azul w3-round-large">
+    <div class="w3-container w3-large w3-center">
+        <p>¡Entra a nuestra webapp y comienza aprender totalmente gratis!</p>
+        <a href="https://dinglish.info/app/login.php" target="_blank" class="w3-button amarillo w3-padding-large w3-round-large w3-margin-top w3-hover-dark-grey" style="min-width: 250px;">
+            <b class="w3-large">Entrar</b>
+        </a>
+        <br><br>
+    </div>
+</section>
+
+<br><br>
+
+</div>
+
+<script>
+
+    // menu desplegable para pantallas pequeñas
+    function despliega(){
+        let x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        }else{
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+</script>
+
+</body>
+</html>
