@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/solanix/static/css/main.cc9ddbe8.css",
-    "main.js": "/solanix/static/js/main.6f6d88eb.js",
+    "main.css": "/solanix/static/css/main.fc3c9a4a.css",
+    "main.js": "/solanix/static/js/main.06f560a1.js",
     "static/js/453.6b63c52d.chunk.js": "/solanix/static/js/453.6b63c52d.chunk.js",
     "static/media/logo.png": "/solanix/static/media/logo.05d422def9cb4d9f6c51.png",
     "index.html": "/solanix/index.html",
-    "main.cc9ddbe8.css.map": "/solanix/static/css/main.cc9ddbe8.css.map",
-    "main.6f6d88eb.js.map": "/solanix/static/js/main.6f6d88eb.js.map",
+    "main.fc3c9a4a.css.map": "/solanix/static/css/main.fc3c9a4a.css.map",
+    "main.06f560a1.js.map": "/solanix/static/js/main.06f560a1.js.map",
     "453.6b63c52d.chunk.js.map": "/solanix/static/js/453.6b63c52d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cc9ddbe8.css",
-    "static/js/main.6f6d88eb.js"
+    "static/css/main.fc3c9a4a.css",
+    "static/js/main.06f560a1.js"
   ]
 }
