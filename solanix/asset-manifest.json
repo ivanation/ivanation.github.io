@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/solanix/static/css/main.cc9ddbe8.css",
+    "main.js": "/solanix/static/js/main.6f6d88eb.js",
+    "static/js/453.6b63c52d.chunk.js": "/solanix/static/js/453.6b63c52d.chunk.js",
+    "static/media/logo.png": "/solanix/static/media/logo.05d422def9cb4d9f6c51.png",
+    "index.html": "/solanix/index.html",
+    "main.cc9ddbe8.css.map": "/solanix/static/css/main.cc9ddbe8.css.map",
+    "main.6f6d88eb.js.map": "/solanix/static/js/main.6f6d88eb.js.map",
+    "453.6b63c52d.chunk.js.map": "/solanix/static/js/453.6b63c52d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc9ddbe8.css",
+    "static/js/main.6f6d88eb.js"
+  ]
+}
