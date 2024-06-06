@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,119 +10,196 @@
     <link rel="shortcut icon" href="img/logico.ico" />
 </head>
 <style>
-    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-    a{text-decoration: none;}
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Montserrat", sans-serif
+    }
+
+    a {
+        text-decoration: none;
+    }
+
     .titular {
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
     }
+
     .claro {
         color: rgb(58, 58, 56);
     }
-    .azul{
+
+    .azul {
         background: #213b6a;
         color: white;
     }
-    .amarillo{
+
+    .amarillo {
         background: #fa9b29;
         color: black;
     }
-    .txt-azul{
+
+    .txt-azul {
         color: #213b6a !important;
     }
-    .txt-amarillo{
+
+    .txt-amarillo {
         color: #fa9b29 !important;
     }
 </style>
+
 <body class="w-light-gray">
 
-<div class="w3-content w3-container">
+    <div class="w3-content w3-container">
 
-<br>
-<div class="w3-card azul w3-round-large w3-container">
-    <div class="w3-bar">
-            <a class="w3-bar-item w3-button w3-padding w3-hide-medium w3-hide-large w3-right" style="font-size: 34px;" href="javascript:void(0)" onclick="despliega()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-            <a href="index.html" class="w3-bar-item w3-button w3-padding"><h4>D'inglish</h4></a>
-            <a href="app.html" class="w3-bar-item w3-button w3-padding w3-hide-small"><h4>APP</h4></a>
+        <br>
+        <div class="w3-card azul w3-round-large w3-container">
+            <div class="w3-bar">
+                <a class="w3-bar-item w3-button w3-padding w3-hide-medium w3-hide-large w3-right" style="font-size: 34px; margin-top: 8px;" href="javascript:void(0)" onclick="despliega()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+                <a href="index.html" class="w3-bar-item w3-button w3-padding"><h4>D'inglish</h4></a>
+                <a href="app.html" class="w3-bar-item w3-button w3-padding w3-hide-small"><h4>APP</h4></a>
+            </div>
+            <div id="navDemo" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium azul">
+                <a href="app.html" class="w3-bar-item w3-button w3-padding-large" onclick="despliega()"><h4>APP</h4></a>
+            </div>
+        </div>
 
-    </div>
-    <div id="navDemo" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium azul">
-        <a href="app.html" class="w3-bar-item w3-button w3-padding-large" onclick="despliega()"><h4>APP</h4></a>
-        <a href="pagos.html" class="w3-bar-item w3-button w3-padding-large" onclick="despliega()"><h4>Pagos</h4></a>
-    </div>
-</div>
-
-<br><br>
-
-<section class="w3-card w3-white w3-round-large">
-    <div class="azul w3-container titular">
-        <h4>Medios de Pago</h4>
-    </div>
-    <div class="w3-container claro w3-large">
-        <p>
-            <strong>Pago movil</strong><br>
-            Mercantil<br>
-            Tlf: 0414-1811006<br>
-            CI: 14337131<br>
-        </p>
-        <p>
-            <strong>Banco Mercantil</strong><br>
-            Ahorro<br>
-            01050091537091043782<br>
-            CI: 14337131<br>
-            Ivan Alvarez<br>
-        </p>
-        <p>
-            <strong>Banco de Venezuela</strong><br>
-            Ahorro<br>
-            01020545050000031590<br>
-            CI: 14337131<br>
-            Ivan Alvarez<br>
-        </p>
-        <p>
-            <strong>Bancolombia</strong><br>
-            Ahorro<br>
-            2130 0000 121<br>
-            Wuilmar Rumbos<br>
-            0414-1811006<br>
-            Pasaporte 5133 5028 15<br>
-        </p>
-        <p>
-            <strong>Binance</strong><br>
-            aivan.alvarez@gmail.com<br>
-        </p>
-    </div>
-</section>
-
-<br><br>
-
-<section class="w3-card azul w3-round-large">
-    <div class="w3-container w3-large w3-center">
-        <p>Reporta tu pago con la captura del recibo.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3RihtZmU5fEmH0DeXrPekhdJ6TIq0b91ydRJ8eDoosgCv4A/viewform?usp=sf_link" target="_blank" class="w3-button amarillo w3-padding-large w3-round-large w3-margin-top w3-hover-dark-grey" style="min-width: 250px;">
-            <b class="w3-large">Reportar</b>
-        </a>
         <br><br>
+
+        <section class="w3-card w3-white w3-round-large">
+            <div class="azul w3-container titular">
+                <h4>Calculadora de Pago</h4>
+            </div>
+            <div class="w3-container claro w3-large w3-padding">
+                <h2>$ <span id="price">00.00</span></h2>
+                <p>Tasa de cambio actualizada al: <span id="update"></span></p>
+
+                <p><label>Dólares</label>
+                <input class="w3-input w3-border" name="last" id="dol" type="number"></p>
+
+                <p><label>Bolívares</label>
+                <input class="w3-input w3-border" name="first" id="ves" type="number"></p>
+
+            </div>
+        </section>
+
+        <br><br>
+
+        <section class="w3-card azul w3-round-large">
+            <div class="w3-container w3-large w3-center">
+                <p>Reporta tu pago con la captura del recibo.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3RihtZmU5fEmH0DeXrPekhdJ6TIq0b91ydRJ8eDoosgCv4A/viewform?usp=sf_link"
+                    target="_blank"
+                    class="w3-button amarillo w3-padding-large w3-round-large w3-margin-top w3-hover-dark-grey"
+                    style="min-width: 250px;">
+                    <b class="w3-large">Reportar</b>
+                </a>
+                <br><br>
+            </div>
+        </section>
+        
+        <br><br>
+
+        <section class="w3-card w3-white w3-round-large">
+            <div class="azul w3-container titular">
+                <h4>Medios de Pago</h4>
+            </div>
+            <div class="w3-container claro w3-large">
+                <p>
+                    <strong>Pago movil</strong><br>
+                    Mercantil<br>
+                    Tlf: 0414-1811006<br>
+                    CI: 14337131<br>
+                </p>
+                <p>
+                    <strong>Banco Mercantil</strong><br>
+                    Ahorro<br>
+                    01050091537091043782<br>
+                    CI: 14337131<br>
+                    Ivan Alvarez<br>
+                </p>
+                <p>
+                    <strong>Banco de Venezuela</strong><br>
+                    Ahorro<br>
+                    01020545050000031590<br>
+                    CI: 14337131<br>
+                    Ivan Alvarez<br>
+                </p>
+                <p>
+                    <strong>Bancolombia</strong><br>
+                    Ahorro<br>
+                    2130 0000 121<br>
+                    Wuilmar Rumbos<br>
+                    0414-1811006<br>
+                    Pasaporte 5133 5028 15<br>
+                </p>
+                <p>
+                    <strong>Binance</strong><br>
+                    aivan.alvarez@gmail.com<br>
+                </p>
+            </div>
+        </section>
+
+        <br><br>
+
     </div>
-</section>
 
-<br><br>
+    <script>
 
-</div>
-
-<script>
-
-    // menu desplegable para pantallas pequeñas
-    function despliega(){
-        let x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        }else{
-            x.className = x.className.replace(" w3-show", "");
+        // menu desplegable para pantallas pequeñas
+        function despliega() {
+            let x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
         }
-    }
 
-</script>
+        async function getPrice() {
+            const response = await fetch("https://pydolarvenezuela-api.vercel.app/api/v1/dollar/unit/enparalelovzla");
+            const data = await response.json();
+            return data;
+        }
+
+        async function run() {
+            datos = await getPrice();
+            document.getElementById("update").innerHTML = datos.last_update;
+            document.getElementById("price").innerHTML = datos.price;
+            inputVes.value = (datos.price * 10).toFixed(2);
+            inputDol.value = 10.00;
+        }
+
+        let datos;
+        let inputDol = document.getElementById("dol"), inputVes = document.getElementById("ves");
+
+        function calculadora(num) {
+            const price = datos.price;
+            if (num === 0) {
+                dol = inputDol.value;
+                inputVes.value = (dol * price).toFixed(2); 
+            }else{
+                ves = inputVes.value
+                inputDol.value = (ves / price).toFixed(2);
+            }
+        }
+
+        inputDol.addEventListener("input", () => { 
+            calculadora(0);
+        });
+
+        inputVes.addEventListener("input", () => { 
+            calculadora(1);
+        });
+
+        run();
+
+    </script>
 
 </body>
+
 </html>
