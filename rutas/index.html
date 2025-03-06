@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rutas en Bicicleta</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ruta en Bicicleta con Google Maps</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <gmpx-api-loader key="AIzaSyBy7yhUcz3e7p98aTQtRKPri1q9E8AuXq0" solution-channel="GMP_GE_mapsandplacesautocomplete_v2"></gmpx-api-loader>
-    <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
-        <div slot="control-block-start-inline-start" class="place-picker-container">
-            <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
-        </div>
-        <gmp-advanced-marker></gmp-advanced-marker>
-    </gmp-map>
-    <script defer src="script.js"></script>
+    <h1>Ruta en Bicicleta</h1>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            // Crear el mapa
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: { lat: 19.4326, lng: -99.1332 } // Centro inicial (Ciudad de México)
+            });
+
+            // Crear el servicio de direcciones y el renderizador
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            // Definir origen y destino (coordenadas de ejemplo en Ciudad de México)
+            const origin = { lat: 19.4326, lng: -99.1332 }; // Centro de CDMX
+            const destination = { lat: 19.3910, lng: -99.1748 }; // Zona de Polanco
+
+            // Configurar la solicitud de la ruta
+            const request = {
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.BICYCLING // Modo bicicleta
+            };
+
+            // Calcular y mostrar la ruta
+            directionsService.route(request, function (result, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    alert("No se pudo calcular la ruta: " + status);
+                }
+            });
+        }
+    </script>
+
+    <!-- Cargar la API de Google Maps con tu clave API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvy-VPCrz3BPBheH46uD8Hs1e85YTIjxk&callback=initMap">
+    </script>
 </body>
 </html>
