@@ -111,6 +111,44 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 }
 
 window.initMap = initMap;
+
+
+async function getBikeRoute() {
+    const apiKey = "API_KEY"; // Reemplaza con tu clave de API
+    const url = "https://routes.googleapis.com/directions/v2:computeRoutes";
+
+    const requestData = {
+        origin: { address: "1600 Amphitheatre Parkway, Mountain View, CA" },
+        destination: { address: "450 Serra Mall, Stanford, CA" },
+        travelMode: "BICYCLE" // Especificar que es una ruta en bicicleta
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Goog-Api-Key": "AIzaSyDvy-VPCrz3BPBheH46uD8Hs1e85YTIjxk",
+                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters"
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la API: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log("Distancia:", data.routes[0].distanceMeters, "metros");
+        console.log("Duración:", data.routes[0].duration);
+    } catch (error) {
+        console.error("Error obteniendo la ruta:", error);
+    }
+}
+
+// Llamar a la función
+getBikeRoute();
+
     
 </script>
 
