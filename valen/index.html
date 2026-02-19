@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Cumpleaños de Valentina! 🎉</title>
-    <!-- Importar fuentes modernas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary-color: #d11181; /* Rosa un poco más fuerte para que el texto sea legible */
+            --primary-color: #d11181;
             --accent-color: #25D366;
             --pastel-pink: #ffb3c6;
             --pastel-purple: #e4c1f9;
@@ -26,18 +28,18 @@
 
         body {
             margin: 0;
-            padding: 80px 20px 40px; 
+            padding: 80px 20px 40px;
             font-family: 'Outfit', sans-serif;
             background-image: var(--bg-gradient);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; 
+            align-items: flex-start;
             box-sizing: border-box;
             overflow-x: hidden;
         }
-        
+
         @media (min-height: 850px) {
             body {
                 align-items: center;
@@ -45,7 +47,7 @@
             }
         }
 
-        /* --- Lluvia de Confeti CSS (Fondo) --- */
+        /* Confeti CSS */
         .confetti-css {
             position: fixed;
             width: 10px;
@@ -57,16 +59,31 @@
             opacity: 0.8;
             animation: fall linear infinite;
         }
-        .confetti-css:nth-child(2n) { background-color: #95e1d3; }
-        .confetti-css:nth-child(3n) { background-color: #f38181; }
-        .confetti-css:nth-child(4n) { background-color: #a8d8ea; }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        .confetti-css:nth-child(2n) {
+            background-color: var(--pastel-green);
         }
 
-        /* Lienzo para la explosión JS */
+        .confetti-css:nth-child(3n) {
+            background-color: var(--pastel-pink);
+        }
+
+        .confetti-css:nth-child(4n) {
+            background-color: var(--pastel-blue);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
         #confetti-canvas {
             position: fixed;
             top: 0;
@@ -81,9 +98,9 @@
             background: var(--card-bg);
             padding: 50px 30px 40px;
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            max-width: 420px;
+            max-width: 450px;
             width: 100%;
             position: relative;
             z-index: 10;
@@ -91,17 +108,16 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            margin-top: 20px; 
+            margin-top: 20px;
         }
 
-        /* Icono flotante superior */
         .header-icon-container {
             position: absolute;
-            top: -50px; 
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
             cursor: pointer;
-            z-index: 20; 
+            z-index: 20;
         }
 
         .header-icon {
@@ -113,7 +129,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 10px 25px rgba(209, 17, 129, 0.3);
             transition: transform 0.3s;
             animation: float 3s ease-in-out infinite;
         }
@@ -121,7 +137,7 @@
         .header-icon:hover {
             transform: scale(1.1) rotate(10deg);
         }
-        
+
         .click-hint {
             font-size: 0.75rem;
             color: var(--primary-color);
@@ -130,7 +146,7 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 4px 12px;
             border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: inline-block;
             white-space: nowrap;
         }
@@ -140,7 +156,7 @@
             color: var(--primary-color);
             font-size: 2.4rem;
             margin: 40px 0 5px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
         }
 
         h2 {
@@ -160,7 +176,7 @@
             margin-bottom: 25px;
         }
 
-        /* Caja de detalles moderna */
+        /* Detalles */
         .details-grid {
             display: grid;
             gap: 15px;
@@ -173,20 +189,14 @@
             border-radius: 16px;
             display: flex;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-
-        .detail-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         .icon-box {
             width: 45px;
             height: 45px;
-            background: #fff0f0;
+            background: rgba(255, 179, 198, 0.2);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -196,7 +206,6 @@
             flex-shrink: 0;
         }
 
-        /* Estilos para los iconos SVG */
         .icon-svg {
             width: 24px;
             height: 24px;
@@ -222,31 +231,20 @@
             font-size: 0.95rem;
         }
 
-        .map-link {
-            text-decoration: none;
-            color: var(--text-main);
-        }
-        
-        .map-arrow {
-            color: var(--primary-color);
-            margin-left: 5px;
-            font-size: 0.8rem;
-        }
-
-        /* Sección Dress Code */
+        /* Dress Code */
         .dress-code {
             background: linear-gradient(to right, rgba(252, 246, 189, 0.4), rgba(228, 193, 249, 0.4), rgba(169, 222, 249, 0.4));
             border-radius: 12px;
             padding: 15px;
             font-size: 0.85rem;
             color: var(--text-main);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             border: 1px solid rgba(228, 193, 249, 0.8);
             display: flex;
             align-items: flex-start;
             text-align: left;
         }
-        
+
         .dress-code svg {
             width: 28px;
             height: 28px;
@@ -258,37 +256,224 @@
 
         .color-dot {
             display: inline-block;
-            width: 12px; height: 12px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             margin-right: 3px;
             vertical-align: middle;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Sección coche */
-        .car-info {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        /* --- APP DE TRANSPORTES --- */
+        .transport-app {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px dashed var(--pastel-blue);
+            border-radius: 16px;
+            padding: 20px 15px;
             margin-bottom: 30px;
-            border: 1px dashed #dcdde1;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .car-info svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            fill: #636e72;
-            flex-shrink: 0;
-            margin-top: 2px;
         }
 
-        /* Botón CTA */
+        .transport-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .transport-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .t-section h4 {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+            color: #444;
+            text-align: left;
+            border-bottom: 2px solid var(--pastel-yellow);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--pastel-green);
+        }
+
+        .car-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .car-seats {
+            font-size: 0.8rem;
+            background: var(--pastel-green);
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #2d3436;
+        }
+
+        .car-passengers {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 8px;
+            min-height: 18px;
+        }
+
+        .btn-small {
+            background: var(--pastel-blue);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2d3436;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .btn-small:hover {
+            filter: brightness(0.9);
+        }
+
+        .btn-small:disabled {
+            background: #eee;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .need-ride-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-start;
+        }
+
+        .need-ride-tag {
+            background: var(--pastel-purple);
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #2d3436;
+        }
+
+        .btn-add-car {
+            background: var(--pastel-yellow);
+        }
+
+        .btn-add-ride {
+            background: var(--pastel-pink);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal Customizado (Para evitar el uso de prompts y alerts) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: popIn 0.3s;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--pastel-blue);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-family: 'Outfit';
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-modal {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: #f1f2f6;
+            color: #636e72;
+        }
+
+        .btn-confirm {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* CTA WhatsApp */
         .cta-button {
+            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -302,9 +487,6 @@
             font-size: 1.1rem;
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-sizing: border-box;
             animation: pulse 2s infinite;
         }
 
@@ -321,32 +503,49 @@
             fill: white;
         }
 
-        /* Animaciones */
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
 
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Confeti estático (CSS) -->
     <div id="css-confetti-container"></div>
-
-    <!-- Canvas para Confeti explosivo (JS) -->
     <canvas id="confetti-canvas"></canvas>
 
     <div class="card">
@@ -358,90 +557,116 @@
         <h1>Barbacoa Rural</h1>
         <h2>Cumpleaños Valentina #28</h2>
 
-        <p>
-            ¡Prepárate! Este 18 de abril celebro mis 28 vueltas al sol. <br>
-            Habrá buena comida, música y las mejores vibras. 💛
-        </p>
+        <p>¡Prepárate! Este 18 de abril celebro mis 28 vueltas al sol. <br>Habrá buena comida, música y las mejores
+            vibras. 💛</p>
 
         <div class="details-grid">
             <div class="detail-card">
-                <div class="icon-box">
-                    <!-- Icono SVG Calendario -->
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19,4H18V2H16V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M9,14H7V12H9V14M13,14H11V12H13V14M17,14H15V12H17V14M9,18H7V16H9V18M13,18H11V16H13V18M17,18H15V16H17V18Z" /></svg>
-                </div>
-                <div class="text-box">
-                    <span class="label">Cuándo</span>
-                    <span class="value">Sábado, 18 de Abril</span>
+                <div class="icon-box"><svg class="icon-svg" viewBox="0 0 24 24">
+                        <path
+                            d="M19,4H18V2H16V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M9,14H7V12H9V14M13,14H11V12H13V14M17,14H15V12H17V14M9,18H7V16H9V18M13,18H11V16H13V18M17,18H15V16H17V18Z" />
+                    </svg></div>
+                <div class="text-box"><span class="label">Cuándo</span><span class="value">Sábado, 18 de Abril</span>
                 </div>
             </div>
-
             <div class="detail-card">
-                <div class="icon-box">
-                    <!-- Icono SVG Reloj -->
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" /></svg>
-                </div>
-                <div class="text-box">
-                    <span class="label">Hora</span>
-                    <span class="value">A partir de las 14:30 hrs</span>
-                </div>
+                <div class="icon-box"><svg class="icon-svg" viewBox="0 0 24 24">
+                        <path
+                            d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+                    </svg></div>
+                <div class="text-box"><span class="label">Hora</span><span class="value">A partir de las 14:30
+                        hrs</span></div>
             </div>
-
-            <a href="https://www.google.com/maps/search/?api=1&query=Calle+las+Colinas+130B+Illana+Spain" target="_blank" style="text-decoration: none;">
-                <div class="detail-card">
-                    <div class="icon-box">
-                        <!-- Icono SVG Ubicación -->
-                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
-                    </div>
-                    <div class="text-box">
-                        <span class="label">Dónde (Toca para ir)</span>
-                        <span class="value map-link">Calle las Colinas, 130B <i class="fa-solid fa-arrow-right map-arrow"></i></span>
-                    </div>
-                </div>
-            </a>
         </div>
 
         <div class="dress-code">
-            <!-- Icono SVG Corona -->
-            <svg viewBox="0 0 24 24"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z" /></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z" />
+            </svg>
             <div>
                 <strong>👗 Dress Code: ¡Fancy Nancy!</strong><br>
                 Ven con tu mejor look combinando <strong>colores pasteles</strong>:<br>
                 <span style="display:inline-block; margin-top:5px;">
-                    <span class="color-dot" style="background: var(--pastel-yellow);"></span>Amarillo, 
-                    <span class="color-dot" style="background: var(--pastel-purple);"></span>Morado, 
-                    <span class="color-dot" style="background: var(--pastel-pink);"></span>Rosa, 
-                    <span class="color-dot" style="background: var(--pastel-blue);"></span>Azul o 
+                    <span class="color-dot" style="background: var(--pastel-yellow);"></span>Amarillo,
+                    <span class="color-dot" style="background: var(--pastel-purple);"></span>Morado,
+                    <span class="color-dot" style="background: var(--pastel-pink);"></span>Rosa,
+                    <span class="color-dot" style="background: var(--pastel-blue);"></span>Azul,
                     <span class="color-dot" style="background: var(--pastel-green);"></span>Verde.
                 </span><br>
                 ¡A sacar el glamour a la barbacoa! ✨🎀
             </div>
         </div>
 
-        <div class="car-info">
-            <!-- Icono SVG Coche -->
-            <svg viewBox="0 0 24 24"><path d="M18.92 6C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.28 5.42 5.08 6L3 12V20C3 20.55 3.45 21 4 21H5C5.55 21 6 20.55 6 20V19H18V20C18 20.55 18.45 21 19 21H20C20.55 21 21 20.55 21 20V12L18.92 6M6.5 6.5H17.5L18.5 9.5H5.5L6.5 6.5M6.5 16C5.67 16 5 15.33 5 14.5C5 13.67 5.67 13 6.5 13C7.33 13 8 13.67 8 14.5C8 15.33 7.33 16 6.5 16M17.5 16C16.67 16 16 15.33 16 14.5C16 13.67 16.67 13 17.5 13C18.33 13 19 13.67 19 14.5C19 15.33 18.33 16 17.5 16Z" /></svg>
-            <div>
+        <a class="cta-button" style="margin-bottom: 30px;"
+            href="https://wa.me/34667927282?text=¡Hola%20Valentina!%20Cuentame%20para%20la%20barbacoa%20del%2018%20🔥"
+            target="_blank">
+            <!-- Icono SVG WhatsApp -->
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M16.53 13.33C16.29 13.2 15.1 12.63 14.87 12.57C14.67 12.5 14.5 12.5 14.33 12.75C14.17 13 13.7 13.53 13.56 13.7C13.42 13.85 13.27 13.87 13 13.74C12.77 13.61 12.01 13.38 11.12 12.59C10.42 11.97 9.96 11.21 9.81 10.96C9.68 10.71 9.81 10.58 9.93 10.46C10.04 10.35 10.18 10.19 10.3 10.05C10.42 9.91 10.47 9.8 10.54 9.64C10.62 9.49 10.58 9.35 10.53 9.24C10.47 9.11 10.02 8 9.83 7.55C9.65 7.11 9.47 7.17 9.33 7.17C9.21 7.17 9.06 7.16 8.91 7.16C8.75 7.16 8.5 7.22 8.28 7.46C8.07 7.7 7.46 8.27 7.46 9.42C7.46 10.57 8.3 11.68 8.42 11.83C8.54 12 10.11 14.39 12.5 15.42C13.07 15.66 13.51 15.81 13.86 15.92C14.65 16.17 15.36 16.12 15.92 16.03C16.55 15.94 17.85 15.24 18.12 14.47C18.39 13.7 18.39 13.06 18.31 12.92C18.23 12.8 18.06 12.72 17.82 12.6L16.53 13.33Z">
+                </path>
+            </svg>
+            ¡Sí, voy!
+        </a>
+
+        <!-- APP DE ORGANIZACIÓN DE COCHES -->
+        <div class="transport-app">
+            <div class="transport-title">
+                <i class="fa-solid fa-car-side"></i> Organización de Coches
+            </div>
+
+            <div style="margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; color: var(--text-main);">
                 <strong>¿Coche lleno o vacío?</strong><br>
                 Si tienes hueco o necesitas transporte, ¡avísame para organizar los coches!
             </div>
-        </div>
 
-        <a class="cta-button" 
-        href="https://wa.me/34667927282?text=¡Hola%20Valentina!%20Cuentame%20para%20la%20barbacoa%20del%2018%20🔥" 
-        target="_blank">
-            <!-- Icono SVG WhatsApp -->
-            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M16.53 13.33C16.29 13.2 15.1 12.63 14.87 12.57C14.67 12.5 14.5 12.5 14.33 12.75C14.17 13 13.7 13.53 13.56 13.7C13.42 13.85 13.27 13.87 13 13.74C12.77 13.61 12.01 13.38 11.12 12.59C10.42 11.97 9.96 11.21 9.81 10.96C9.68 10.71 9.81 10.58 9.93 10.46C10.04 10.35 10.18 10.19 10.3 10.05C10.42 9.91 10.47 9.8 10.54 9.64C10.62 9.49 10.58 9.35 10.53 9.24C10.47 9.11 10.02 8 9.83 7.55C9.65 7.11 9.47 7.17 9.33 7.17C9.21 7.17 9.06 7.16 8.91 7.16C8.75 7.16 8.5 7.22 8.28 7.46C8.07 7.7 7.46 8.27 7.46 9.42C7.46 10.57 8.3 11.68 8.42 11.83C8.54 12 10.11 14.39 12.5 15.42C13.07 15.66 13.51 15.81 13.86 15.92C14.65 16.17 15.36 16.12 15.92 16.03C16.55 15.94 17.85 15.24 18.12 14.47C18.39 13.7 18.39 13.06 18.31 12.92C18.23 12.8 18.06 12.72 17.82 12.6L16.53 13.33Z" /></svg>
-            ¡Sí, voy!
-        </a>
+            <div class="action-buttons" style="margin-bottom: 20px;">
+                <button class="btn-action btn-add-car" onclick="openDriverModal()"><i class="fa-solid fa-plus"></i>
+                    Ofrezco Coche</button>
+                <button class="btn-action btn-add-ride" onclick="openPassengerModal()"><i class="fa-solid fa-hand"></i>
+                    Busco Plaza</button>
+            </div>
+
+            <div class="transport-sections">
+                <!-- Gente que necesita transporte -->
+                <div class="t-section">
+                    <h4>Buscan Plaza</h4>
+                    <div id="needs-container" class="need-ride-list">
+                        <!-- Se llena con JS -->
+                    </div>
+                </div>
+
+                <!-- Coches Disponibles -->
+                <div class="t-section">
+                    <h4>Coches Confirmados</h4>
+                    <div id="cars-container">
+                        <!-- Se llena con JS -->
+                        <div style="font-size: 0.85rem; color: #888;">Cargando coches...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Biblioteca JS para explosiones -->
+    <!-- Modal Dinámico -->
+    <div class="modal-overlay" id="custom-modal">
+        <div class="modal-box">
+            <h3 class="modal-title" id="modal-title">Título</h3>
+            <div id="modal-body"></div>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-modal btn-confirm" id="modal-confirm-btn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script>
-        // 1. Generar Confeti de Fondo CSS
-        const confettiContainer = document.getElementById('css-confetti-container');
+        // --- 1. Lógica Visual (Confeti) ---
         const colors = ['#fcf6bd', '#e4c1f9', '#ffb3c6', '#a9def9', '#d0f4de'];
-        
+        const confettiContainer = document.getElementById('css-confetti-container');
         for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti-css');
@@ -452,33 +677,129 @@
             confettiContainer.appendChild(confetti);
         }
 
-        // 2. Lógica de Explosiones JS
         let jsConfetti;
-
         window.onload = () => {
             jsConfetti = new JSConfetti({ canvas: document.getElementById('confetti-canvas') });
-            
-            // Explosión inicial potente
             lanzarConfeti();
+            fetchTransportData(); // Cargar coches al iniciar
         };
 
         function lanzarConfeti() {
             if (!jsConfetti) return;
+            jsConfetti.addConfetti({ emojis: ['🔥', '👑', '🎀', '🌸', '✨', '👗'], emojiSize: 45, confettiNumber: 50 });
+            jsConfetti.addConfetti({ confettiColors: colors, confettiNumber: 100 });
+        }
 
-            // Explosión de emojis centrales
-            jsConfetti.addConfetti({
-                emojis: ['🔥', '👑', '🎀', '🌸', '✨', '👗'],
-                emojiSize: 45,
-                confettiNumber: 50,
-            });
+        // --- 2. Lógica App de Transportes (Frontend a Backend) ---
 
-            // Explosión de colores clásica
-            jsConfetti.addConfetti({
-                confettiColors: ['#fcf6bd', '#e4c1f9', '#ffb3c6', '#a9def9', '#d0f4de'],
-                confettiNumber: 100,
-            });
+        const API_URL = 'http://217.154.102.99:8085'; // Usar path relativo
+
+        // Obtener datos del servidor Flask
+        async function fetchTransportData() {
+            try {
+                const response = await fetch(API_URL + '/api/data');
+                const data = await response.json();
+                renderTransportData(data);
+            } catch (error) {
+                console.error("Error al cargar datos", error);
+                document.getElementById('cars-container').innerHTML = '<span style="color:red; font-size:0.8rem;">Error al conectar con el servidor.</span>';
+            }
+        }
+
+        function renderTransportData(data) {
+            const carsContainer = document.getElementById('cars-container');
+            const needsContainer = document.getElementById('needs-container');
+
+            // Renderizar Coches
+            if (data.drivers.length === 0) {
+                carsContainer.innerHTML = '<div style="font-size: 0.85rem; color: #888; font-style:italic;">Aún no hay coches registrados. ¡Anímate!</div>';
+            } else {
+                carsContainer.innerHTML = data.drivers.map(driver => {
+                    const available = driver.seats - driver.passengers.length;
+                    const isFull = available <= 0;
+                    const passList = driver.passengers.length > 0 ? driver.passengers.join(', ') : 'Ninguno todavía';
+
+                    return `
+                        <div class="car-card">
+                            <div class="car-header">
+                                <span>🚗 ${driver.name}</span>
+                                <span class="car-seats">${driver.passengers.length}/${driver.seats} ocupados</span>
+                            </div>
+                            <div class="car-passengers">Pasajeros: ${passList}</div>
+
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Renderizar Gente sin plaza
+            if (data.need_ride.length === 0) {
+                needsContainer.innerHTML = '<div style="font-size: 0.85rem; color: #888; font-style:italic;">Nadie ha pedido plaza por ahora.</div>';
+            } else {
+                needsContainer.innerHTML = data.need_ride.map(name => `
+                    <span class="need-ride-tag"><i class="fa-solid fa-user"></i> ${name}</span>
+                `).join('');
+            }
+        }
+
+        // --- 3. Sistema de Modales Customizados ---
+        const modal = document.getElementById('custom-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+
+        function closeModal() { modal.style.display = 'none'; }
+
+        // Modal: Ofrecer Coche
+        function openDriverModal() {
+            modalTitle.innerText = "Ofrezco mi Coche";
+            modalBody.innerHTML = `
+                <input type="text" id="driver-name" class="modal-input" placeholder="Tu nombre" required>
+                <input type="number" id="driver-seats" class="modal-input" placeholder="Huecos libres (ej. 3)" min="1" max="8" required>
+            `;
+            modalConfirmBtn.onclick = async () => {
+                const name = document.getElementById('driver-name').value.trim();
+                const seats = parseInt(document.getElementById('driver-seats').value);
+                if (name && seats > 0) {
+                    await sendPost(API_URL + '/api/add_driver', { name, seats });
+                    closeModal();
+                }
+            };
+            modal.style.display = 'flex';
+        }
+
+        // Modal: Necesito Plaza
+        function openPassengerModal() {
+            modalTitle.innerText = "Necesito Transporte";
+            modalBody.innerHTML = `
+                <input type="text" id="passenger-name" class="modal-input" placeholder="Tu nombre" required>
+            `;
+            modalConfirmBtn.onclick = async () => {
+                const name = document.getElementById('passenger-name').value.trim();
+                if (name) {
+                    await sendPost(API_URL + '/api/add_need', { name });
+                    closeModal();
+                }
+            };
+            modal.style.display = 'flex';
+        }
+
+        // Función Helper para hacer POST a Flask
+        async function sendPost(url, data) {
+            modalConfirmBtn.innerText = "Guardando...";
+            try {
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                fetchTransportData(); // Recargar datos
+            } catch (error) {
+                console.error("Error", error);
+            }
+            modalConfirmBtn.innerText = "Guardar";
         }
     </script>
-
 </body>
+
 </html>
