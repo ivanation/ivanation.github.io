@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Organización de Coches</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            padding: 20px;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d11181;
+        }
+
+        .car-card {
+            background: #fbfbfb;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .car-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pass-list {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .btn {
+            background: #d11181;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-cancel {
+            background: #ccc;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            margin-left: 5px;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .need-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .need-tag {
+            background: #e4c1f9;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Organizar Pasajeros</h1>
+
+        <h3>Buscan Plaza:</h3>
+        <div id="needs" class="need-list">Cargando...</div>
+
+        <h3>Coches Confirmados:</h3>
+        <div id="cars">Cargando...</div>
+    </div>
+
+    <script>
+        const API_URL = 'http://217.154.102.99:8085'; // Usar url path relativo en las requests
+
+        async function load() {
+            const res = await fetch(API_URL + '/api/data');
+            const data = await res.json();
+
+            // Needs
+            const needsDiv = document.getElementById('needs');
+            if (data.need_ride.length === 0) needsDiv.innerHTML = "Ninguno por ahora.";
+            else needsDiv.innerHTML = data.need_ride.map(n => `<span class="need-tag">${n}</span>`).join('');
+
+            // Cars
+            const carsDiv = document.getElementById('cars');
+            carsDiv.innerHTML = data.drivers.map(d => {
+                const pass = d.passengers.length > 0 ?
+                    d.passengers.map(p => `<li>${p} <button class="btn-danger" onclick="removePass('${d.name}', '${p}')">X</button></li>`).join('') :
+                    '<em style="font-size:0.9rem; color:#888;">Nadie asignado todavía</em>';
+
+                let selectHtml = `<option value="">Asignar a un pasajero en cola...</option>` +
+                    data.need_ride.map(n => `<option value="${n}">${n}</option>`).join('');
+
+                const formHtml = d.passengers.length < d.seats ? `
+                    <div style="margin-top: 10px; display:flex; gap:10px;">
+                        <select id="select-${d.name}">${selectHtml}</select>
+                        <button class="btn" onclick="addPassSelect('${d.name}')">Asignar</button>
+                    </div>
+                    <div style="margin-top: 10px; display:flex; gap:10px;">
+                        <input type="text" id="custom-${d.name}" placeholder="O escribe tú el nombre manual...">
+                        <button class="btn" onclick="addPassCustom('${d.name}')">Añadir</button>
+                    </div>
+                ` : `<div style="color: #e74c3c; font-size: 0.85em; margin-top: 10px; font-weight:bold;">¡Este coche ya está lleno!</div>`;
+
+                return `
+                    <div class="car-card">
+                        <div class="car-header"><span>🚗 Coche de ${d.name}</span> <span>${d.passengers.length} / ${d.seats}</span></div>
+                        <ul class="pass-list">${pass}</ul>
+                        ${formHtml}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function postChange(url, body) {
+            await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            load();
+        }
+
+        function removePass(driver, pass) {
+            if (confirm(`¿Seguro que quieres quitar a ${pass} del coche de ${driver}?`)) {
+                postChange(API_URL + '/api/remove_passenger', { driver_name: driver, passenger_name: pass });
+            }
+        }
+
+        function addPassSelect(driver) {
+            const el = document.getElementById(`select-${driver}`);
+            if (el && el.value.trim()) {
+                postChange(API_URL + '/api/join_car', { driver_name: driver, passenger_name: el.value.trim() });
+            }
+        }
+
+        function addPassCustom(driver) {
+            const el = document.getElementById(`custom-${driver}`);
+            if (el && el.value.trim()) {
+                postChange(API_URL + '/api/join_car', { driver_name: driver, passenger_name: el.value.trim() });
+            }
+        }
+
+        load();
+    </script>
+</body>
+
+</html>
