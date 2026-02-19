@@ -11,9 +11,14 @@
     
     <style>
         :root {
-            --primary-color: #ff6b6b;
+            --primary-color: #d11181; /* Rosa un poco más fuerte para que el texto sea legible */
             --accent-color: #25D366;
-            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            --pastel-pink: #ffb3c6;
+            --pastel-purple: #e4c1f9;
+            --pastel-blue: #a9def9;
+            --pastel-yellow: #fcf6bd;
+            --pastel-green: #d0f4de;
+            --bg-gradient: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-purple) 50%, var(--pastel-blue) 100%);
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-main: #2d3436;
             --text-secondary: #636e72;
@@ -228,6 +233,38 @@
             font-size: 0.8rem;
         }
 
+        /* Sección Dress Code */
+        .dress-code {
+            background: linear-gradient(to right, rgba(252, 246, 189, 0.4), rgba(228, 193, 249, 0.4), rgba(169, 222, 249, 0.4));
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            border: 1px solid rgba(228, 193, 249, 0.8);
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .dress-code svg {
+            width: 28px;
+            height: 28px;
+            margin-right: 12px;
+            fill: var(--primary-color);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .color-dot {
+            display: inline-block;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            margin-right: 3px;
+            vertical-align: middle;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
         /* Sección coche */
         .car-info {
             background: #f8f9fa;
@@ -363,6 +400,23 @@
             </a>
         </div>
 
+        <div class="dress-code">
+            <!-- Icono SVG Corona -->
+            <svg viewBox="0 0 24 24"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z" /></svg>
+            <div>
+                <strong>👗 Dress Code: ¡Fancy Nancy!</strong><br>
+                Ven con tu mejor look combinando <strong>colores pasteles</strong>:<br>
+                <span style="display:inline-block; margin-top:5px;">
+                    <span class="color-dot" style="background: var(--pastel-yellow);"></span>Amarillo, 
+                    <span class="color-dot" style="background: var(--pastel-purple);"></span>Morado, 
+                    <span class="color-dot" style="background: var(--pastel-pink);"></span>Rosa, 
+                    <span class="color-dot" style="background: var(--pastel-blue);"></span>Azul o 
+                    <span class="color-dot" style="background: var(--pastel-green);"></span>Verde.
+                </span><br>
+                ¡A sacar el glamour a la barbacoa! ✨🎀
+            </div>
+        </div>
+
         <div class="car-info">
             <!-- Icono SVG Coche -->
             <svg viewBox="0 0 24 24"><path d="M18.92 6C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.28 5.42 5.08 6L3 12V20C3 20.55 3.45 21 4 21H5C5.55 21 6 20.55 6 20V19H18V20C18 20.55 18.45 21 19 21H20C20.55 21 21 20.55 21 20V12L18.92 6M6.5 6.5H17.5L18.5 9.5H5.5L6.5 6.5M6.5 16C5.67 16 5 15.33 5 14.5C5 13.67 5.67 13 6.5 13C7.33 13 8 13.67 8 14.5C8 15.33 7.33 16 6.5 16M17.5 16C16.67 16 16 15.33 16 14.5C16 13.67 16.67 13 17.5 13C18.33 13 19 13.67 19 14.5C19 15.33 18.33 16 17.5 16Z" /></svg>
@@ -386,7 +440,7 @@
     <script>
         // 1. Generar Confeti de Fondo CSS
         const confettiContainer = document.getElementById('css-confetti-container');
-        const colors = ['#f2d74e', '#95e1d3', '#f38181', '#a8d8ea'];
+        const colors = ['#fcf6bd', '#e4c1f9', '#ffb3c6', '#a9def9', '#d0f4de'];
         
         for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
@@ -413,15 +467,15 @@
 
             // Explosión de emojis centrales
             jsConfetti.addConfetti({
-                emojis: ['🔥', '🍖', '🍻', '🎉', '💃'],
+                emojis: ['🔥', '👑', '🎀', '🌸', '✨', '👗'],
                 emojiSize: 45,
                 confettiNumber: 50,
             });
 
             // Explosión de colores clásica
             jsConfetti.addConfetti({
-                confettiColors: ['#ff6b6b', '#25D366', '#fecfef', '#f6d365'],
-                confettiNumber: 80,
+                confettiColors: ['#fcf6bd', '#e4c1f9', '#ffb3c6', '#a9def9', '#d0f4de'],
+                confettiNumber: 100,
             });
         }
     </script>
