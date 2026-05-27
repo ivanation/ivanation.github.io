@@ -1,0 +1,30 @@
+# Seguridad - Secretos y API Keys
+.env
+*.env
+.venv
+env/
+venv/
+ENV/
+
+# Python - Archivos temporales y caché
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema Operativo
+Thumbs.db
+.DS_Store
+
+# Distribución / Paquetes
+dist/
+build/
+*.egg-info/

@@ -87,256 +87,448 @@
             font-size: 16px;
         }
 
-        a{
+        a {
             text-decoration: none;
+        }
+
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #3f51b5;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-toggle:hover {
+            background: white;
+            color: #3f51b5;
+            transform: scale(1.05);
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .skill-list li {
+            margin-bottom: 10px;
+        }
+
+        .skill-list i {
+            color: #3f51b5;
+            margin-right: 10px;
         }
     </style>
 </head>
 
-<body class="w3-light-gray">
-    <div class="w3-container w3-content">
+<button id="lang-btn" class="lang-toggle" onclick="toggleLanguage()">English</button>
 
-        <br><br>
+<div class="w3-container w3-content">
 
-        <section class="w3-center w3-card w3-indigo w3-round-large w3-container">
-            <br>
-            <img src="img/avatar.png" style="width: 150px;" class="w3-circle" alt="Data Analyst">
-            <h1 class="title-01">Ivan Alvarez</h1>
-            <h2>Data Analyst</h2>
-            <div class="w3-container w3-padding w3-center w3-xxlarge">
-                <a href="https://www.linkedin.com/in/ivan-domingo-alvarez/" target="_blank"><i class="fa fa-linkedin w3-hover-opacity"></i></a>&nbsp; &nbsp;
-                <a href="https://github.com/ivanation" target="_blank"><i class="fa fa-github w3-hover-opacity"></i></a>&nbsp; &nbsp;
-                <a href="https://wa.me/+34641453277" target="_blank"><i class="fa fa-whatsapp w3-hover-opacity"></i></a>&nbsp; &nbsp;
-                <a href="mailto:ivan.alva1433@gmail.com" target="_blank"><i class="fa fa-envelope-o w3-hover-opacity"></i></a>
+    <br><br>
+
+    <section class="w3-center w3-card w3-indigo w3-round-large w3-container">
+        <br>
+        <img src="img/avatar.png" style="width: 150px;" class="w3-circle" alt="Data Analyst">
+        <h1 class="title-01">Ivan Alvarez</h1>
+        <h2 id="hero-role">Analista de Datos</h2>
+        <div class="w3-container w3-padding w3-center w3-xxlarge">
+            <a href="https://www.linkedin.com/in/ivan-domingo-alvarez/" target="_blank"><i
+                    class="fa fa-linkedin w3-hover-opacity"></i></a>&nbsp; &nbsp;
+            <a href="https://github.com/ivanation" target="_blank"><i
+                    class="fa fa-github w3-hover-opacity"></i></a>&nbsp; &nbsp;
+            <a href="https://wa.me/+34641453277" target="_blank"><i
+                    class="fa fa-whatsapp w3-hover-opacity"></i></a>&nbsp; &nbsp;
+            <a href="mailto:ivan.alva1433@gmail.com" target="_blank"><i
+                    class="fa fa-envelope-o w3-hover-opacity"></i></a>
+        </div>
+    </section>
+
+    <br><br>
+
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="summary-title">Perfil Profesional</h2>
+        </div>
+        <div class="w3-container claro w3-large">
+            <p id="summary-text">Analista de datos con experiencia en extracción, transformación y visualización de
+                datos para soporte a la toma de decisiones. Competente en SQL, Power BI, Excel y Python, con capacidad
+                para traducir necesidades de negocio en dashboards accionables e informes claros.</p>
+        </div>
+    </section>
+
+    <br><br>
+
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="skills-title">Habilidades</h2>
+        </div>
+        <div class="w3-container claro w3-large w3-padding-24">
+            <div id="skills-content" class="w3-row">
+                <div class="w3-col l6 m6 s12">
+                    <ul class="skill-list">
+                        <li><i class="fa fa-database"></i><b>SQL:</b> JOINs, sub consultas, optimización básica, CTEs,
+                            Window Functions.</li>
+                        <li><i class="fa fa-bar-chart"></i><b>Power BI:</b> Modelado de datos, DAX (CALCULATE, FILTER),
+                            dashboards</li>
+                        <li><i class="fa fa-table"></i><b>Excel:</b> Tablas dinámicas, Power Query, funciones avanzadas,
+                            macros básicas</li>
+                    </ul>
+                </div>
+                <div class="w3-col l6 m6 s12">
+                    <ul class="skill-list">
+                        <li><i class="fa fa-code"></i><b>Python (básico):</b> pandas para limpieza de datos,
+                            automatización</li>
+                        <li><i class="fa fa-lightbulb-o"></i><b>Conceptos BI:</b> KPIs, ETL, calidad de dato,
+                            storytelling con datos</li>
+                        <li><i class="fa fa-wrench"></i><b>Herramientas:</b> Git, Docker, metodología ágil (Scrum)</li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <br><br>
+    <br><br>
 
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Summary</h2>
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="viz-title">Visualización</h2>
+        </div>
+        <div class="w3-container claro w3-large">
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/power.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b>Power BI</b></span><br>
+                    <span class="txt-dashboards">Tableros e informes</span><br>
+                    <span class="w3-text-deep-purple"><a href="galeria.html" target="_blank"
+                            style="text-decoration: none;" class="txt-view">Ver</a></span>
+                </div>
             </div>
-            <div class="w3-container claro w3-large">
-                <p>Data science student with a strong passion for using data to solve real-world problems. Ability to
-                    learn quickly and apply new skills, use data to solve business problems, build and deploy machine
-                    learning models and communicate results to stakeholders. Seeking an entry-level data science role or
-                    data analytics and the opportunity to apply my expertise in a dynamic and collaborative environment.
-                </p>
-            </div>
-        </section>
 
-        <br><br>
-
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Skills</h2>
+            <div class="w3-row w3-padding-16">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/tableau.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b>Tableau</b></span><br>
+                    <span class="txt-dashboards">Tableros e informes</span><br>
+                    <span class="w3-text-deep-purple"><a
+                            href="https://public.tableau.com/app/profile/ivan.alvarez5569/vizzes" target="_blank"
+                            style="text-decoration: none;" class="txt-view">Ver</a></span>
+                </div>
             </div>
-            <div class="w3-container claro w3-large w3-center">
-                <div class="w3-row">
+
+        </div>
+
+    </section>
+
+    <br><br>
+
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="ml-title">Machine Learning</h2>
+        </div>
+        <div class="w3-container claro w3-large">
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/barras.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="ml-1-title">Estimación de Gastos de Seguros</b></span><br>
+                    <span><span class="txt-difficulty">Dificultad</span>: <span
+                            id="ml-1-diff">Intermedio</span></span><br>
+                    <span><span class="txt-focus">Enfoque</span>: Random Forest Regressor, feature engineering
+                    </span><br>
+                    <span class="w3-text-deep-purple"><a href="https://ml-test-insurance-ck0us4seohm.streamlit.app/"
+                            target="_blank" class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/casa.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="ml-2-title">Precio de Viviendas</b></span><br>
+                    <span><span class="txt-difficulty">Dificultad</span>: <span
+                            id="ml-2-diff">Principiante</span></span><br>
+                    <span><span class="txt-focus">Enfoque</span>: Regression, feature engineering, and model
+                        evaluation</span><br>
+                    <span class="w3-text-deep-purple"><a href="art/housing/index.html" target="_blank"
+                            class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+
+            <div class="w3-row w3-padding-16">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/iris.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="ml-3-title">Conjunto de Datos Iris</b></span><br>
+                    <span><span class="txt-difficulty">Dificultad</span>: <span
+                            id="ml-3-diff">Principiante</span></span><br>
+                    <span><span class="txt-focus">Enfoque</span>: Classification, feature engineering, and model
+                        evaluation</span><br>
+                    <span class="w3-text-deep-purple"><a href="art/iris/index.html" target="_blank"
+                            style="text-decoration: none;" class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <br><br>
+
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="projects-title">Proyectos</h2>
+        </div>
+        <div class="w3-container claro w3-large">
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/agent_icon.png" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="proj-0-title">Laboratorio de Agentes</b></span><br>
+                    <span><span class="txt-tools">Herramientas</span>: Python y DeepSeek</span><br>
+                    <span><span class="txt-focus">Enfoque</span>: Como construir agentes autónomos con memoria</span><br>
+                    <span class="w3-text-deep-purple"><a
+                            href="https://github.com/ivanation/Laboratorio-Agentes/tree/main"
+                            target="_blank" class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/ai_icon.png" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="proj-1-title">Proyectos de IA</b></span><br>
+                    <span><span class="txt-tools">Herramientas</span>: Gemini y Python</span><br>
+                    <span><span class="txt-focus">Enfoque</span>: colección de herramientas impulsadas por Inteligencia Artificial</span><br>
+                    <span class="w3-text-deep-purple"><a
+                            href="https://github.com/ivanation/ivanation.github.io/tree/master/proyectosia"
+                            target="_blank" class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/scraping_icon.png" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b id="proj-2-title">Web Scraping</b></span><br>
+                    <span><span class="txt-tools">Herramientas</span>: Requests, BeautifulSoup y Scrapy</span><br>
+                    <span><span class="txt-focus">Enfoque</span>: proyectos web scraping</span><br>
+                    <span class="w3-text-deep-purple"><a
+                            href="https://github.com/ivanation/web-scraping"
+                            target="_blank" class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+
+            <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
+                <div class="w3-col" style="width:110px">
+                    <img src="img/criptobot.jpg" style="width:95px" class=" w3-round">
+                </div>
+                <div class="w3-rest">
+                    <span class="w3-large"><b>Cripto Bot</b></span><br>
+                    <span><span class="txt-tools">Herramientas</span>: Javascript, html, css, rest API</span><br>
+                    <span><span class="txt-focus">Enfoque</span>: Trade backtesting critpto currency in Binance
+                        Exchange</span><br>
+                    <span class="w3-text-deep-purple"><a href="trading/index.html" target="_blank"
+                            class="txt-view">Ver</a></span>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <br><br>
+
+    <section class="w3-card w3-white w3-round-large">
+        <div class="w3-indigo w3-container titular">
+            <h2 id="edu-title">Educación</h2>
+        </div>
+        <div class="w3-container claro w3-large">
+            <ul id="edu-list">
+                <li>Power BI | DiCampus | 2024</li>
+                <li>GCP Data Engineer | CFTIC Getafe | 2024</li>
+                <li>Ingeniero de Minas | UCV | 2006</li>
+            </ul>
+        </div>
+    </section>
+
+    <br><br>
+
+</div>
+
+<script>
+    const translations = {
+        es: {
+            hero_role: "Analista de Datos",
+            summary_title: "Perfil Profesional",
+            summary_text: "Analista de datos con experiencia en extracción, transformación y visualización de datos para soporte a la toma de decisiones. Competente en SQL, Power BI, Excel y Python, con capacidad para traducir necesidades de negocio en dashboards accionables e informes claros.",
+            skills_title: "Habilidades",
+            skills_content: `
                     <div class="w3-col l6 m6 s12">
-                        <div class="skill" style="margin-top: 20px;">
-                            <div class="skill-name">HTML</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 90%"></div>
-                            </div>
-                            <div class="skill-percent-number">90%</div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-name">CSS</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 50%"></div>
-                            </div>
-                            <div class="skill-percent-number">50%</div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-name">Javascript</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 70%"></div>
-                            </div>
-                            <div class="skill-percent-number">70%</div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-name">PHP</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 60%"></div>
-                            </div>
-                            <div class="skill-percent-number">60%</div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-name">Python</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 70%"></div>
-                            </div>
-                            <div class="skill-percent-number">70%</div>
-                        </div>
-                        <div class="skill">
-                            <div class="skill-name">SQL</div>
-                            <div class="skill-level">
-                                <div class="skill-percent" style="width: 80%"></div>
-                            </div>
-                            <div class="skill-percent-number">80%</div>
-                        </div>
-                    </diV>
+                        <ul class="skill-list">
+                            <li><i class="fa fa-database"></i><b>SQL:</b> JOINs, sub consultas, optimización básica, CTEs, Window Functions.</li>
+                            <li><i class="fa fa-bar-chart"></i><b>Power BI:</b> Modelado de datos, DAX (CALCULATE, FILTER), dashboards</li>
+                            <li><i class="fa fa-table"></i><b>Excel:</b> Tablas dinámicas, Power Query, funciones avanzadas, macros básicas</li>
+                        </ul>
+                    </div>
                     <div class="w3-col l6 m6 s12">
-                        <br class="w3-hide-medium w3-hide-large">
-                        <p><b class="w3-hide-medium">Data and Analysis:</b><br class="w3-hide-medium w3-hide-large"> Pandas, NumPy, Excel</p>
-                        <p><b class="w3-hide-medium">Machine Learning:</b><br class="w3-hide-medium w3-hide-large"> Scikit-learn, Prophet, Causal Impact</p>
-                        <p><b class="w3-hide-medium">Data Visualization:</b><br class="w3-hide-medium w3-hide-large"> Matplotlib, Seaborn, Power BI</p>
-                        <p><b class="w3-hide-medium">Database Management:</b><br class="w3-hide-medium w3-hide-large"> SQL Server, MySQL</p>
-                        <p><b class="w3-hide-medium">Software Engineering:</b><br class="w3-hide-medium w3-hide-large"> Agile and version control</p>
-                        <p><b class="w3-hide-medium">Communication:</b><br class="w3-hide-medium w3-hide-large"> Clear and concise presentations</p>
+                        <ul class="skill-list">
+                            <li><i class="fa fa-code"></i><b>Python (básico):</b> pandas para limpieza de datos, automatización</li>
+                            <li><i class="fa fa-lightbulb-o"></i><b>Conceptos BI:</b> KPIs, ETL, calidad de dato, storytelling con datos</li>
+                            <li><i class="fa fa-wrench"></i><b>Herramientas:</b> Git, Docker, metodología ágil (Scrum)</li>
+                        </ul>
+                    </div>`,
+            viz_title: "Visualización",
+            ml_title: "Machine Learning",
+            projects_title: "Proyectos",
+            edu_title: "Educación",
+            edu_list: `
+                    <li>Ingeniero de Minas | UCV | 2006</li>
+                    <li>Power BI | DiCampus | 2024</li>
+                    <li>GCP Data Engineer | CFTIC Getafe | 2024</li>`,
+            ml_1_title: "Estimación de Gastos de Seguros",
+            ml_1_diff: "Intermedio",
+            ml_2_title: "Precio de Viviendas",
+            ml_2_diff: "Principiante",
+            ml_3_title: "Conjunto de Datos Iris",
+            ml_3_diff: "Principiante",
+            proj_0_title: "Laboratorio de Agentes",
+            proj_1_title: "Proyectos de IA",
+            proj_2_title: "Web Scraping",
+            txt_dashboards: "Tableros e informes",
+            txt_view: "Ver",
+            txt_difficulty: "Dificultad",
+            txt_focus: "Enfoque",
+            txt_tools: "Herramientas",
+            toggle_btn: "English"
+        },
+        en: {
+            hero_role: "Data Analyst",
+            summary_title: "Professional Summary",
+            summary_text: "Data analyst with experience in data extraction, transformation, and visualization to support decision-making. Proficient in SQL, Power BI, Excel, and Python, with the ability to translate business needs into actionable dashboards and clear reports.",
+            skills_title: "Skills",
+            skills_content: `
+                    <div class="w3-col l6 m6 s12">
+                        <ul class="skill-list">
+                            <li><i class="fa fa-database"></i><b>SQL:</b> JOINs, subqueries, basic optimization, CTEs, Window Functions.</li>
+                            <li><i class="fa fa-bar-chart"></i><b>Power BI:</b> Data modeling, DAX (CALCULATE, FILTER), dashboards</li>
+                            <li><i class="fa fa-table"></i><b>Excel:</b> Pivot tables, Power Query, advanced functions, basic macros</li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </section>
+                    <div class="w3-col l6 m6 s12">
+                        <ul class="skill-list">
+                            <li><i class="fa fa-code"></i><b>Python (basic):</b> pandas for data cleaning, automation</li>
+                            <li><i class="fa fa-lightbulb-o"></i><b>BI Concepts:</b> KPIs, ETL, data quality, storytelling with data</li>
+                            <li><i class="fa fa-wrench"></i><b>Tools:</b> Git, Docker, agile methodology (Scrum)</li>
+                        </ul>
+                    </div>`,
+            viz_title: "Visualization",
+            ml_title: "Machine Learning",
+            projects_title: "Projects",
+            edu_title: "Education",
+            edu_list: `
+                    <li>Mining Engineer | UCV | 2006</li>
+                    <li>Power BI | DiCampus | 2024</li>
+                    <li>GCP Data Engineer | CFTIC Getafe | 2024</li>`,
+            ml_1_title: "Insurance Charge Estimation",
+            ml_1_diff: "Intermediate",
+            ml_2_title: "Housing Price",
+            ml_2_diff: "Beginner",
+            ml_3_title: "Iris Dataset",
+            ml_3_diff: "Beginner",
+            proj_0_title: "Agents Laboratory",
+            proj_1_title: "AI Projects",
+            proj_2_title: "Web Scraping",
+            txt_dashboards: "Dashboards and reports",
+            txt_view: "View",
+            txt_difficulty: "Difficulty",
+            txt_focus: "Focus",
+            txt_tools: "Tools",
+            toggle_btn: "Español"
+        }
+    };
 
-        <br><br>
+    let currentLang = 'es';
 
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Visualization</h2>
-            </div>
-            <div class="w3-container claro w3-large">
+    function toggleLanguage() {
+        currentLang = currentLang === 'es' ? 'en' : 'es';
+        localStorage.setItem('preferredLang', currentLang);
+        updateContent();
+    }
 
-                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/power.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Power BI</b></span><br>
-                        <span>Dashboards and reports</span><br>
-                        <span class="w3-text-deep-purple"><a href="galeria.html" target="_blank"
-                                style="text-decoration: none;">View</a></span>
-                    </div>
-                </div>
+    function updateContent() {
+        const t = translations[currentLang];
 
-                <div class="w3-row w3-padding-16">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/tableau.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Tableau</b></span><br>
-                        <span>Dashboards and reports</span><br>
-                        <span class="w3-text-deep-purple"><a href="https://public.tableau.com/app/profile/ivan.alvarez5569/vizzes" target="_blank"
-                                style="text-decoration: none;">View</a></span>
-                    </div>
-                </div>
+        // Text content
+        document.getElementById('hero-role').innerText = t.hero_role;
+        document.getElementById('summary-title').innerText = t.summary_title;
+        document.getElementById('summary-text').innerText = t.summary_text;
+        document.getElementById('skills-title').innerText = t.skills_title;
+        document.getElementById('viz-title').innerText = t.viz_title;
+        document.getElementById('ml-title').innerText = t.ml_title;
+        document.getElementById('projects-title').innerText = t.projects_title;
+        document.getElementById('edu-title').innerText = t.edu_title;
+        document.getElementById('ml-1-title').innerText = t.ml_1_title;
+        document.getElementById('ml-1-diff').innerText = t.ml_1_diff;
+        document.getElementById('ml-2-title').innerText = t.ml_2_title;
+        document.getElementById('ml-2-diff').innerText = t.ml_2_diff;
+        document.getElementById('ml-3-title').innerText = t.ml_3_title;
+        document.getElementById('ml-3-diff').innerText = t.ml_3_diff;
+        document.getElementById('proj-0-title').innerText = t.proj_0_title;
+        document.getElementById('proj-1-title').innerText = t.proj_1_title;
+        document.getElementById('proj-2-title').innerText = t.proj_2_title;
+        document.getElementById('lang-btn').innerText = t.toggle_btn;
 
-            </div>
+        // HTML content
+        document.getElementById('skills-content').innerHTML = t.skills_content;
+        document.getElementById('edu-list').innerHTML = t.edu_list;
 
-        </section>
+        // Class-based translations
+        document.querySelectorAll('.txt-dashboards').forEach(el => el.innerText = t.txt_dashboards);
+        document.querySelectorAll('.txt-view').forEach(el => el.innerText = t.txt_view);
+        document.querySelectorAll('.txt-difficulty').forEach(el => el.innerText = t.txt_difficulty);
+        document.querySelectorAll('.txt-focus').forEach(el => el.innerText = t.txt_focus);
+        document.querySelectorAll('.txt-tools').forEach(el => el.innerText = t.txt_tools);
 
-        <br><br>
+        document.documentElement.lang = currentLang;
+    }
 
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Machine Learning</h2>
-            </div>
-            <div class="w3-container claro w3-large">
-                
-                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/barras.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Insurance Charge Estimation</b></span><br>
-                        <span>Difficulty: Intermediate</span><br>
-                        <span>Focus:  Random Forest Regressor, feature engineering </span><br>
-                        <span class="w3-text-deep-purple"><a href="https://ml-test-insurance-ck0us4seohm.streamlit.app/" target="_blank">View</a></span>
-                    </div>
-                </div>
-
-
-                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/casa.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Housing Price</b></span><br>
-                        <span>Difficulty: Beginner</span><br>
-                        <span>Focus: Regression, feature engineering, and model evaluation</span><br>
-                        <span class="w3-text-deep-purple"><a href="art/housing/index.html" target="_blank">View</a></span>
-                    </div>
-                </div>
-
-
-                <div class="w3-row w3-padding-16">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/iris.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Iris Dataset</b></span><br>
-                        <span>Difficulty: Beginner</span><br>
-                        <span>Focus: Classification, feature engineering, and model evaluation</span><br>
-                        <span class="w3-text-deep-purple"><a href="art/iris/index.html" target="_blank"
-                                style="text-decoration: none;">View</a></span>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <br><br>
-
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Projects</h2>
-            </div>
-            <div class="w3-container claro w3-large">
-                
-                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/factory.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Analyst Factory</b></span><br>
-                        <span>Tools: Google Form, Google Sheets and Power BI</span><br>
-                        <span>Focus: Get data from a factory for cash flow </span><br>
-                        <span class="w3-text-deep-purple"><a href="https://app.powerbi.com/view?r=eyJrIjoiZjVkODUwNzItZDhkYy00MWQzLWI4MjEtZjExMTU0YzcwNzk5IiwidCI6Ijg1ODdlOTVkLTU2ZWItNGU4NC1hMTcxLWFmM2RhODBiNGY0ZiJ9" target="_blank"
-                        >View</a></span>
-                    </div>
-                </div>
-
-
-                <div class="w3-row w3-padding-16" style="border-bottom: 1px #CCC solid; ">
-                    <div class="w3-col" style="width:110px">
-                        <img src="img/criptobot.jpg" style="width:95px" class=" w3-round">
-                    </div>
-                    <div class="w3-rest">
-                        <span class="w3-large"><b>Cripto Bot</b></span><br>
-                        <span>Tools: Javascript, html, css, rest API</span><br>
-                        <span>Focus: Trade backtesting critpto currency in Binance Exchange</span><br>
-                        <span class="w3-text-deep-purple"><a href="trading/index.html" target="_blank"
-                        >View</a></span>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <br><br>
-
-        <section class="w3-card w3-white w3-round-large">
-            <div class="w3-indigo w3-container titular">
-                <h2>Education</h2>
-            </div>
-            <div class="w3-container claro w3-large">
-                <ul>
-                    <li>Mining Engineer (2006) Universidad Central de Venezuela</li>
-                    <li>Basic Statistics (Mode, Median, Mean, Correlation, Standard Deviation)</li>
-                    <li>Intermediary Statistics (Normal Distribution, P-value, Standard Error, Z-core)</li>
-                    <li>Linear Refgression, Multilinear Regression, Logistic Regression</li>
-                    <li>Business Intelligence: RFM Analysis (segmentation), Google Causal Impact (Causal Inference)</li>
-                </ul>
-            </div>
-        </section>
-
-        <br><br>
-
-    </div>
+    // Initialize based on saved preference or default to Spanish
+    window.onload = () => {
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
+            currentLang = savedLang;
+        }
+        updateContent();
+    };
+</script>
 </body>
 
 </html>

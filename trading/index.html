@@ -47,7 +47,7 @@
                 <option value="30m" selected>30m</option>
                 <option value="1h">1h</option>
             </select></p>
-            <p>Cantidad de velas (Máximo mil):<br><input id="velas" type="number" class="w3-input w3-border" value="1000"></p>
+            <p>Cantidad de velas:<br><input id="velas" type="number" class="w3-input w3-border" value="1500"></p>
             <p>Media Móvil 1:<br><input id="movil1" type="number" class="w3-input w3-border" value="96"></p>
             <p>Media Móvil 2:<br><input id="movil2" type="number" class="w3-input w3-border" value="10"></p>
             <p><input id="enviar" type="submit" class="w3-btn w3-block w3-indigo w3-round" value="Aceptar"></p>
@@ -128,12 +128,40 @@
         const media2 = document.getElementById("movil2").value;
 
         // llamo a velas de binance
-        const dir = "https://fapi.binance.com/fapi/v1/klines?symbol=" + coin + "USDT&interval=" + int + "&limit=" + limit;
-        fetch(dir).then(res => res.json()).then(function (res) {
+        async function getKlines(coin, interval, limit) {
+            let allKlines = [];
+            let remaining = limit;
+            let endTime = null;
+
+            while (remaining > 0) {
+                let fetchLimit = Math.min(remaining, 1500);
+                let url = `https://fapi.binance.com/fapi/v1/klines?symbol=${coin}USDT&interval=${interval}&limit=${fetchLimit}`;
+                if (endTime) {
+                    url += `&endTime=${endTime}`;
+                }
+
+                try {
+                    const res = await fetch(url).then(r => r.json());
+                    if (!res || res.length === 0) break;
+
+                    allKlines = res.concat(allKlines);
+                    remaining -= res.length;
+                    endTime = res[0][0] - 1;
+
+                    if (res.length < fetchLimit) break;
+                } catch (error) {
+                    console.error("Error fetching klines:", error);
+                    break;
+                }
+            }
+            return allKlines;
+        }
+
+        getKlines(coin, int, limit).then(res => {
             backtesting(res, media1, media2);
             document.getElementById("spiner").style.display = "none";
             document.getElementById("respuesta").style.display = "block";
-        })
+        });
     });
 
 
