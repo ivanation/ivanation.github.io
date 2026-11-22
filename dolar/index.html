@@ -25,6 +25,7 @@
             --accent-emerald: #059669;
             --accent-amber: #f59e0b;
             --accent-indigo: #4f46e5;
+            --accent-violet: #7c3aed;
             --accent-rose: #e11d48;
             --bg-rose-soft: rgba(244, 63, 94, 0.1);
             --bg-rose-hover: rgba(244, 63, 94, 0.18);
@@ -51,6 +52,7 @@
             --accent-emerald: #34d399;
             --accent-amber: #fbbf24;
             --accent-indigo: #818cf8;
+            --accent-violet: #a78bfa;
             --accent-rose: #fb7185;
             --bg-rose-soft: rgba(244, 63, 94, 0.12);
             --bg-rose-hover: rgba(244, 63, 94, 0.22);
@@ -131,13 +133,13 @@
         .rate-btn {
             display: flex;
             align-items: center;
-            gap: 0.375rem;
-            padding: 0.5rem 0.875rem;
+            gap: 0.25rem;
+            padding: 0.45rem 0.55rem;
             border-radius: 0.75rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             font-family: var(--font-mono);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             color: var(--text-secondary);
         }
 
@@ -154,6 +156,18 @@
         .rate-btn.active-bcv {
             background-color: var(--bg-pill-active);
             color: var(--accent-emerald);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rate-btn.active-eur-par {
+            background-color: var(--bg-pill-active);
+            color: var(--accent-violet);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rate-btn.active-eur {
+            background-color: var(--bg-pill-active);
+            color: var(--accent-indigo);
             box-shadow: var(--shadow-sm);
         }
 
@@ -326,6 +340,10 @@
         }
 
         .badge-ves {
+            color: var(--accent-indigo);
+        }
+
+        .badge-eur {
             color: var(--accent-indigo);
         }
 
@@ -575,6 +593,8 @@
 
         .text-amber { color: var(--accent-amber); }
         .text-emerald { color: var(--accent-emerald); }
+        .text-indigo { color: var(--accent-indigo); }
+        .text-violet { color: var(--accent-violet); }
     </style>
 </head>
 <body>
@@ -582,15 +602,23 @@
     <main class="app-card">
         <!-- Barra Superior -->
         <header class="header">
-            <!-- Selector de Tasa: Paralelo (Izquierda, por defecto) vs BCV (Derecha) -->
+            <!-- Selector de Tasa: Dólar PAR/BCV y Euro PAR/BCV -->
             <div class="rate-selector">
-                <button id="btn-paralelo" onclick="setRateType('paralelo')" aria-label="Paralelo" class="rate-btn active-par">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <button id="btn-paralelo" onclick="setRateType('paralelo')" aria-label="Dólar Paralelo" class="rate-btn active-par">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     <span>PAR</span>
                 </button>
-                <button id="btn-bcv" onclick="setRateType('bcv')" aria-label="BCV" class="rate-btn">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                <button id="btn-bcv" onclick="setRateType('bcv')" aria-label="Dólar BCV" class="rate-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
                     <span>BCV</span>
+                </button>
+                <button id="btn-eur-par" onclick="setRateType('eur_par')" aria-label="Euro Paralelo" class="rate-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>EUR</span>
+                </button>
+                <button id="btn-eur" onclick="setRateType('eur')" aria-label="Euro BCV" class="rate-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                    <span>EUR</span>
                 </button>
             </div>
 
@@ -614,7 +642,7 @@
         <div class="rate-bar">
             <div class="status-wrap">
                 <span id="status-dot" class="status-dot"></span>
-                <span>1 USD =</span>
+                <span id="rate-unit-label">1 USD =</span>
             </div>
             <div class="rate-value-wrap">
                 <span id="current-rate-display" class="rate-value">0.00</span>
@@ -728,22 +756,25 @@
             moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
             sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
             bolt: '<svg class="text-amber" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+            boltViolet: '<svg class="text-violet" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
             bank: '<svg class="text-emerald" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>',
+            bankIndigo: '<svg class="text-indigo" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>',
             usd: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>USD</span>',
+            eur: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg><span>EUR</span>',
             ves: '<span style="font-weight:800;font-size:11px;">Bs</span><span>VES</span>',
             copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
             check: '<polyline points="20 6 9 17 4 12" stroke="#10b981" stroke-width="2.5"/>'
         };
 
-        const CACHE_KEY = 've_rates_cache_v1';
+        const CACHE_KEY = 've_rates_cache_v3';
         const CACHE_TTL = 15 * 60 * 1000; // 15 minutos de caché inteligente
 
         /* Estado de la App */
         const state = {
-            rates: { bcv: 46.50, paralelo: 54.20 },
+            rates: { bcv: 46.50, paralelo: 54.20, eur: 50.40, eur_par: 58.60 },
             updatedAt: 0,
             activeType: 'paralelo',
-            direction: 'USD_TO_VES',
+            direction: 'FOREIGN_TO_VES',
             currentInput: '0',
             decimalSeparator: '.'
         };
@@ -814,7 +845,7 @@
                 const raw = localStorage.getItem(CACHE_KEY);
                 if (!raw) return false;
                 const parsed = JSON.parse(raw);
-                if (parsed && parsed.rates && parsed.rates.bcv && parsed.rates.paralelo) {
+                if (parsed && parsed.rates && parsed.rates.bcv && parsed.rates.paralelo && parsed.rates.eur && parsed.rates.eur_par) {
                     state.rates = parsed.rates;
                     state.updatedAt = parsed.updatedAt || 0;
                     return (Date.now() - state.updatedAt) < CACHE_TTL;
@@ -847,28 +878,42 @@
 
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 5000);
+            const fetchOpts = {
+                signal: controller.signal,
+                cache: force ? 'no-cache' : 'default'
+            };
 
             try {
-                const response = await fetch('https://ve.dolarapi.com/v1/dolares', {
-                    signal: controller.signal,
-                    cache: force ? 'no-cache' : 'default'
-                });
+                const [usdRes, eurRes] = await Promise.all([
+                    fetch('https://ve.dolarapi.com/v1/dolares', fetchOpts),
+                    fetch('https://ve.dolarapi.com/v1/euros', fetchOpts).catch(() => null)
+                ]);
                 clearTimeout(timeoutId);
 
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                const data = await response.json();
+                if (!usdRes.ok) throw new Error('HTTP ' + usdRes.status);
+                const usdData = await usdRes.json();
 
-                if (Array.isArray(data)) {
-                    const oficial = data.find(item => item.fuente === 'oficial');
-                    const paralelo = data.find(item => item.fuente === 'paralelo');
+                if (Array.isArray(usdData)) {
+                    const oficial = usdData.find(item => item.fuente === 'oficial');
+                    const paralelo = usdData.find(item => item.fuente === 'paralelo');
 
                     if (oficial && oficial.promedio > 0) state.rates.bcv = Number(oficial.promedio);
                     if (paralelo && paralelo.promedio > 0) state.rates.paralelo = Number(paralelo.promedio);
-
-                    state.updatedAt = Date.now();
-                    saveRates();
-                    dot.classList.remove('offline');
                 }
+
+                if (eurRes && eurRes.ok) {
+                    const eurData = await eurRes.json();
+                    if (Array.isArray(eurData)) {
+                        const eurOficial = eurData.find(item => item.fuente === 'oficial');
+                        const eurParalelo = eurData.find(item => item.fuente === 'paralelo');
+                        if (eurOficial && eurOficial.promedio > 0) state.rates.eur = Number(eurOficial.promedio);
+                        if (eurParalelo && eurParalelo.promedio > 0) state.rates.eur_par = Number(eurParalelo.promedio);
+                    }
+                }
+
+                state.updatedAt = Date.now();
+                saveRates();
+                dot.classList.remove('offline');
             } catch (error) {
                 clearTimeout(timeoutId);
                 dot.classList.add('offline');
@@ -884,13 +929,15 @@
             state.activeType = type;
             document.getElementById('btn-paralelo').classList.toggle('active-par', type === 'paralelo');
             document.getElementById('btn-bcv').classList.toggle('active-bcv', type === 'bcv');
+            document.getElementById('btn-eur-par').classList.toggle('active-eur-par', type === 'eur_par');
+            document.getElementById('btn-eur').classList.toggle('active-eur', type === 'eur');
             updateUI();
         }
 
         function swapDirection() {
-            state.direction = state.direction === 'USD_TO_VES' ? 'VES_TO_USD' : 'USD_TO_VES';
+            state.direction = state.direction === 'FOREIGN_TO_VES' ? 'VES_TO_FOREIGN' : 'FOREIGN_TO_VES';
             const icon = document.getElementById('swap-icon');
-            icon.style.transform = state.direction === 'VES_TO_USD' ? 'rotate(180deg)' : 'rotate(0deg)';
+            icon.style.transform = state.direction === 'VES_TO_FOREIGN' ? 'rotate(180deg)' : 'rotate(0deg)';
             updateUI();
         }
 
@@ -938,26 +985,33 @@
         }
 
         function updateUI() {
+            const isEur = state.activeType === 'eur' || state.activeType === 'eur_par';
             const activeRate = state.rates[state.activeType];
-            const altType = state.activeType === 'bcv' ? 'paralelo' : 'bcv';
+
+            let altType = 'bcv';
+            if (state.activeType === 'bcv') altType = 'paralelo';
+            else if (state.activeType === 'eur_par') altType = 'eur';
+            else if (state.activeType === 'eur') altType = 'eur_par';
+
             const altRate = state.rates[altType];
 
+            document.getElementById('rate-unit-label').textContent = isEur ? '1 EUR =' : '1 USD =';
             document.getElementById('current-rate-display').textContent = formatNumber(activeRate, 2);
             document.getElementById('btn-decimal').textContent = state.decimalSeparator;
 
             const fromBadge = document.getElementById('from-badge');
             const toBadge = document.getElementById('to-badge');
 
-            if (state.direction === 'USD_TO_VES') {
-                fromBadge.className = 'badge badge-usd';
-                fromBadge.innerHTML = ICONS.usd;
+            if (state.direction === 'FOREIGN_TO_VES') {
+                fromBadge.className = isEur ? 'badge badge-eur' : 'badge badge-usd';
+                fromBadge.innerHTML = isEur ? ICONS.eur : ICONS.usd;
                 toBadge.className = 'badge badge-ves';
                 toBadge.innerHTML = ICONS.ves;
             } else {
                 fromBadge.className = 'badge badge-ves';
                 fromBadge.innerHTML = ICONS.ves;
-                toBadge.className = 'badge badge-usd';
-                toBadge.innerHTML = ICONS.usd;
+                toBadge.className = isEur ? 'badge badge-eur' : 'badge badge-usd';
+                toBadge.innerHTML = isEur ? ICONS.eur : ICONS.usd;
             }
 
             const rawVal = parseFloat(state.currentInput) || 0;
@@ -970,7 +1024,7 @@
             let converted = 0;
             let altConverted = 0;
 
-            if (state.direction === 'USD_TO_VES') {
+            if (state.direction === 'FOREIGN_TO_VES') {
                 converted = rawVal * activeRate;
                 altConverted = rawVal * altRate;
             } else {
@@ -979,7 +1033,13 @@
             }
 
             document.getElementById('to-amount').textContent = formatNumber(converted, 2);
-            document.getElementById('alt-rate-icon').innerHTML = altType === 'paralelo' ? ICONS.bolt : ICONS.bank;
+            const altIcons = {
+                paralelo: ICONS.bolt,
+                bcv: ICONS.bank,
+                eur_par: ICONS.boltViolet,
+                eur: ICONS.bankIndigo
+            };
+            document.getElementById('alt-rate-icon').innerHTML = altIcons[altType];
             document.getElementById('alt-amount').textContent = formatNumber(altConverted, 2);
         }
 
