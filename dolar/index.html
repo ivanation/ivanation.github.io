@@ -929,7 +929,7 @@
             }
         }
 
-        /* Consulta API con Timeout (5s) para conexiones lentas */
+        /* Consulta API en Tiempo Real (DolarVZLA CDN oficial BCV + DolarAPI paralelo/respaldo) */
         async function fetchRates(force = false) {
             const icon = document.getElementById('icon-sync');
             const btn = document.getElementById('btn-sync');
@@ -938,46 +938,79 @@
             icon.classList.add('spinning');
             btn.disabled = true;
 
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 5000);
-            const fetchOpts = {
-                signal: controller.signal,
-                cache: force ? 'no-cache' : 'default'
+            const fetchWithTimeout = async (url, ms = 4500) => {
+                const controller = new AbortController();
+                const id = setTimeout(() => controller.abort(), ms);
+                try {
+                    const cacheBuster = force ? `${url.includes('?') ? '&' : '?'}t=${Date.now()}` : '';
+                    const res = await fetch(url + cacheBuster, {
+                        signal: controller.signal,
+                        cache: force ? 'no-store' : 'default'
+                    });
+                    clearTimeout(id);
+                    return res.ok ? await res.json() : null;
+                } catch (e) {
+                    clearTimeout(id);
+                    return null;
+                }
             };
 
             try {
-                const [usdRes, eurRes] = await Promise.all([
-                    fetch('https://ve.dolarapi.com/v1/dolares', fetchOpts),
-                    fetch('https://ve.dolarapi.com/v1/euros', fetchOpts).catch(() => null)
+                let gotFreshData = false;
+
+                // Consultamos en paralelo el CDN directo del BCV (DolarVZLA) y DolarAPI para el mercado paralelo
+                const [bcvDirect, usdDolarApi, eurDolarApi] = await Promise.all([
+                    fetchWithTimeout('https://rates.dolarvzla.com/bcv/current.json'),
+                    fetchWithTimeout('https://ve.dolarapi.com/v1/dolares'),
+                    fetchWithTimeout('https://ve.dolarapi.com/v1/euros')
                 ]);
-                clearTimeout(timeoutId);
 
-                if (!usdRes.ok) throw new Error('HTTP ' + usdRes.status);
-                const usdData = await usdRes.json();
-
-                if (Array.isArray(usdData)) {
-                    const oficial = usdData.find(item => item.fuente === 'oficial');
-                    const paralelo = usdData.find(item => item.fuente === 'paralelo');
-
-                    if (oficial && oficial.promedio > 0) state.rates.bcv = Number(oficial.promedio);
-                    if (paralelo && paralelo.promedio > 0) state.rates.paralelo = Number(paralelo.promedio);
-                }
-
-                if (eurRes && eurRes.ok) {
-                    const eurData = await eurRes.json();
-                    if (Array.isArray(eurData)) {
-                        const eurOficial = eurData.find(item => item.fuente === 'oficial');
-                        const eurParalelo = eurData.find(item => item.fuente === 'paralelo');
-                        if (eurOficial && eurOficial.promedio > 0) state.rates.eur = Number(eurOficial.promedio);
-                        if (eurParalelo && eurParalelo.promedio > 0) state.rates.eur_par = Number(eurParalelo.promedio);
+                // 1. Tasas Oficiales BCV (USD y EUR) directas de bcv.org.ve vía DolarVZLA
+                if (bcvDirect && bcvDirect.current) {
+                    if (Number(bcvDirect.current.usd) > 0) {
+                        state.rates.bcv = Number(bcvDirect.current.usd);
+                        gotFreshData = true;
+                    }
+                    if (Number(bcvDirect.current.eur) > 0) {
+                        state.rates.eur = Number(bcvDirect.current.eur);
+                        gotFreshData = true;
                     }
                 }
+
+                // 2. Dólar Paralelo y respaldo BCV USD
+                if (Array.isArray(usdDolarApi)) {
+                    const oficial = usdDolarApi.find(item => item.fuente === 'oficial');
+                    const paralelo = usdDolarApi.find(item => item.fuente === 'paralelo');
+                    if ((!bcvDirect || !bcvDirect.current || !bcvDirect.current.usd) && oficial && oficial.promedio > 0) {
+                        state.rates.bcv = Number(oficial.promedio);
+                        gotFreshData = true;
+                    }
+                    if (paralelo && paralelo.promedio > 0) {
+                        state.rates.paralelo = Number(paralelo.promedio);
+                        gotFreshData = true;
+                    }
+                }
+
+                // 3. Euro Paralelo y respaldo BCV EUR
+                if (Array.isArray(eurDolarApi)) {
+                    const eurOficial = eurDolarApi.find(item => item.fuente === 'oficial');
+                    const eurParalelo = eurDolarApi.find(item => item.fuente === 'paralelo');
+                    if ((!bcvDirect || !bcvDirect.current || !bcvDirect.current.eur) && eurOficial && eurOficial.promedio > 0) {
+                        state.rates.eur = Number(eurOficial.promedio);
+                        gotFreshData = true;
+                    }
+                    if (eurParalelo && eurParalelo.promedio > 0) {
+                        state.rates.eur_par = Number(eurParalelo.promedio);
+                        gotFreshData = true;
+                    }
+                }
+
+                if (!gotFreshData) throw new Error('Sin datos disponibles');
 
                 state.updatedAt = Date.now();
                 saveRates();
                 dot.classList.remove('offline');
             } catch (error) {
-                clearTimeout(timeoutId);
                 dot.classList.add('offline');
             } finally {
                 icon.classList.remove('spinning');
